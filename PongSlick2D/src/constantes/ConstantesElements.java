@@ -49,11 +49,4 @@ public class ConstantesElements
 	public final static float ELEMENT_MUR2_COORDONEE_Y = ContantesJeu.ECRAN_HAUTEUR - 30;
 	
 	
-	//Identifiants éléments
-	public final static String ELEMENT_BALLE_ID = "2";
-	public final static String ELEMENT_RAQUETTE1_ID = "3";
-	public final static String ELEMENT_RAQUETTE2_ID = "4";
-	public final static String ELEMENT_ARENE_ID= "1";
-	
-	
 }

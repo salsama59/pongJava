@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 
 import constantes.ConstantesElements;
+import constantes.ContantesJoueurs;
 import elementsJeu.Balle;
 import elementsJeu.Element;
 import elementsJeu.Filet;
@@ -178,32 +179,76 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		float hauteurRaquette = raquette.getHauteur();
 		boolean casSpecial = false;
 		
+		String camp = "";
 		
-		if((coordonneesZoneDroite > coordonneesRaquetteX) && (coordonneesZoneDroite < (coordonneesRaquetteX + largeurRaquette)))
+		switch(detecterRaquette(coordonneesRaquetteX, coordonneesRaquetteY))
 		{
-			if(coordonneesZoneBasse == coordonneesRaquetteY)
+			case ContantesJoueurs.JOUEUR_ID_1: 
+				
+			camp = ContantesJoueurs.JOUEUR_CAMP_GAUCHE;
+				
+			break;
+			
+			case ContantesJoueurs.JOUEUR_ID_2:
+			
+			camp = ContantesJoueurs.JOUEUR_CAMP_DROITE;
+			
+			break;
+		
+		}
+		
+		if(camp.equals(ContantesJoueurs.JOUEUR_CAMP_DROITE))
+		{
+			if((coordonneesZoneDroite > coordonneesRaquetteX) && (coordonneesZoneDroite < (coordonneesRaquetteX + largeurRaquette)))
 			{
-				casSpecial = true;
+				if(coordonneesZoneBasse == coordonneesRaquetteY)
+				{
+					casSpecial = true;
+				}
+				else if(coordonneesZoneHaute == (coordonneesRaquetteY + hauteurRaquette))
+				{
+					casSpecial = true;
+				}
 			}
-			else if(coordonneesZoneHaute == (coordonneesRaquetteY + hauteurRaquette))
+			else if((coordonneesZoneGauche > coordonneesRaquetteX) && (coordonneesZoneGauche < (coordonneesRaquetteX + largeurRaquette)))
 			{
-				casSpecial = true;
+				if((coordonneesZoneBasse >= coordonneesRaquetteY) && (coordonneesZoneBasse <= (coordonneesRaquetteY + hauteurRaquette)))
+				{
+					casSpecial = true;
+				}
+				else if((coordonneesZoneHaute <= (coordonneesRaquetteY + hauteurRaquette)) && (coordonneesZoneHaute >= coordonneesRaquetteY))
+				{
+					casSpecial = true;
+				}
 			}
 		}
-		else if((coordonneesZoneGauche > coordonneesRaquetteX) && (coordonneesZoneGauche < (coordonneesRaquetteX + largeurRaquette)))
+		else if(camp.equals(ContantesJoueurs.JOUEUR_CAMP_GAUCHE))
 		{
-			if(coordonneesZoneBasse == coordonneesRaquetteY)
-			{
-				casSpecial = true;
-			}
-			else if(coordonneesZoneHaute == (coordonneesRaquetteY + hauteurRaquette))
-			{
-				casSpecial = true;
-			}
+			//TODO gestion raquette camp gauche (collision basse et haute, critères largeur raquette prise compte)
 		}
+		
+		
 		
 		return casSpecial;
 		
 	}
+	
+	
+	private int detecterRaquette(float x, float y)
+	{
+		
+		if((x == ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X) && (y == ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y))
+		{
+			return ContantesJoueurs.JOUEUR_ID_1;
+		}
+		else if((x == ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X) && (y == ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_Y))
+		{
+			return ContantesJoueurs.JOUEUR_ID_2;
+		}
+		
+		return -1;
+	}
+
 
 }
+

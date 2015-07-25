@@ -10,7 +10,7 @@ public class Balle extends Element
 	private Circle element = null;
 	private float vitesse;
 	private boolean enDeplacement = true;
-	private int direction = ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE;
+	private int direction = ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE;
 
 	public Balle(float centreX, float centreY, float rayon) 
 	{
