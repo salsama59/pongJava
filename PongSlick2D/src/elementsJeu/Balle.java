@@ -12,18 +12,10 @@ public class Balle extends Element
 	private boolean enDeplacement = true;
 	private int direction = ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE;
 
-	public Balle(float centreX, float centreY, float rayon) 
+	public Balle(float centreX, float centreY, float rayon, String nom) 
 	{
-		super();
+		super(nom);
 		this.setElement(new Circle(centreX,centreY,rayon));
-		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
-	}
-	
-	public Balle()
-	{
-		super();
-		Circle cercle = new Circle(ConstantesElements.ELEMENT_BALLE_CENTRE_X, ConstantesElements.ELEMENT_BALLE_CENTRE_Y, ConstantesElements.ELEMENT_BALLE_RAYON);
-		this.setElement(cercle);
 		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
 	}
 

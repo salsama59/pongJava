@@ -38,52 +38,106 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 	@Override
 	public void gererEtats(int key, char c) 
 	{
-		switch (key) 
-	    {
-	        case Input.KEY_UP:
-	        element.setEnDeplacement(true);
-	        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT);
-	        break;
-	        
-	        case Input.KEY_LEFT:
-	        //raquette1.setCoordonneeX(raquette1.getCoordonneeX()-1);
-	        break;
-	        
-	        case Input.KEY_DOWN:
-	        element.setEnDeplacement(true);
-	        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS);
-	        break;
-	        
-	        case Input.KEY_RIGHT:
-	        //raquette1.setCoordonneeX(raquette1.getCoordonneeX()+1);
-	        break;
-	    }
+		if(element.getNomElement().equals(ConstantesElements.ELEMENT_RAQUETTE1_NOM))
+		{
+			switch (key) 
+		    {
+		        case Input.KEY_UP:
+		        element.setEnDeplacement(true);
+		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT);
+		        break;
+		        
+		        case Input.KEY_LEFT:
+		        //raquette1.setCoordonneeX(raquette1.getCoordonneeX()-1);
+		        break;
+		        
+		        case Input.KEY_DOWN:
+		        element.setEnDeplacement(true);
+		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS);
+		        break;
+		        
+		        case Input.KEY_RIGHT:
+		        //raquette1.setCoordonneeX(raquette1.getCoordonneeX()+1);
+		        break;
+		    }
+		}
+		else if(element.getNomElement().equals(ConstantesElements.ELEMENT_RAQUETTE2_NOM))
+		{
+			switch (key) 
+		    {
+		        case Input.KEY_Z:
+		        element.setEnDeplacement(true);
+		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT);
+		        break;
+		        
+		        case Input.KEY_Q:
+		        //raquette1.setCoordonneeX(raquette1.getCoordonneeX()-1);
+		        break;
+		        
+		        case Input.KEY_W:
+		        element.setEnDeplacement(true);
+		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS);
+		        break;
+		        
+		        case Input.KEY_S:
+		        //raquette1.setCoordonneeX(raquette1.getCoordonneeX()+1);
+		        break;
+		    }
+		}
+		
 	}
 
 	@Override
 	public void reinitialisationEtat(int key, char c) 
 	{
-		switch (key) 
-	    {
-	        case Input.KEY_UP:
-	        element.setEnDeplacement(false);
-	        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
-	        break;
-	        
-	        case Input.KEY_LEFT:
-	        //element1.setCoordonneeX(element1.getCoordonneeX()-1);
-	        break;
-	        
-	        case Input.KEY_DOWN:
-	        element.setEnDeplacement(false);
-		    element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
-	        break;
-	        
-	        case Input.KEY_RIGHT:
-	        //element1.setCoordonneeX(element1.getCoordonneeX()+1);
-	        break;
-	    }
 		
+		if(element.getNomElement().equals(ConstantesElements.ELEMENT_RAQUETTE1_NOM))
+		{
+			switch (key) 
+		    {
+		        case Input.KEY_UP:
+		        element.setEnDeplacement(false);
+		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+		        break;
+		        
+		        case Input.KEY_LEFT:
+		        //element1.setCoordonneeX(element1.getCoordonneeX()-1);
+		        break;
+		        
+		        case Input.KEY_DOWN:
+		        element.setEnDeplacement(false);
+			    element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+		        break;
+		        
+		        case Input.KEY_RIGHT:
+		        //element1.setCoordonneeX(element1.getCoordonneeX()+1);
+		        break;
+		    }
+		}
+		else if(element.getNomElement().equals(ConstantesElements.ELEMENT_RAQUETTE2_NOM))
+		{
+			switch (key) 
+		    {
+		        case Input.KEY_Z:
+	        	element.setEnDeplacement(false);
+		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+		        break;
+		        
+		        case Input.KEY_Q:
+		        //raquette1.setCoordonneeX(raquette1.getCoordonneeX()-1);
+		        break;
+		        
+		        case Input.KEY_W:
+	        	element.setEnDeplacement(false);
+			    element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+		        break;
+		        
+		        case Input.KEY_S:
+		        //raquette1.setCoordonneeX(raquette1.getCoordonneeX()+1);
+		        break;
+		    }
+		}
+			
 	}
 
 	public Raquette getElement() {

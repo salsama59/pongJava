@@ -11,9 +11,9 @@ public class Raquette extends Element
 	private boolean enDeplacement = false;
 	private int direction = ConstantesElements.ELEMENT_DIRECTION_NEUTRE;
 
-	public Raquette(float x, float y, float largeur, float longueur, float v) 
+	public Raquette(float x, float y, float largeur, float longueur, float v, String nom) 
 	{
-		super();
+		super(nom);
 		this.setElement(new Rectangle(x,y,largeur,longueur));
 		this.setVitesse(v);
 	}
