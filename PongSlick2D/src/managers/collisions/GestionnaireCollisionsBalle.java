@@ -60,97 +60,127 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 					
 					this.setIdElementEnCollision(element.getIdElement());
 					
-					if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_DROITE)
-					{
-						this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_GAUCHE);
-					}
-					else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_GAUCHE)
-					{
-						this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_DROITE);
-					}
-					else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
-					{
-						this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS);
-					}
-					else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
-					{
-						this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT);
-					}
-					
+					gererCasGeneric();
 					
 					if(element instanceof Raquette)
 					{
-						//TODO gerer collision sur le haut de la raquette pour corriger le  bug (calcul de la position du centre du cercle par rapport à celle de la raquette
-						
-						if(detecterCollisionSpeciale((Raquette) element))
-						{
-							//version mur pour raquette
-							if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
-							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE);
-							}
-							else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
-							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE);
-							}
-							else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
-							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE);
-							}
-							else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
-							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
-							}
-						}
-						else
-						{
-							if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
-							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE);
-							}
-							else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
-							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
-							}
-							else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
-							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE);
-							}
-							else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
-							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE);
-							}
-						}
-							
+						gererCasCollisionsSpeciales(element);
 					}
 					else if(element instanceof Mur)
 					{
-						
-						if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
-						{
-							this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE);
-						}
-						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
-						{
-							this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE);
-						}
-						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
-						{
-							this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE);
-						}
-						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
-						{
-							this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
-						}
-						
+						gererCasMur();
 					}
-					
 				}
 			}
 			
 			this.setEnCollision(collisionDetectee);
 		}
 		
+	}
+	
+	private void gererCasGeneric()
+	{
+		if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_DROITE)
+		{
+			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_GAUCHE);
+		}
+		else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_GAUCHE)
+		{
+			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_DROITE);
+		}
+		else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
+		{
+			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS);
+		}
+		else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
+		{
+			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT);
+		}
+	}
+	
+	private void gererCasMur()
+	{
+		if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
+		{
+			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE);
+		}
+		else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
+		{
+			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE);
+		}
+		else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
+		{
+			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE);
+		}
+		else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
+		{
+			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
+		}
+	}
+	
+	private void gererCasCollisionsSpeciales(Element element)
+	{
+		if((detecterCollisionSpecialePlate((Raquette) element)) && !(detecterCollisionSpecialeCoin((Raquette) element)))
+		{
+			//version mur pour raquette
+			
+			if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
+			}
+		}
+		else if((detecterCollisionSpecialePlate((Raquette) element)) && (detecterCollisionSpecialeCoin((Raquette) element)))
+		{
+			//version coin pour les raquettes rebond particulier
+			
+			if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE);
+			}
+		}
+		else
+		{
+			if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE);
+			}
+			else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
+			{
+				this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE);
+			}
+		}
 	}
 	
 	public Balle getElementGere() 
@@ -163,26 +193,64 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		this.elementGere = elementGere;
 	}
 	
-	public boolean detecterCollisionSpeciale(Raquette raquette)
+	public boolean detecterCollisionSpecialePlate(Raquette raquette)
+	{
+		
+		this.getElementGere().getCentreX();
+		float coordonneesBalleY = this.getElementGere().getCentreY();
+		this.getElementGere().getRayon();
+		raquette.getCoordonneeX();
+		float coordonneesRaquetteY = raquette.getCoordonneeY();
+		raquette.getLargeur();
+		float hauteurRaquette = raquette.getHauteur();
+		boolean casSpecial = false;
+			
+		if(coordonneesBalleY < coordonneesRaquetteY)
+		{
+			casSpecial = true;
+		}
+		else if(coordonneesBalleY > (coordonneesRaquetteY + hauteurRaquette))
+		{
+			casSpecial = true;
+		}
+			
+		return casSpecial;
+		
+	}
+	
+	
+	private int detecterRaquette(float x, float y)
+	{
+		
+		if(x == ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X)
+		{
+			return ContantesJoueurs.JOUEUR_ID_1;
+		}
+		else if(x == ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X)
+		{
+			return ContantesJoueurs.JOUEUR_ID_2;
+		}
+		
+		return -1;
+	}
+	
+	public boolean detecterCollisionSpecialeCoin(Raquette raquette)
 	{
 		
 		float coordonneesBalleX = this.getElementGere().getCentreX();
-		float coordonneesBalleY = this.getElementGere().getCentreY();
-		float rayonBalle = this.getElementGere().getRayon();
-		float coordonneesZoneDroite = coordonneesBalleX + rayonBalle;
-		float coordonneesZoneGauche = coordonneesBalleX - rayonBalle;
-		float coordonneesZoneHaute = coordonneesBalleY - rayonBalle;
-		float coordonneesZoneBasse = coordonneesBalleY + rayonBalle;
+		this.getElementGere().getCentreY();
+		this.getElementGere().getRayon();
 		float coordonneesRaquetteX = raquette.getCoordonneeX();
 		float coordonneesRaquetteY = raquette.getCoordonneeY();
 		float largeurRaquette = raquette.getLargeur();
-		float hauteurRaquette = raquette.getHauteur();
+		raquette.getHauteur();
 		boolean casSpecial = false;
 		
 		String camp = "";
 		
 		switch(detecterRaquette(coordonneesRaquetteX, coordonneesRaquetteY))
 		{
+			
 			case ContantesJoueurs.JOUEUR_ID_1: 
 				
 			camp = ContantesJoueurs.JOUEUR_CAMP_GAUCHE;
@@ -199,56 +267,21 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		
 		if(camp.equals(ContantesJoueurs.JOUEUR_CAMP_DROITE))
 		{
-			if((coordonneesZoneDroite > coordonneesRaquetteX) && (coordonneesZoneDroite < (coordonneesRaquetteX + largeurRaquette)))
+			if(coordonneesBalleX < coordonneesRaquetteX)
 			{
-				if(coordonneesZoneBasse == coordonneesRaquetteY)
-				{
-					casSpecial = true;
-				}
-				else if(coordonneesZoneHaute == (coordonneesRaquetteY + hauteurRaquette))
-				{
-					casSpecial = true;
-				}
-			}
-			else if((coordonneesZoneGauche > coordonneesRaquetteX) && (coordonneesZoneGauche < (coordonneesRaquetteX + largeurRaquette)))
-			{
-				if((coordonneesZoneBasse >= coordonneesRaquetteY) && (coordonneesZoneBasse <= (coordonneesRaquetteY + hauteurRaquette)))
-				{
-					casSpecial = true;
-				}
-				else if((coordonneesZoneHaute <= (coordonneesRaquetteY + hauteurRaquette)) && (coordonneesZoneHaute >= coordonneesRaquetteY))
-				{
-					casSpecial = true;
-				}
+				casSpecial = true;
 			}
 		}
 		else if(camp.equals(ContantesJoueurs.JOUEUR_CAMP_GAUCHE))
 		{
-			//TODO gestion raquette camp gauche (collision basse et haute, critères largeur raquette prise compte)
+			
+			if(coordonneesBalleX > coordonneesRaquetteX + largeurRaquette)
+			{
+				casSpecial = true;
+			}
 		}
-		
-		
 		
 		return casSpecial;
-		
 	}
-	
-	
-	private int detecterRaquette(float x, float y)
-	{
-		
-		if((x == ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X) && (y == ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y))
-		{
-			return ContantesJoueurs.JOUEUR_ID_1;
-		}
-		else if((x == ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X) && (y == ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_Y))
-		{
-			return ContantesJoueurs.JOUEUR_ID_2;
-		}
-		
-		return -1;
-	}
-
-
 }
 

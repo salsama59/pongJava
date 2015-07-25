@@ -29,7 +29,7 @@ public class ConstantesElements
 	public final static int ELEMENT_DIRECTION_HAUT_GAUCHE =8;
 	
 	//Parametre balle
-	public final static float ELEMENT_BALLE_RAYON = 20;
+	public final static float ELEMENT_BALLE_RAYON = 15;
 	public final static float ELEMENT_BALLE_CENTRE_X = 650;
 	public final static float ELEMENT_BALLE_CENTRE_Y= 200;
 	public final static float ELEMENT_BALLE_VITESSE= 0.1f;
