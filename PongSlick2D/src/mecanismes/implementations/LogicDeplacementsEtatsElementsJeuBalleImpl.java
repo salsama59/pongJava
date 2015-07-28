@@ -1,5 +1,7 @@
 package mecanismes.implementations;
 
+import java.util.Random;
+
 import org.newdawn.slick.Input;
 
 import constantes.ConstantesElements;
@@ -45,25 +47,25 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
 			{
 				element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
-				element.setCentreY(element.getCentreY() - (element.getVitesse() * delta));
+				element.setCentreY(element.getCentreY() - (element.getVitesse() * delta * this.genererMouvementAleatoire()));
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
 			{
 				element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
-				element.setCentreY(element.getCentreY() - (element.getVitesse() * delta));
+				element.setCentreY(element.getCentreY() - (element.getVitesse() * delta * this.genererMouvementAleatoire()));
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
 			{
 				element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
-				element.setCentreY(element.getCentreY() + (element.getVitesse() * delta));
+				element.setCentreY(element.getCentreY() + (element.getVitesse() * delta * this.genererMouvementAleatoire()));
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
 			{
 				element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
-				element.setCentreY(element.getCentreY() + (element.getVitesse() * delta));
+				element.setCentreY(element.getCentreY() + (element.getVitesse() * delta * this.genererMouvementAleatoire()));
 			}
 			
 		}
@@ -104,6 +106,20 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 
 	public void setElement(Balle element) {
 		this.element = element;
+	}
+	
+	private float genererMouvementAleatoire()
+	{
+		float nombreAleatoire = 0;
+		int intervale = ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MAX - ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MIN;
+		
+		Random r = new Random();
+		int valeur = ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MIN + r.nextInt(intervale);
+
+		nombreAleatoire = valeur * 0.1f;
+		
+		return nombreAleatoire;
+		
 	}
 	
 }
