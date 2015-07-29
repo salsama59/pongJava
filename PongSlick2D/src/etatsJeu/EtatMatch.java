@@ -44,6 +44,8 @@ public class EtatMatch extends BasicGameState
 		raquette1 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE1_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE1_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE1_VITESSE, ConstantesElements.ELEMENT_RAQUETTE1_NOM);
 		raquette2 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE2_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE2_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE2_VITESSE, ConstantesElements.ELEMENT_RAQUETTE2_NOM);
 		balle = new Balle(ConstantesElements.ELEMENT_BALLE_CENTRE_X, ConstantesElements.ELEMENT_BALLE_CENTRE_Y, ConstantesElements.ELEMENT_BALLE_RAYON, ConstantesElements.ELEMENT_BALLE_NOM);
+		filet1 = new Filet(ConstantesElements.ELEMENT_FILET1_COORDONEE_X, ConstantesElements.ELEMENT_FILET1_COORDONEE_Y, ConstantesElements.ELEMENT_FILET1_LARGEUR, ConstantesElements.ELEMENT_FILET1_HAUTEUR, ConstantesElements.ELEMENT_FILET1_NOM);
+		filet2 = new Filet(ConstantesElements.ELEMENT_FILET2_COORDONEE_X, ConstantesElements.ELEMENT_FILET2_COORDONEE_Y, ConstantesElements.ELEMENT_FILET2_LARGEUR, ConstantesElements.ELEMENT_FILET2_HAUTEUR, ConstantesElements.ELEMENT_FILET2_NOM);
 		mecanismeRaquette1 = new LogicDeplacementsEtatsElementsJeuRaquetteImpl(raquette1);
 		mecanismeRaquette2 = new LogicDeplacementsEtatsElementsJeuRaquetteImpl(raquette2);
 		gestionnaireElement.ajouterElement(mur1);
@@ -51,6 +53,8 @@ public class EtatMatch extends BasicGameState
 		gestionnaireElement.ajouterElement(raquette1);
 		gestionnaireElement.ajouterElement(raquette2);
 		gestionnaireElement.ajouterElement(balle);
+		gestionnaireElement.ajouterElement(filet1);
+		gestionnaireElement.ajouterElement(filet2);
 		
 		mecanismeBalle = new LogicDeplacementsEtatsElementsJeuBalleImpl(balle);
 		gestionnaireColisionBalle = new GestionnaireCollisionsBalle(balle, gestionnaireElement.getListElements());
@@ -68,6 +72,8 @@ public class EtatMatch extends BasicGameState
 		graphisme.draw(balle.getElement());
 		graphisme.draw(mur1.getElement());
 		graphisme.draw(mur2.getElement());
+		graphisme.draw(filet1.getElement());
+		graphisme.draw(filet2.getElement());
 		
 	}
 

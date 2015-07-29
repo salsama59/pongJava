@@ -39,6 +39,21 @@ public class ConstantesElements
 	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MIN= 1;
 	public final static String ELEMENT_BALLE_NOM = "balle";
 	
+	//Parametre filet gauche
+	public final static float ELEMENT_FILET1_LARGEUR = (ContantesJeu.ECRAN_LARGEUR * 5)/100;
+	public final static float ELEMENT_FILET1_HAUTEUR = ContantesJeu.ECRAN_HAUTEUR;
+	public final static float ELEMENT_FILET1_COORDONEE_X = 0;
+	public final static float ELEMENT_FILET1_COORDONEE_Y= 0;
+	public final static String ELEMENT_FILET1_NOM = "filet1";
+	
+	//Parametre filet droit
+	public final static float ELEMENT_FILET2_LARGEUR = (ContantesJeu.ECRAN_LARGEUR * 5)/100;
+	public final static float ELEMENT_FILET2_HAUTEUR = ContantesJeu.ECRAN_HAUTEUR;
+	public final static float ELEMENT_FILET2_COORDONEE_X = ContantesJeu.ECRAN_LARGEUR - ELEMENT_FILET1_LARGEUR;
+	public final static float ELEMENT_FILET2_COORDONEE_Y= 0;
+	public final static String ELEMENT_FILET2_NOM = "filet2";
+	
+	
 	//Parametres Mur1
 	//TODO metre largeur fillet dans les calcul de dimmention
 	public final static float ELEMENT_MUR1_LARGEUR = ContantesJeu.ECRAN_LARGEUR - 100;
