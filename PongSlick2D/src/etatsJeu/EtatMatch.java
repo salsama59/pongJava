@@ -1,5 +1,6 @@
 package etatsJeu;
 import managers.collisions.GestionnaireCollisionsBalle;
+import managers.collisions.GestionnaireCollisionsFilet;
 import managers.collisions.GestionnaireCollisionsRaquette;
 import managers.elements.GestionnaireElements;
 import mecanismes.implementations.LogicDeplacementsEtatsElementsJeuBalleImpl;
@@ -33,6 +34,8 @@ public class EtatMatch extends BasicGameState
 	private GestionnaireCollisionsBalle gestionnaireColisionBalle;
 	private GestionnaireCollisionsRaquette gestionnaireColisionRaquette1;
 	private GestionnaireCollisionsRaquette gestionnaireColisionRaquette2;
+	private GestionnaireCollisionsFilet gestionnaireCollisionFilet1;
+	private GestionnaireCollisionsFilet gestionnaireCollisionFilet2;
 	private GestionnaireElements gestionnaireElement;
 
 	@Override
@@ -60,6 +63,8 @@ public class EtatMatch extends BasicGameState
 		gestionnaireColisionBalle = new GestionnaireCollisionsBalle(balle, gestionnaireElement.getListElements());
 		gestionnaireColisionRaquette1 = new GestionnaireCollisionsRaquette(raquette1, gestionnaireElement.getListElements());
 		gestionnaireColisionRaquette2 = new GestionnaireCollisionsRaquette(raquette2, gestionnaireElement.getListElements());
+		gestionnaireCollisionFilet1 = new GestionnaireCollisionsFilet(filet1, gestionnaireElement.getListElements());
+		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireElement.getListElements());
 	}
 
 	@Override
@@ -86,6 +91,8 @@ public class EtatMatch extends BasicGameState
 		gestionnaireColisionBalle.gererCollision(delta);
 		gestionnaireColisionRaquette1.gererCollision(delta);
 		gestionnaireColisionRaquette2.gererCollision(delta);
+		gestionnaireCollisionFilet1.gererCollision(delta);
+		gestionnaireCollisionFilet2.gererCollision(delta);
 	}
 	
 	@Override

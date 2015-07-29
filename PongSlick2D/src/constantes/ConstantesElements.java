@@ -47,7 +47,7 @@ public class ConstantesElements
 	public final static String ELEMENT_FILET1_NOM = "filet1";
 	
 	//Parametre filet droit
-	public final static float ELEMENT_FILET2_LARGEUR = (ContantesJeu.ECRAN_LARGEUR * 5)/100;
+	public final static float ELEMENT_FILET2_LARGEUR = ELEMENT_FILET1_LARGEUR;
 	public final static float ELEMENT_FILET2_HAUTEUR = ContantesJeu.ECRAN_HAUTEUR;
 	public final static float ELEMENT_FILET2_COORDONEE_X = ContantesJeu.ECRAN_LARGEUR - ELEMENT_FILET1_LARGEUR;
 	public final static float ELEMENT_FILET2_COORDONEE_Y= 0;
@@ -55,19 +55,17 @@ public class ConstantesElements
 	
 	
 	//Parametres Mur1
-	//TODO metre largeur fillet dans les calcul de dimmention
-	public final static float ELEMENT_MUR1_LARGEUR = ContantesJeu.ECRAN_LARGEUR - 100;
-	public final static float ELEMENT_MUR1_HAUTEUR = 30;
-	public final static float ELEMENT_MUR1_COORDONEE_X = 50;
+	public final static float ELEMENT_MUR1_LARGEUR = (ContantesJeu.ECRAN_LARGEUR * 90)/100;
+	public final static float ELEMENT_MUR1_HAUTEUR = (ContantesJeu.ECRAN_HAUTEUR * 5)/100;
+	public final static float ELEMENT_MUR1_COORDONEE_X = ELEMENT_FILET1_LARGEUR;
 	public final static float ELEMENT_MUR1_COORDONEE_Y= 0;
 	public final static String ELEMENT_MUR1_NOM = "mur1";
 	
 	//parametre Mur2
-	//TODO metre largeur fillet dans les calcul de dimmention
-	public final static float ELEMENT_MUR2_LARGEUR = ContantesJeu.ECRAN_LARGEUR - 100;
-	public final static float ELEMENT_MUR2_HAUTEUR = 30;
-	public final static float ELEMENT_MUR2_COORDONEE_X = 50;
-	public final static float ELEMENT_MUR2_COORDONEE_Y = ContantesJeu.ECRAN_HAUTEUR - 30;
+	public final static float ELEMENT_MUR2_LARGEUR = ELEMENT_MUR1_LARGEUR;
+	public final static float ELEMENT_MUR2_HAUTEUR = ELEMENT_MUR1_HAUTEUR;
+	public final static float ELEMENT_MUR2_COORDONEE_X = ELEMENT_MUR1_COORDONEE_X;
+	public final static float ELEMENT_MUR2_COORDONEE_Y = ContantesJeu.ECRAN_HAUTEUR - ELEMENT_MUR1_HAUTEUR;
 	public final static String ELEMENT_MUR2_NOM = "mur2";
 	
 	
