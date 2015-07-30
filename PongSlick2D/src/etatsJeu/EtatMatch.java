@@ -3,6 +3,7 @@ import managers.collisions.GestionnaireCollisionsBalle;
 import managers.collisions.GestionnaireCollisionsFilet;
 import managers.collisions.GestionnaireCollisionsRaquette;
 import managers.elements.GestionnaireElements;
+import managers.etat.match.GestionnaireMatch;
 import mecanismes.implementations.LogicDeplacementsEtatsElementsJeuBalleImpl;
 import mecanismes.implementations.LogicDeplacementsEtatsElementsJeuRaquetteImpl;
 
@@ -37,11 +38,13 @@ public class EtatMatch extends BasicGameState
 	private GestionnaireCollisionsFilet gestionnaireCollisionFilet1;
 	private GestionnaireCollisionsFilet gestionnaireCollisionFilet2;
 	private GestionnaireElements gestionnaireElement;
+	private GestionnaireMatch gestionnaireMatch;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame etat) throws SlickException 
 	{
 		gestionnaireElement = new GestionnaireElements();
+		gestionnaireMatch = new GestionnaireMatch();
 		mur1 = new Mur(ConstantesElements.ELEMENT_MUR1_COORDONEE_X, ConstantesElements.ELEMENT_MUR1_COORDONEE_Y, ConstantesElements.ELEMENT_MUR1_LARGEUR, ConstantesElements.ELEMENT_MUR1_HAUTEUR, ConstantesElements.ELEMENT_MUR1_NOM);
 		mur2 = new Mur(ConstantesElements.ELEMENT_MUR2_COORDONEE_X, ConstantesElements.ELEMENT_MUR2_COORDONEE_Y, ConstantesElements.ELEMENT_MUR2_LARGEUR, ConstantesElements.ELEMENT_MUR2_HAUTEUR, ConstantesElements.ELEMENT_MUR2_NOM);
 		raquette1 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE1_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE1_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE1_VITESSE, ConstantesElements.ELEMENT_RAQUETTE1_NOM);
@@ -63,8 +66,8 @@ public class EtatMatch extends BasicGameState
 		gestionnaireColisionBalle = new GestionnaireCollisionsBalle(balle, gestionnaireElement.getListElements());
 		gestionnaireColisionRaquette1 = new GestionnaireCollisionsRaquette(raquette1, gestionnaireElement.getListElements());
 		gestionnaireColisionRaquette2 = new GestionnaireCollisionsRaquette(raquette2, gestionnaireElement.getListElements());
-		gestionnaireCollisionFilet1 = new GestionnaireCollisionsFilet(filet1, gestionnaireElement.getListElements());
-		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireElement.getListElements());
+		gestionnaireCollisionFilet1 = new GestionnaireCollisionsFilet(filet1, gestionnaireMatch, gestionnaireElement.getListElements());
+		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireMatch, gestionnaireElement.getListElements());
 	}
 
 	@Override
@@ -79,6 +82,8 @@ public class EtatMatch extends BasicGameState
 		graphisme.draw(mur2.getElement());
 		graphisme.draw(filet1.getElement());
 		graphisme.draw(filet2.getElement());
+		graphisme.drawString("" + gestionnaireMatch.getPointCampDroit(), 200, 50);
+		graphisme.drawString("" + gestionnaireMatch.getPointCampGauche(), 100, 50);
 		
 	}
 

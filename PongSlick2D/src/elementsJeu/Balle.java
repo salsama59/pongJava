@@ -2,6 +2,7 @@ package elementsJeu;
 
 import org.newdawn.slick.geom.Circle;
 
+import constantes.ConstantePosition;
 import constantes.ConstantesElements;
 
 public class Balle extends Element
@@ -83,6 +84,12 @@ public class Balle extends Element
 	public void setDirection(int direction) 
 	{
 		this.direction = direction;
+	}
+	
+	public void reinitialiserPosition()
+	{
+		this.setCentreX(ConstantesElements.ELEMENT_BALLE_CENTRE_X);
+		this.setCentreY(ConstantesElements.ELEMENT_BALLE_CENTRE_Y);
 	}
 
 }
