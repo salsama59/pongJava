@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 
 import constantes.ConstantesElements;
+import elementsJeu.Balle;
 import elementsJeu.Element;
 import elementsJeu.Mur;
 import elementsJeu.Raquette;
@@ -22,6 +23,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 	@Override
 	public void gererCollision(int delta) 
 	{
+		
 		boolean collisionDetectee = false;
 		
 		Collection<Element> listeElementEnJeu = this.getElementsExistant().values();
@@ -33,6 +35,10 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 			{
 				collisionDetectee = this.getElementGere().getElement().intersects(((Mur) element).getElement());
 			}
+			else if(element instanceof Balle)
+			{
+				collisionDetectee = this.getElementGere().getElement().intersects(((Balle) element).getElement());
+			}
 			else
 			{
 				this.setEnCollision(collisionDetectee);
@@ -41,24 +47,52 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 			
 			if(!this.isEnCollision())
 			{
+				
 				if(collisionDetectee)
 				{
 					
 					this.setIdElementEnCollision(element.getIdElement());
 					
-					if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
+					if(element instanceof Mur)
 					{
-						this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
-						this.getElementGere().setEnDeplacement(false);
-						this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() + (this.getElementGere().getVitesse() * delta));
+						
+						if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
+						{
+							this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+							this.getElementGere().setEnDeplacement(false);
+							this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() + (this.getElementGere().getVitesse() * delta));
+						}
+						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
+						{
+							this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+							this.getElementGere().setEnDeplacement(false);
+							this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() - (this.getElementGere().getVitesse() * delta));
+						}
+						
 					}
-					else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
+					else if(element instanceof Balle)
 					{
-						this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
-						this.getElementGere().setEnDeplacement(false);
-						this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() - (this.getElementGere().getVitesse() * delta));
+						
+						if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
+						{
+							if(detecterPositionBallePlat((Balle)element))
+							{
+								this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() + (this.getElementGere().getVitesse() * delta));
+								((Balle) element).setCentreY(((Balle) element).getCentreY() - (((Balle) element).getVitesse() * delta));
+							}
+							
+						}
+						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
+						{
+							if(detecterPositionBallePlat((Balle)element))
+							{
+								this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() - (this.getElementGere().getVitesse() * delta));
+								((Balle) element).setCentreY(((Balle) element).getCentreY() + (((Balle) element).getVitesse() * delta));
+							}
+							
+						}
+						
 					}
-					
 				}
 			}
 			
@@ -74,6 +108,27 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 	public void setElementGere(Raquette elementGere) 
 	{
 		this.elementGere = elementGere;
+	}
+	
+	private boolean detecterPositionBallePlat(Balle balle)
+	{
+		
+		float coordonneesBalleY = balle.getCentreY();
+		float coordonneesRaquetteY = this.getElementGere().getCoordonneeY();
+		float hauteurRaquette = this.getElementGere().getHauteur();
+		boolean casSpecial = false;
+			
+		if(coordonneesBalleY < coordonneesRaquetteY)
+		{
+			casSpecial = true;
+		}
+		else if(coordonneesBalleY > (coordonneesRaquetteY + hauteurRaquette))
+		{
+			casSpecial = true;
+		}
+			
+		return casSpecial;
+		
 	}
 
 }

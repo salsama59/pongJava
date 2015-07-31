@@ -305,13 +305,14 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		
 		String position = "";
 		float coordonneesBalleY = this.getElementGere().getCentreY();
+		float coordonneesRaquetteY = raquette.getCoordonneeY();
 		float hauteurRaquette = raquette.getHauteur();
 		
-		if(coordonneesBalleY < (coordonneesBalleY + (hauteurRaquette/2)))
+		if(coordonneesBalleY < (coordonneesRaquetteY + (hauteurRaquette/2)))
 		{
 			position = ConstantePosition.POSITION_HAUT_RAQUETTE;
 		}
-		else if(coordonneesBalleY > (coordonneesBalleY + (hauteurRaquette/2)))
+		else if(coordonneesBalleY > (coordonneesRaquetteY + (hauteurRaquette/2)))
 		{
 			position = ConstantePosition.POSITION_BAS_RAQUETTE;
 		}
