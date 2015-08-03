@@ -2,7 +2,6 @@ package elementsJeu;
 
 import org.newdawn.slick.geom.Circle;
 
-import constantes.ConstantePosition;
 import constantes.ConstantesElements;
 
 public class Balle extends Element

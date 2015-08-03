@@ -75,7 +75,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 						
 						if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
 						{
-							if(detecterPositionBallePlat((Balle)element))
+							if(detecterCollisionSpecialeBallePlat((Balle)element))
 							{
 								this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() + (this.getElementGere().getVitesse() * delta));
 								((Balle) element).setCentreY(((Balle) element).getCentreY() - (((Balle) element).getVitesse() * delta));
@@ -84,7 +84,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 						}
 						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
 						{
-							if(detecterPositionBallePlat((Balle)element))
+							if(detecterCollisionSpecialeBallePlat((Balle)element))
 							{
 								this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() - (this.getElementGere().getVitesse() * delta));
 								((Balle) element).setCentreY(((Balle) element).getCentreY() + (((Balle) element).getVitesse() * delta));
@@ -110,7 +110,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 		this.elementGere = elementGere;
 	}
 	
-	private boolean detecterPositionBallePlat(Balle balle)
+	private boolean detecterCollisionSpecialeBallePlat(Balle balle)
 	{
 		
 		float coordonneesBalleY = balle.getCentreY();

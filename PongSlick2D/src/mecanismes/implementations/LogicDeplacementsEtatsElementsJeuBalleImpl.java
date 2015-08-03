@@ -12,6 +12,8 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 {
 	
 	private Balle element = null;
+	private float valeurAleatoire = 0;
+	private boolean encollision = false;
 	
 	public LogicDeplacementsEtatsElementsJeuBalleImpl(Balle balle)
 	{
@@ -22,8 +24,20 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	public void gererDeplacements(int delta)
 	{
 		
+		if(!isEncollision())
+		{
+			this.setEncollision(this.getElement().isEnDeplacement());
+			
+			if(isEncollision())
+			{
+				this.setValeurAleatoire(this.genererMouvementAleatoire());
+			}
+			
+		}
+		
 		if(element.isEnDeplacement())
 		{
+			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
 			{
 				element.setCentreY(element.getCentreY() - (element.getVitesse() * delta));
@@ -46,26 +60,66 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
 			{
-				element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
-				element.setCentreY(element.getCentreY() - (element.getVitesse() * delta * this.genererMouvementAleatoire()));
+				
+				if(this.getValeurAleatoire() != 0)
+				{
+					element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
+					element.setCentreY(element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoire()));
+				}
+				else
+				{
+					element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
+					element.setCentreY(element.getCentreY() - (element.getVitesse() * delta));
+				}
+				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
 			{
-				element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
-				element.setCentreY(element.getCentreY() - (element.getVitesse() * delta * this.genererMouvementAleatoire()));
+				
+				if(this.getValeurAleatoire() != 0)
+				{
+					element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
+					element.setCentreY(element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoire()));
+				}
+				else
+				{
+					element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
+					element.setCentreY(element.getCentreY() - (element.getVitesse() * delta));
+				}
+				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
 			{
-				element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
-				element.setCentreY(element.getCentreY() + (element.getVitesse() * delta * this.genererMouvementAleatoire()));
+				
+				if(this.getValeurAleatoire() != 0)
+				{
+					element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
+					element.setCentreY(element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoire()));
+				}
+				else
+				{
+					element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
+					element.setCentreY(element.getCentreY() + (element.getVitesse() * delta));
+				}
+				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
 			{
-				element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
-				element.setCentreY(element.getCentreY() + (element.getVitesse() * delta * this.genererMouvementAleatoire()));
+				
+				if(this.getValeurAleatoire() != 0)
+				{
+					element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
+					element.setCentreY(element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoire()));
+				}
+				else
+				{
+					element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
+					element.setCentreY(element.getCentreY() + (element.getVitesse() * delta));
+				}
+				
 			}
 			
 		}
@@ -99,14 +153,6 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	public void reinitialisationEtat(int key, char c) 
 	{
 	}
-
-	public Balle getElement() {
-		return element;
-	}
-
-	public void setElement(Balle element) {
-		this.element = element;
-	}
 	
 	private float genererMouvementAleatoire()
 	{
@@ -120,6 +166,30 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 		return nombreAleatoire;
 		
+	}
+
+	public Balle getElement() {
+		return element;
+	}
+
+	public void setElement(Balle element) {
+		this.element = element;
+	}
+
+	public float getValeurAleatoire() {
+		return valeurAleatoire;
+	}
+
+	public void setValeurAleatoire(float valeurAleatoire) {
+		this.valeurAleatoire = valeurAleatoire;
+	}
+
+	public boolean isEncollision() {
+		return encollision;
+	}
+
+	public void setEncollision(boolean encollision) {
+		this.encollision = encollision;
 	}
 	
 }
