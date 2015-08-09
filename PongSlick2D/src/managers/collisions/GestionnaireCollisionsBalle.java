@@ -72,12 +72,15 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 					{
 						gererCasMur();
 					}
+					
+					break;
 				}
 			}
 			
-			this.setEnCollision(collisionDetectee);
-			this.getElementGere().setEnCollision(collisionDetectee);
 		}
+		
+		this.setEnCollision(collisionDetectee);
+		this.getElementGere().setEnCollision(collisionDetectee);
 		
 	}
 	

@@ -1,6 +1,7 @@
 package etatsJeu;
 import managers.collisions.GestionnaireCollisionsBalle;
 import managers.collisions.GestionnaireCollisionsFilet;
+import managers.collisions.GestionnaireCollisionsMur;
 import managers.collisions.GestionnaireCollisionsRaquette;
 import managers.elements.GestionnaireElements;
 import managers.etat.match.GestionnaireMatch;
@@ -37,6 +38,8 @@ public class EtatMatch extends BasicGameState
 	private GestionnaireCollisionsRaquette gestionnaireColisionRaquette2;
 	private GestionnaireCollisionsFilet gestionnaireCollisionFilet1;
 	private GestionnaireCollisionsFilet gestionnaireCollisionFilet2;
+	private GestionnaireCollisionsMur gestionnaireColisionMur1;
+	private GestionnaireCollisionsMur gestionnaireColisionMur2;
 	private GestionnaireElements gestionnaireElement;
 	private GestionnaireMatch gestionnaireMatch;
 
@@ -68,6 +71,8 @@ public class EtatMatch extends BasicGameState
 		gestionnaireColisionRaquette2 = new GestionnaireCollisionsRaquette(raquette2, gestionnaireElement.getListElements());
 		gestionnaireCollisionFilet1 = new GestionnaireCollisionsFilet(filet1, gestionnaireMatch, gestionnaireElement.getListElements());
 		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireMatch, gestionnaireElement.getListElements());
+		gestionnaireColisionMur1 = new GestionnaireCollisionsMur(mur1, gestionnaireElement.getListElements());
+		gestionnaireColisionMur2 = new GestionnaireCollisionsMur(mur2, gestionnaireElement.getListElements());
 	}
 
 	@Override
@@ -90,14 +95,21 @@ public class EtatMatch extends BasicGameState
 	@Override
 	public void update(GameContainer container, StateBasedGame etat, int delta) throws SlickException 
 	{
-		mecanismeRaquette1.gererDeplacements(delta);
-		mecanismeRaquette2.gererDeplacements(delta);
-		mecanismeBalle.gererDeplacements(delta);
+		
 		gestionnaireColisionBalle.gererCollision(delta);
+		mecanismeBalle.gererDeplacements(delta);
+		
 		gestionnaireColisionRaquette1.gererCollision(delta);
 		gestionnaireColisionRaquette2.gererCollision(delta);
+		mecanismeRaquette1.gererDeplacements(delta);
+		mecanismeRaquette2.gererDeplacements(delta);
+		
 		gestionnaireCollisionFilet1.gererCollision(delta);
 		gestionnaireCollisionFilet2.gererCollision(delta);
+		
+		gestionnaireColisionMur1.gererCollision(delta);
+		gestionnaireColisionMur2.gererCollision(delta);
+		
 	}
 	
 	@Override
