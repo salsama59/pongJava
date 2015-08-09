@@ -13,7 +13,7 @@ public class Raquette extends Element
 
 	public Raquette(float x, float y, float largeur, float longueur, float v, String nom) 
 	{
-		super(nom);
+		super(nom, false);
 		this.setElement(new Rectangle(x,y,largeur,longueur));
 		this.setVitesse(v);
 	}

@@ -4,10 +4,12 @@ public class Element
 {
 	private int idElement;
 	private String nomElement;
+	private boolean enCollision;
 	
-	public Element(String nom)
+	public Element(String nom, boolean enCollision)
 	{
 		this.setNomElement(nom);
+		this.setEnCollision(enCollision);
 	}
 
 	public int getIdElement() 
@@ -28,6 +30,14 @@ public class Element
 	public void setNomElement(String nomElement) 
 	{
 		this.nomElement = nomElement;
+	}
+
+	public boolean isEnCollision() {
+		return enCollision;
+	}
+
+	public void setEnCollision(boolean enCollision) {
+		this.enCollision = enCollision;
 	}
 	
 }

@@ -13,7 +13,6 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	
 	private Balle element = null;
 	private float valeurAleatoire = 0;
-	private boolean encollision = false;
 	
 	public LogicDeplacementsEtatsElementsJeuBalleImpl(Balle balle)
 	{
@@ -24,15 +23,11 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	public void gererDeplacements(int delta)
 	{
 		
-		if(!isEncollision())
+		this.setValeurAleatoire(0);
+			
+		if(this.getElement().isEnCollision())
 		{
-			this.setEncollision(this.getElement().isEnDeplacement());
-			
-			if(isEncollision())
-			{
-				this.setValeurAleatoire(this.genererMouvementAleatoire());
-			}
-			
+			this.setValeurAleatoire(this.genererMouvementAleatoire());
 		}
 		
 		if(element.isEnDeplacement())
@@ -182,14 +177,6 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 
 	public void setValeurAleatoire(float valeurAleatoire) {
 		this.valeurAleatoire = valeurAleatoire;
-	}
-
-	public boolean isEncollision() {
-		return encollision;
-	}
-
-	public void setEncollision(boolean encollision) {
-		this.encollision = encollision;
 	}
 	
 }

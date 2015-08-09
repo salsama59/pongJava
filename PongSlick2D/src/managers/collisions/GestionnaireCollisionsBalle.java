@@ -50,6 +50,7 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 			else
 			{
 				this.setEnCollision(collisionDetectee);
+				this.getElementGere().setEnCollision(collisionDetectee);
 				continue;
 			}
 			
@@ -75,6 +76,7 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 			}
 			
 			this.setEnCollision(collisionDetectee);
+			this.getElementGere().setEnCollision(collisionDetectee);
 		}
 		
 	}

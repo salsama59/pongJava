@@ -42,6 +42,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 			else
 			{
 				this.setEnCollision(collisionDetectee);
+				this.getElementGere().setEnCollision(collisionDetectee);
 				continue;
 			}
 			
@@ -97,6 +98,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 			}
 			
 			this.setEnCollision(collisionDetectee);
+			this.getElementGere().setEnCollision(collisionDetectee);
 		}
 	}
 
