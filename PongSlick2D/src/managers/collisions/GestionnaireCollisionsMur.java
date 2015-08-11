@@ -14,7 +14,7 @@ public class GestionnaireCollisionsMur extends GestionnaireCollisions
 	
 	private Mur elementGere;
 
-	public GestionnaireCollisionsMur(Mur elementAgerer, Hashtable<Integer, Element> elements) 
+	public GestionnaireCollisionsMur(Mur elementAgerer, Hashtable<String, Element> elements) 
 	{
 		super(elements);
 		this.setElementGere(elementAgerer);

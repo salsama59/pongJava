@@ -7,9 +7,9 @@ public class Arene extends Element
 	
 	protected Rectangle element = null;
 	
-	public Arene(String nom)
+	public Arene(String nom, String type)
 	{
-		super(nom, false);
+		super(nom, false, type);
 	}
 
 	public Rectangle getElement() {

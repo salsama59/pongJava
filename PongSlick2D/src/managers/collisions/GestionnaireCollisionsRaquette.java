@@ -14,7 +14,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 	
 	private  Raquette elementGere;
 
-	public GestionnaireCollisionsRaquette(Raquette elementAgerer, Hashtable<Integer, Element> elements) 
+	public GestionnaireCollisionsRaquette(Raquette elementAgerer, Hashtable<String, Element> elements) 
 	{
 		super(elements);
 		this.setElementGere(elementAgerer);

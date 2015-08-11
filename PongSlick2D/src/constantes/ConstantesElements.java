@@ -3,6 +3,11 @@ package constantes;
 public class ConstantesElements 
 {
 	
+	public final static String ELEMENT_RAQUETTE_TYPE = "RAQUETTE";
+	public final static String ELEMENT_BALLE_TYPE = "BALLE";
+	public final static String ELEMENT_FILET_TYPE = "FILET";
+	public final static String ELEMENT_MUR_TYPE = "MUR";
+	
 	//Parametres raquette 1
 	public final static float ELEMENT_RAQUETTE1_LARGEUR = 30;
 	public final static float ELEMENT_RAQUETTE1_HAUTEUR = 80;

@@ -9,9 +9,9 @@ public abstract class GestionnaireCollisions
 	
 	private int idElementEnCollision;
 	private boolean enCollision = false;
-	private Hashtable<Integer, Element> elementsExistant;
+	private Hashtable<String, Element> elementsExistant;
 	
-	public GestionnaireCollisions(Hashtable<Integer, Element> elements)
+	public GestionnaireCollisions(Hashtable<String, Element> elements)
 	{
 		this.setElementsExistant(elements);
 	}
@@ -39,11 +39,11 @@ public abstract class GestionnaireCollisions
 	public abstract void gererCollision(int delta);
 	
 
-	public Hashtable<Integer, Element> getElementsExistant() {
+	public Hashtable<String, Element> getElementsExistant() {
 		return elementsExistant;
 	}
 
-	public void setElementsExistant(Hashtable<Integer, Element> elementsExistant) {
+	public void setElementsExistant(Hashtable<String, Element> elementsExistant) {
 		this.elementsExistant = elementsExistant;
 	}
 	

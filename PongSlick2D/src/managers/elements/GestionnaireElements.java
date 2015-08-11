@@ -1,6 +1,8 @@
 package managers.elements;
 
+import java.util.Collection;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import elementsJeu.Element;
 
@@ -9,13 +11,13 @@ import elementsJeu.Element;
 public class GestionnaireElements 
 {
 	
-	private Hashtable<Integer, Element> ListElements;
+	private Hashtable<String, Element> ListElements;
 	private int prochainID;
 	private int iDprecedent;
 	
 	public GestionnaireElements()
 	{
-		ListElements = new Hashtable<Integer, Element>();
+		ListElements = new Hashtable<String, Element>();
 		this.setProchainID(0);
 	}
 
@@ -37,20 +39,18 @@ public class GestionnaireElements
 		this.iDprecedent = iDprecedent;
 	}
 
-	public Hashtable<Integer, Element> getListElements() 
+	public Hashtable<String, Element> getListElements() 
 	{
 		return ListElements;
 	}
 
-	public void setListElements(Hashtable<Integer, Element> listElements) 
+	public void setListElements(Hashtable<String, Element> listElements) 
 	{
 		ListElements = listElements;
 	}
 	
-	private int attribuerIdElement(Element element)
+	private int attribuerIdElement()
 	{
-		//mise à jour id element
-		element.setIdElement(this.getProchainID());
 		//stocker l'id précédent
 		this.setIdPrecedent(this.getProchainID());
 		//Préparer le prochaine id
@@ -61,7 +61,30 @@ public class GestionnaireElements
 	
 	public void ajouterElement(Element element)
 	{
-		this.getListElements().put(attribuerIdElement(element), element);
+		element.setIdElement(this.attribuerIdElement());
+		this.getListElements().put(element.getNomElement(), element);
+	}
+	
+	public Hashtable<String, Element> getListeElementsFiltrees(String filtre)
+	{
+		
+		Hashtable<String, Element> listeTriee = new Hashtable<String, Element>();
+		
+		Collection<Element> valeurs = ListElements.values();
+		Iterator<Element> iterateurElements = valeurs.iterator();
+		
+		while(iterateurElements.hasNext())
+		{
+			Element element = iterateurElements.next();
+			
+			if(filtre.contains(element.getType()))
+			{
+				listeTriee.put(element.getNomElement(), element);
+			}
+		}
+		
+		return listeTriee;
+		
 	}
 
 }

@@ -17,7 +17,7 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 	
 	private  Balle elementGere;
 	
-	public GestionnaireCollisionsBalle(Balle elementAgerer, Hashtable<Integer, Element> elements) 
+	public GestionnaireCollisionsBalle(Balle elementAgerer, Hashtable<String, Element> elements) 
 	{
 		super(elements);
 		this.setElementGere(elementAgerer);

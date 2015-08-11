@@ -15,7 +15,7 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 	private Filet elementGere;
 	private GestionnaireMatch gestionnaireMatch;
 
-	public GestionnaireCollisionsFilet(Filet elementAgerer, GestionnaireMatch gestionnaire, Hashtable<Integer, Element> elements) 
+	public GestionnaireCollisionsFilet(Filet elementAgerer, GestionnaireMatch gestionnaire, Hashtable<String, Element> elements) 
 	{
 		super(elements);
 		this.setElementGere(elementAgerer);

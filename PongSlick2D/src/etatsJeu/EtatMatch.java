@@ -16,6 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import constantes.ConstantesElements;
 import constantes.ConstantesEtat;
+import constantes.ConstantesGestionnaires;
 import elementsJeu.Balle;
 import elementsJeu.Filet;
 import elementsJeu.Mur;
@@ -66,11 +67,11 @@ public class EtatMatch extends BasicGameState
 		gestionnaireElement.ajouterElement(filet2);
 		
 		mecanismeBalle = new LogicDeplacementsEtatsElementsJeuBalleImpl(balle);
-		gestionnaireColisionBalle = new GestionnaireCollisionsBalle(balle, gestionnaireElement.getListElements());
-		gestionnaireColisionRaquette1 = new GestionnaireCollisionsRaquette(raquette1, gestionnaireElement.getListElements());
-		gestionnaireColisionRaquette2 = new GestionnaireCollisionsRaquette(raquette2, gestionnaireElement.getListElements());
-		gestionnaireCollisionFilet1 = new GestionnaireCollisionsFilet(filet1, gestionnaireMatch, gestionnaireElement.getListElements());
-		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireMatch, gestionnaireElement.getListElements());
+		gestionnaireColisionBalle = new GestionnaireCollisionsBalle(balle, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_BALLE));
+		gestionnaireColisionRaquette1 = new GestionnaireCollisionsRaquette(raquette1, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_RAQUETTE));
+		gestionnaireColisionRaquette2 = new GestionnaireCollisionsRaquette(raquette2, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_RAQUETTE));
+		gestionnaireCollisionFilet1 = new GestionnaireCollisionsFilet(filet1, gestionnaireMatch, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_FILET));
+		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireMatch, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_FILET));
 		gestionnaireColisionMur1 = new GestionnaireCollisionsMur(mur1, gestionnaireElement.getListElements());
 		gestionnaireColisionMur2 = new GestionnaireCollisionsMur(mur2, gestionnaireElement.getListElements());
 	}
