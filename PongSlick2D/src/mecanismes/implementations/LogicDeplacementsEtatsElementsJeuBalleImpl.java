@@ -30,6 +30,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		if(this.getElement().isEnCollision())
 		{
 			this.setValeurAleatoireXY(this.genererMouvementAleatoire());
+			this.accelererBalle();
 		}
 		
 		if(element.isEnDeplacement())
@@ -154,8 +155,6 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	private Vector2f genererMouvementAleatoire()
 	{
 		Vector2f coupleVitesse = null;
-		float nombreAleatoireX = 0;
-		float nombreAleatoireY = 0;
 		
 		int intervale = ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MAX - ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MIN;
 		
@@ -163,14 +162,8 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 		int valeurX = ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MIN + r.nextInt(intervale);
 		int valeurY = ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MIN + r.nextInt(intervale);
-
-		//nombreAleatoireX = valeurX * 0.1f;
-		//nombreAleatoireY = valeurY * 0.1f;
 		
-		nombreAleatoireX = valeurX;
-		nombreAleatoireY = valeurY;
-		
-		coupleVitesse = new Vector2f(nombreAleatoireX, nombreAleatoireY);
+		coupleVitesse = new Vector2f(valeurX, valeurY);
 		
 		return coupleVitesse;
 		
@@ -190,6 +183,14 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 
 	private void setValeurAleatoireXY(Vector2f valeurAleatoireXY) {
 		this.valeurAleatoireXY = valeurAleatoireXY;
+	}
+	
+	//TODO mettre un limiteur de vitesse pour la maintenir à un niveau élevée mais static
+	//TODO ajuster la vistesse d'origine et le gain de vitesse pour obtenir un bon équilibre
+	private void accelererBalle()
+	{
+		Balle element = this.getElement();
+		element.setVitesse(element.getVitesse() + 0.001f);
 	}
 	
 }

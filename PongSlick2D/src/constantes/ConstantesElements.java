@@ -40,8 +40,8 @@ public class ConstantesElements
 	public final static float ELEMENT_BALLE_CENTRE_X = 650;
 	public final static float ELEMENT_BALLE_CENTRE_Y= 200;
 	public final static float ELEMENT_BALLE_VITESSE= 0.1f;
-	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MAX= 6;
-	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MIN= 1;
+	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MAX = 3;
+	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MIN = 2;
 	public final static String ELEMENT_BALLE_NOM = "balle";
 	
 	//Parametre filet gauche
