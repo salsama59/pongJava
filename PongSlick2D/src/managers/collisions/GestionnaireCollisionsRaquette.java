@@ -59,15 +59,25 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 						
 						if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
 						{
-							this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
-							this.getElementGere().setEnDeplacement(false);
-							this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() + (this.getElementGere().getVitesse() * delta));
+							
+							if(((Mur)element).getNomElement() == ConstantesElements.ELEMENT_MUR1_NOM)
+							{
+								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+								this.getElementGere().setEnDeplacement(false);
+								this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() + (this.getElementGere().getVitesse() * delta));
+							}
+							
 						}
 						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
 						{
-							this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
-							this.getElementGere().setEnDeplacement(false);
-							this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() - (this.getElementGere().getVitesse() * delta));
+							
+							if(((Mur)element).getNomElement() == ConstantesElements.ELEMENT_MUR2_NOM)
+							{
+								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+								this.getElementGere().setEnDeplacement(false);
+								this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() - (this.getElementGere().getVitesse() * delta));
+							}
+							
 						}
 						
 					}

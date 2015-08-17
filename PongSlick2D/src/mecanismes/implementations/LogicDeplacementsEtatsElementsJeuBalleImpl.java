@@ -169,28 +169,35 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 	}
 
-	public Balle getElement() {
+	public Balle getElement() 
+	{
 		return element;
 	}
 
-	public void setElement(Balle element) {
+	public void setElement(Balle element) 
+	{
 		this.element = element;
 	}
 
-	private Vector2f getValeurAleatoireXY() {
+	private Vector2f getValeurAleatoireXY() 
+	{
 		return valeurAleatoireXY;
 	}
 
-	private void setValeurAleatoireXY(Vector2f valeurAleatoireXY) {
+	private void setValeurAleatoireXY(Vector2f valeurAleatoireXY) 
+	{
 		this.valeurAleatoireXY = valeurAleatoireXY;
 	}
 	
-	//TODO mettre un limiteur de vitesse pour la maintenir à un niveau élevée mais static
-	//TODO ajuster la vistesse d'origine et le gain de vitesse pour obtenir un bon équilibre
 	private void accelererBalle()
 	{
 		Balle element = this.getElement();
-		element.setVitesse(element.getVitesse() + 0.001f);
+		
+		if(element.getVitesse() < ConstantesElements.ELEMENT_BALLE_VITESSE_MAX)
+		{
+			element.setVitesse(element.getVitesse() + 0.01f);
+		}
+		
 	}
 	
 }
