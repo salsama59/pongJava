@@ -14,6 +14,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import constantes.ConstantesAffichageInfos;
 import constantes.ConstantesElements;
 import constantes.ConstantesEtat;
 import constantes.ConstantesGestionnaires;
@@ -88,8 +89,8 @@ public class EtatMatch extends BasicGameState
 		graphisme.draw(mur2.getElement());
 		graphisme.draw(filet1.getElement());
 		graphisme.draw(filet2.getElement());
-		graphisme.drawString("" + gestionnaireMatch.getPointCampDroit(), 200, 50);
-		graphisme.drawString("" + gestionnaireMatch.getPointCampGauche(), 100, 50);
+		graphisme.drawString("" + gestionnaireMatch.getPointCampDroit(), ConstantesAffichageInfos.INFOS_POSITION_X_SCORE_CAMP_DROITE, ConstantesAffichageInfos.INFOS_POSITION_Y_SCORE_CAMP_DROITE);
+		graphisme.drawString("" + gestionnaireMatch.getPointCampGauche(), ConstantesAffichageInfos.INFOS_POSITION_X_SCORE_CAMP_GAUCHE, ConstantesAffichageInfos.INFOS_POSITION_Y_SCORE_CAMP_GAUCHE);
 		
 	}
 

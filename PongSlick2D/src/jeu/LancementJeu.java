@@ -3,7 +3,7 @@ package jeu;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import constantes.ContantesJeu;
+import constantes.ConstantesJeu;
 
 public class LancementJeu 
 {
@@ -23,8 +23,8 @@ public class LancementJeu
 	
 	private static void initialisationJeu(AppGameContainer container) throws SlickException
 	{
-		container.setDisplayMode(ContantesJeu.ECRAN_LARGEUR, ContantesJeu.ECRAN_HAUTEUR, ContantesJeu.ECRAN_AFFICHAGE_FULLSCREEN); 
-		container.setTargetFrameRate(ContantesJeu.JEU_FRAMERATE);
+		container.setDisplayMode(ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, ConstantesJeu.ECRAN_AFFICHAGE_FULLSCREEN); 
+		container.setTargetFrameRate(ConstantesJeu.JEU_FRAMERATE);
 		container.start();
 	}
 }

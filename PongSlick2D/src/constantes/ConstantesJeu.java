@@ -1,6 +1,6 @@
 package constantes;
 
-public class ContantesJeu 
+public class ConstantesJeu 
 {
 	
 	public final static String JEU_TITRE = "Pong 2015";

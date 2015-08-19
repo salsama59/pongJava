@@ -6,8 +6,6 @@ import java.util.Iterator;
 
 import elementsJeu.Element;
 
-//TODO refonte complete du gestionnaire avec mise en place du tri sur les listes d'éléments gérés pour optimiser les boucles
-//Renplacement des id int part les nom des éléments string
 public class GestionnaireElements 
 {
 	

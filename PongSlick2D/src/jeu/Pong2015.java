@@ -4,7 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException; 
 import org.newdawn.slick.state.StateBasedGame;
 
-import constantes.ContantesJeu;
+import constantes.ConstantesJeu;
 import etatsJeu.EtatMatch;
 
 public class Pong2015 extends StateBasedGame
@@ -15,7 +15,7 @@ public class Pong2015 extends StateBasedGame
 
 	public Pong2015()
 	{
-		super(ContantesJeu.JEU_TITRE);
+		super(ConstantesJeu.JEU_TITRE);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class Pong2015 extends StateBasedGame
 		} 
 		 
 		 match = new EtatMatch();
-		 container.setShowFPS(ContantesJeu.ECRAN_AFFICHAGE_FRAMERATE);
+		 container.setShowFPS(ConstantesJeu.ECRAN_AFFICHAGE_FRAMERATE);
 		 addState(match);
 	}
 	
