@@ -10,10 +10,12 @@ public class Raquette extends Element
 	private float vitesse;
 	private boolean enDeplacement = false;
 	private int direction = ConstantesElements.ELEMENT_DIRECTION_NEUTRE;
+	private int endurance;
+	private int energie;
 
-	public Raquette(float x, float y, float largeur, float longueur, float v, String nom) 
+	public Raquette(float x, float y, float largeur, float longueur, float v, String nom, String camp)
 	{
-		super(nom, false, ConstantesElements.ELEMENT_RAQUETTE_TYPE);
+		super(nom, false, ConstantesElements.ELEMENT_RAQUETTE_TYPE, camp);
 		this.setElement(new Rectangle(x,y,largeur,longueur));
 		this.setVitesse(v);
 	}
@@ -88,6 +90,32 @@ public class Raquette extends Element
 
 	public void setDirection(int direction) {
 		this.direction = direction;
+	}
+
+	public int getEndurance() {
+		return endurance;
+	}
+
+	public void setEndurance(int endurance) {
+		this.endurance = endurance;
+	}
+
+	public int getEnergie() {
+		return energie;
+	}
+
+	public void setEnergie(int energie) {
+		this.energie = energie;
+	}
+	
+	public void appliquerSmash(Balle balle, int delta)
+	{
+		balle.setVitesse(balle.getVitesse() * ConstantesElements.ELEMENT_RAQUETTE1_VALEUR_SMASH * delta);
+	}
+	
+	public void appliquerSpin(Balle balle, int delta)
+	{
+		balle.setVitesse((balle.getVitesse() * delta) / ConstantesElements.ELEMENT_RAQUETTE1_REDUCTION_SPIN);
 	}
 
 

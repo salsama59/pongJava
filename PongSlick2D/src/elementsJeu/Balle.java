@@ -18,6 +18,13 @@ public class Balle extends Element
 		this.setElement(new Circle(centreX,centreY,rayon));
 		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
 	}
+	
+	public Balle(float centreX, float centreY, float rayon, String nom, String camp) 
+	{
+		super(nom, false, ConstantesElements.ELEMENT_BALLE_TYPE, camp);
+		this.setElement(new Circle(centreX,centreY,rayon));
+		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
+	}
 
 	public float getVitesse() {
 		return vitesse;

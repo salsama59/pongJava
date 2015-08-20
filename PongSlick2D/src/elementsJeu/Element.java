@@ -6,18 +6,21 @@ public class Element
 	private String nomElement;
 	private String type;
 	private boolean enCollision;
+	private String camp;
+	
+	public Element(String nom, boolean enCollision, String type, String camp)
+	{
+		this.setCamp(camp);
+		this.setNomElement(nom);
+		this.setType(type);
+		this.setEnCollision(enCollision);
+	}
 	
 	public Element(String nom, boolean enCollision, String type)
 	{
 		this.setNomElement(nom);
 		this.setType(type);
 		this.setEnCollision(enCollision);
-	}
-	
-	public Element(String nom, String type)
-	{
-		this.setNomElement(nom);
-		this.setType(type);
 	}
 
 	public int getIdElement() 
@@ -56,6 +59,14 @@ public class Element
 
 	public void setEnCollision(boolean enCollision) {
 		this.enCollision = enCollision;
+	}
+
+	public String getCamp() {
+		return camp;
+	}
+
+	public void setCamp(String camp) {
+		this.camp = camp;
 	}
 	
 }

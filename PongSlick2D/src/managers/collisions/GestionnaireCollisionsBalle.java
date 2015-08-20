@@ -242,49 +242,15 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		
 	}
 	
-	
-	private int detecterRaquette(float x, float y)
-	{
-		
-		if(x == ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X)
-		{
-			return ContantesJoueurs.JOUEUR_ID_1;
-		}
-		else if(x == ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X)
-		{
-			return ContantesJoueurs.JOUEUR_ID_2;
-		}
-		
-		return -1;
-	}
-	
 	private boolean detecterCollisionSpecialeCoin(Raquette raquette)
 	{
 		
 		float coordonneesBalleX = this.getElementGere().getCentreX();
 		float coordonneesRaquetteX = raquette.getCoordonneeX();
-		float coordonneesRaquetteY = raquette.getCoordonneeY();
 		float largeurRaquette = raquette.getLargeur();
 		boolean casSpecial = false;
 		
-		String camp = "";
-		
-		switch(detecterRaquette(coordonneesRaquetteX, coordonneesRaquetteY))
-		{
-			
-			case ContantesJoueurs.JOUEUR_ID_1: 
-				
-			camp = ContantesJoueurs.JOUEUR_CAMP_GAUCHE;
-				
-			break;
-			
-			case ContantesJoueurs.JOUEUR_ID_2:
-			
-			camp = ContantesJoueurs.JOUEUR_CAMP_DROITE;
-			
-			break;
-		
-		}
+		String camp = raquette.getCamp();
 		
 		if(camp.equals(ContantesJoueurs.JOUEUR_CAMP_DROITE))
 		{

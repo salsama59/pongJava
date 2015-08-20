@@ -15,6 +15,8 @@ public class ConstantesElements
 	public final static float ELEMENT_RAQUETTE1_COORDONEE_Y= ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_POSITION_Y_RAQUETTE1;
 	public final static float ELEMENT_RAQUETTE1_VITESSE= 0.1f;
 	public final static String ELEMENT_RAQUETTE1_NOM = "raquette1";
+	public final static float ELEMENT_RAQUETTE1_VALEUR_SMASH= 0.5f;
+	public final static float ELEMENT_RAQUETTE1_REDUCTION_SPIN= 0.3f;
 	
 	//Parametres raquette 2
 	public final static float ELEMENT_RAQUETTE2_LARGEUR = ELEMENT_RAQUETTE1_LARGEUR;
@@ -23,6 +25,8 @@ public class ConstantesElements
 	public final static float ELEMENT_RAQUETTE2_COORDONEE_Y= ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_POSITION_Y_RAQUETTE2;
 	public final static float ELEMENT_RAQUETTE2_VITESSE= 0.1f;
 	public final static String ELEMENT_RAQUETTE2_NOM = "raquette2";
+	public final static float ELEMENT_RAQUETTE2_VALEUR_SMASH= 0.5f;
+	public final static float ELEMENT_RAQUETTE2_REDUCTION_SPIN= 0.3f;
 	
 	//Directions pour tout elements de jeu
 	public final static int ELEMENT_DIRECTION_NEUTRE =0;
