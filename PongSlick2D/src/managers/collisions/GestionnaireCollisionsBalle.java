@@ -327,13 +327,27 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		
 	}
 	
-	//TODO tester cela imperativement et ajouter des commentaires d'explication
+		//TODO tester cela imperativement et ajouter des commentaires d'explication
+		private Vector2f determinerPointInpact(Vector2f coordoneesElementMinA, Vector2f coordoneesElementMaxB)
+		{
+			Vector2f coodoneesImpact = null, u = null, ac = null, c = null;
+			c = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY());
+			u = new Vector2f((coordoneesElementMaxB.x - coordoneesElementMinA.x), (coordoneesElementMaxB.y - coordoneesElementMinA.y));
+			ac = new Vector2f((c.x - coordoneesElementMinA.x), (c.y - coordoneesElementMinA.y));
+			float ti = (u.x * ac.x + u.y * ac.y)/(u.x * u.x + u.y * u.y);
+			
+			coodoneesImpact = new Vector2f((coordoneesElementMinA.x + ti * u.x), (coordoneesElementMinA.y + ti * u.y));
+			
+			return coodoneesImpact;
+		}
+		
 		private Vector2f determinerNormalePointImpact(Vector2f coordoneesElementMinA, Vector2f coordoneesElementMaxB)
 		{
 			
 			Vector2f normale = null, u = null, ac = null, c = null;
 			c = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY());
 			u = new Vector2f((coordoneesElementMaxB.x - coordoneesElementMinA.x), (coordoneesElementMaxB.y - coordoneesElementMinA.y));
+			//calcul ac foireux
 			ac = new Vector2f((c.x - coordoneesElementMinA.x), (c.y - coordoneesElementMinA.y));
 			
 			float parentheses = u.x*ac.y-u.y*ac.x;
@@ -346,19 +360,6 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 			normale = new Vector2f((cordonneesX/norme), (cordonneesY/norme));
 			
 			return normale;
-		}
-		
-		private Vector2f determinerPointInpact(Vector2f coordoneesElementMinA, Vector2f coordoneesElementMaxB)
-		{
-			Vector2f coodoneesImpact = null, u = null, ac = null, c = null;
-			c = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY());
-			u = new Vector2f((coordoneesElementMaxB.x - coordoneesElementMinA.x), (coordoneesElementMaxB.y - coordoneesElementMinA.y));
-			ac = new Vector2f((c.x - coordoneesElementMinA.x), (c.y - coordoneesElementMinA.y));
-			float ti = (u.x * ac.x + u.y * ac.y)/(u.x * u.x + u.y * u.y);
-			
-			coodoneesImpact = new Vector2f((coordoneesElementMinA.x + ti * u.x), (coordoneesElementMinA.y + ti * u.y));
-			
-			return coodoneesImpact;
 		}
 		
 		//Potentiellement errone a cause du sens dans lequel on se trouve (chager le calcul en fonction du sens et de l'objet rencontré
