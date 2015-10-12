@@ -108,7 +108,7 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 	
 	private void gererCasMur(Element element)
 	{
-		Vector2f valeurRebond =null;
+		/*Vector2f valeurRebond =null;
 		
 		if(element.getNomElement() == "mur1")
 		{
@@ -119,8 +119,19 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 			valeurRebond = CalculerTrajectoireRebond(extraireCoordonneesMin(element), extraireCoordonneesMax(element));
 		}
 		
+		
+		
 		this.getElementGere().setCentreX(valeurRebond.x);
-		this.getElementGere().setCentreY(valeurRebond.y);
+		this.getElementGere().setCentreY(valeurRebond.y);*/
+		
+		double angleballe = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY()).getTheta();
+		
+		double angle = changAng(0, (-1 * angleballe));
+		
+		Vector2f vec = new Vector2f(angle);
+		
+		this.getElementGere().setCentreX(vec.x);
+		this.getElementGere().setCentreY(vec.y);
 		
 		if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
 		{
@@ -423,5 +434,32 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 			}
 			
 			return valeurMax;
+		}
+		
+		double changAng(double angle0,double angle) 
+		{ 
+
+		    double A = 2 * angle0 - angle; 
+
+		    if (A < 0) { A = A + 2 * 3.14f ; } 
+
+		    return A; 
+
+		}
+		
+		private Vector2f calculCordoneeSuivante(Vector2f origine, Vector2f arrivee, float coordonneeAbscise)
+		{
+			//Détermination de l'équation de la droite de l'origine jusqu'à la destination
+			//y=ax+b => x est connu et variera selon la trajectoire, on cherche à connaitre y.
+			
+			//calcul de a
+			float a = (origine.y - arrivee.y)/(origine.x - arrivee.x);
+			//calcul de b
+			float b = origine.y - a * origine.x;
+			//Calcul y
+			float coordonneeOrdonnee = a * coordonneeAbscise + b;
+			
+			return new Vector2f(coordonneeAbscise, coordonneeOrdonnee);
+			
 		}
 }
