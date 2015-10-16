@@ -124,14 +124,14 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		this.getElementGere().setCentreX(valeurRebond.x);
 		this.getElementGere().setCentreY(valeurRebond.y);*/
 		
-		double angleballe = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY()).getTheta();
+		//double angleballe = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY()).getTheta();
 		
-		double angle = changAng(0, (-1 * angleballe));
+		//double angle = changAng(0, (-1 * angleballe));
 		
-		Vector2f vec = new Vector2f(angle);
+		//Vector2f vec = new Vector2f(angle);
 		
-		this.getElementGere().setCentreX(vec.x);
-		this.getElementGere().setCentreY(vec.y);
+		//this.getElementGere().setCentreX(vec.x);
+		//this.getElementGere().setCentreY(vec.y);
 		
 		if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
 		{
@@ -447,7 +447,7 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 
 		}
 		
-		private Vector2f calculCordoneeSuivante(Vector2f origine, Vector2f arrivee, float coordonneeAbscise)
+		public Vector2f calculCordoneeSuivante(Vector2f origine, Vector2f arrivee, float coordonneeAbscise)
 		{
 			//Détermination de l'équation de la droite de l'origine jusqu'à la destination
 			//y=ax+b => x est connu et variera selon la trajectoire, on cherche à connaitre y.
