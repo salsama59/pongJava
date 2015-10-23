@@ -37,7 +37,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		{
 			
 			Vector2f origine = new Vector2f(element.getCentreX(), element.getCentreY());
-			Vector2f arrivee = new Vector2f(0f, 0f);
+			float angle = (float) new Vector2f(element.getCentreX(), element.getCentreY()).getTheta();
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
 			{
@@ -64,15 +64,15 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				
 				if(this.getValeurAleatoireXY() != null)
 				{
-					arrivee.set(element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
-					Vector2f test = calculCordoneeSuivante(origine, arrivee, element.getCentreX() + element.getVitesse() * delta * this.getValeurAleatoireXY().x);
+					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
+					Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle - 180);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
 				else
 				{
-					arrivee.set(element.getCentreX() + (element.getVitesse() * delta), element.getCentreY() - (element.getVitesse() * delta));
-					Vector2f test = calculCordoneeSuivante(origine, arrivee, element.getCentreX() + (element.getVitesse() * delta));
+					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta), element.getCentreY() - (element.getVitesse() * delta));
+					Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta), element.getVitesse(), angle);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -84,15 +84,15 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				
 				if(this.getValeurAleatoireXY() != null)
 				{
-					arrivee.set(element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
-					Vector2f test = calculCordoneeSuivante(origine, arrivee, element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x));
+					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
+					Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
 				else
 				{
-					arrivee.set(element.getCentreX() - (element.getVitesse() * delta), element.getCentreY() - (element.getVitesse() * delta));
-					Vector2f test = calculCordoneeSuivante(origine, arrivee, element.getCentreX() - (element.getVitesse() * delta));
+					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta), element.getCentreY() - (element.getVitesse() * delta));
+					Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta), element.getVitesse(), angle);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -104,15 +104,15 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				
 				if(this.getValeurAleatoireXY() != null)
 				{
-					arrivee.set(element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
-					Vector2f test = calculCordoneeSuivante(origine, arrivee, element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x));
+					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
+					Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
 				else
 				{
-					arrivee.set(element.getCentreX() + (element.getVitesse() * delta), element.getCentreY() + (element.getVitesse() * delta));
-					Vector2f test = calculCordoneeSuivante(origine, arrivee, element.getCentreX() + (element.getVitesse() * delta));
+					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta), element.getCentreY() + (element.getVitesse() * delta));
+					Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta), element.getVitesse(), angle);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -124,15 +124,15 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				
 				if(this.getValeurAleatoireXY() != null)
 				{
-					arrivee.set(element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
-					Vector2f test = calculCordoneeSuivante(origine, arrivee, element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x));
+					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
+					Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
 				else
 				{
-					arrivee.set(element.getCentreX() - (element.getVitesse() * delta), element.getCentreY() + (element.getVitesse() * delta));
-					Vector2f test = calculCordoneeSuivante(origine, arrivee, element.getCentreX() - (element.getVitesse() * delta));
+					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta), element.getCentreY() + (element.getVitesse() * delta));
+					Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta), element.getVitesse(), angle);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -219,10 +219,12 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 	}
 	
-	public Vector2f calculCordoneeSuivante(Vector2f origine, Vector2f arrivee, float coordonneeAbscise)
+	public Vector2f calculCordoneeSuivante(Vector2f origine, float coordonneeAbscise, float vitesseDeplacement, float direction)
 	{
 		//Détermination de l'équation de la droite de l'origine jusqu'à la destination
 		//y=ax+b => x est connu et variera selon la trajectoire, on cherche à connaitre y.
+		
+		Vector2f arrivee = calculCordoneeArrivee(origine, vitesseDeplacement, direction);
 		
 		//calcul de a
 		float a = (origine.y - arrivee.y)/(origine.x - arrivee.x);
@@ -235,17 +237,12 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 	}
 	
-	private Vector2f determinerPointInpact(Vector2f coordoneesElementMinA, Vector2f coordoneesElementMaxB)
+	private Vector2f calculCordoneeArrivee(Vector2f origine, float vitesse, float direction)
 	{
-		Vector2f coodoneesImpact = null, u = null, ac = null, c = null;
-		c = new Vector2f(this.getElement().getCentreX(), this.getElement().getCentreY());
-		u = new Vector2f((coordoneesElementMaxB.x - coordoneesElementMinA.x), (coordoneesElementMaxB.y - coordoneesElementMinA.y));
-		ac = new Vector2f((c.x - coordoneesElementMinA.x), (c.y - coordoneesElementMinA.y));
-		float ti = (u.x * ac.x + u.y * ac.y)/(u.x * u.x + u.y * u.y);
+		float xArrivee = (float)(origine.getX() + Math.cos(direction) * vitesse);
+		float yArrivee = (float)(origine.getY() + Math.cos(direction) * vitesse);
 		
-		coodoneesImpact = new Vector2f((coordoneesElementMinA.x + ti * u.x), (coordoneesElementMinA.y + ti * u.y));
-		
-		return coodoneesImpact;
+		return new Vector2f(xArrivee, yArrivee);
 	}
 	
 }
