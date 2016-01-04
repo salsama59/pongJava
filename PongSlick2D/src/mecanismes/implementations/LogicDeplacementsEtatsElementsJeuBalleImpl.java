@@ -29,7 +29,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			
 		if(this.getElement().isEnCollision())
 		{
-			this.setValeurAleatoireXY(this.genererMouvementAleatoire());
+			//this.setValeurAleatoireXY(this.genererMouvementAleatoire());
 			this.accelererBalle();
 		}
 		
@@ -66,7 +66,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				{
 					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
 					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle - 180);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY());
+					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -74,7 +74,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				{
 					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta), element.getCentreY() - (element.getVitesse() * delta));
 					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY());
+					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -88,7 +88,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				{
 					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
 					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY());
+					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -96,7 +96,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				{
 					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta), element.getCentreY() - (element.getVitesse() * delta));
 					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY());
+					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -110,7 +110,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				{
 					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
 					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY());
+					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -118,7 +118,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				{
 					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta), element.getCentreY() + (element.getVitesse() * delta));
 					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY());
+					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -132,7 +132,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				{
 					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
 					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY());
+					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -140,7 +140,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				{
 					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta), element.getCentreY() + (element.getVitesse() * delta));
 					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY());
+					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
 					element.setCentreX(test.x);
 					element.setCentreY(test.y);
 				}
@@ -253,7 +253,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		return new Vector2f(xArrivee, yArrivee);
 	}
 	
-	public Vector2f calculTrajectoire(float angle, float vitesse, float x, float y)
+	public Vector2f calculTrajectoire(float angle, float vitesse, float x, float y, float delta)
 	{
 		//attenttion l'angle renvoyé par l'élément circle de slick1d est en degrée et ne tient pas compte du repère de l'écranc pour obtenir l'angle par rapport à l'écran faire 180 - angleSlick 
 		//x2 = x1 + cos(direction) * vitesse
@@ -265,7 +265,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		// direction (radiant) = (π / 180) * direction (degré)
 		
 		
-		return new Vector2f((float) (x + Math.cos(convertionDegreRadiant(angle)) * vitesse), (float) (y + Math.sin(convertionDegreRadiant(angle)) * vitesse));
+		return new Vector2f((float) (x + Math.cos(convertionDegreRadiant(angle)) * vitesse * delta), (float) (y + Math.sin(convertionDegreRadiant(angle)) * vitesse * delta));
 	}
 	
 	private float convertionDegreRadiant(float angle)

@@ -149,6 +149,13 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		{
 			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
 		}
+		
+		//Vector2f vecteurCercle = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY());
+		
+		//Vector2f vecteurNouvelleDirection = new Vector2f(180 - vecteurCercle.getTheta() + (180 - vecteurCercle.getTheta()) * 2);
+		
+		//this.getElementGere().setCentreX(vecteurNouvelleDirection.x);
+		//this.getElementGere().setCentreY(vecteurNouvelleDirection.y);
 	}
 	
 	private void gererCasCollisionsSpeciales(Element element)
