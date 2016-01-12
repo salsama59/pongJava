@@ -23,6 +23,7 @@ public class LancementJeu
 	
 	private static void initialisationJeu(AppGameContainer container) throws SlickException
 	{
+		container.setVSync(ConstantesJeu.JEU_VSYNC);
 		container.setDisplayMode(ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, ConstantesJeu.ECRAN_AFFICHAGE_FULLSCREEN); 
 		container.setTargetFrameRate(ConstantesJeu.JEU_FRAMERATE);
 		container.start();

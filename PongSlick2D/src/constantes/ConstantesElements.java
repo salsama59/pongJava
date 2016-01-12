@@ -12,7 +12,7 @@ public class ConstantesElements
 	public final static float ELEMENT_RAQUETTE1_LARGEUR = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_LARGEUR_RAQUETTE;
 	public final static float ELEMENT_RAQUETTE1_HAUTEUR = ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_HAUTEUR_RAQUETTE;
 	public final static float ELEMENT_RAQUETTE1_COORDONEE_X = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_X_RAQUETTE1;
-	public final static float ELEMENT_RAQUETTE1_COORDONEE_Y= ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_POSITION_Y_RAQUETTE1;
+	public final static float ELEMENT_RAQUETTE1_COORDONEE_Y = ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_POSITION_Y_RAQUETTE1;
 	public final static float ELEMENT_RAQUETTE1_VITESSE= 0.1f;
 	public final static String ELEMENT_RAQUETTE1_NOM = "raquette1";
 	public final static float ELEMENT_RAQUETTE1_VALEUR_SMASH= 0.5f;
@@ -22,7 +22,7 @@ public class ConstantesElements
 	public final static float ELEMENT_RAQUETTE2_LARGEUR = ELEMENT_RAQUETTE1_LARGEUR;
 	public final static float ELEMENT_RAQUETTE2_HAUTEUR = ELEMENT_RAQUETTE1_HAUTEUR;
 	public final static float ELEMENT_RAQUETTE2_COORDONEE_X = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_X_RAQUETTE2;
-	public final static float ELEMENT_RAQUETTE2_COORDONEE_Y= ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_POSITION_Y_RAQUETTE2;
+	public final static float ELEMENT_RAQUETTE2_COORDONEE_Y = ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_POSITION_Y_RAQUETTE2;
 	public final static float ELEMENT_RAQUETTE2_VITESSE= 0.1f;
 	public final static String ELEMENT_RAQUETTE2_NOM = "raquette2";
 	public final static float ELEMENT_RAQUETTE2_VALEUR_SMASH= 0.5f;
@@ -68,7 +68,7 @@ public class ConstantesElements
 	public final static float ELEMENT_MUR1_LARGEUR = (ConstantesJeu.ECRAN_LARGEUR * 90)/100;
 	public final static float ELEMENT_MUR1_HAUTEUR = (ConstantesJeu.ECRAN_HAUTEUR * 5)/100;
 	public final static float ELEMENT_MUR1_COORDONEE_X = ELEMENT_FILET1_LARGEUR;
-	public final static float ELEMENT_MUR1_COORDONEE_Y= 0;
+	public final static float ELEMENT_MUR1_COORDONEE_Y = 0;
 	public final static String ELEMENT_MUR1_NOM = "mur1";
 	
 	//parametre Mur2

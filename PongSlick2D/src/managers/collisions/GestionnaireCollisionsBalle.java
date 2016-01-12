@@ -3,8 +3,6 @@ package managers.collisions;
 import java.util.Collection;
 import java.util.Hashtable;
 
-import org.newdawn.slick.geom.Vector2f;
-
 import constantes.ConstantePosition;
 import constantes.ConstantesElements;
 import constantes.ContantesJoueurs;
@@ -108,30 +106,6 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 	
 	private void gererCasMur(Element element)
 	{
-		/*Vector2f valeurRebond =null;
-		
-		if(element.getNomElement() == "mur1")
-		{
-			valeurRebond = CalculerTrajectoireRebond(extraireCoordonneesMax(element), extraireCoordonneesMin(element));
-		}
-		else if(element.getNomElement() == "mur2")
-		{
-			valeurRebond = CalculerTrajectoireRebond(extraireCoordonneesMin(element), extraireCoordonneesMax(element));
-		}
-		
-		
-		
-		this.getElementGere().setCentreX(valeurRebond.x);
-		this.getElementGere().setCentreY(valeurRebond.y);*/
-		
-		//double angleballe = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY()).getTheta();
-		
-		//double angle = changAng(0, (-1 * angleballe));
-		
-		//Vector2f vec = new Vector2f(angle);
-		
-		//this.getElementGere().setCentreX(vec.x);
-		//this.getElementGere().setCentreY(vec.y);
 		
 		if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
 		{
@@ -150,12 +124,6 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 			this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE);
 		}
 		
-		//Vector2f vecteurCercle = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY());
-		
-		//Vector2f vecteurNouvelleDirection = new Vector2f(180 - vecteurCercle.getTheta() + (180 - vecteurCercle.getTheta()) * 2);
-		
-		//this.getElementGere().setCentreX(vecteurNouvelleDirection.x);
-		//this.getElementGere().setCentreY(vecteurNouvelleDirection.y);
 	}
 	
 	private void gererCasCollisionsSpeciales(Element element)
@@ -342,131 +310,6 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		}
 		
 		return position;
-		
 	}
 	
-		//TODO tester cela imperativement et ajouter des commentaires d'explication
-		private Vector2f determinerPointInpact(Vector2f coordoneesElementMinA, Vector2f coordoneesElementMaxB)
-		{
-			Vector2f coodoneesImpact = null, u = null, ac = null, c = null;
-			c = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY());
-			u = new Vector2f((coordoneesElementMaxB.x - coordoneesElementMinA.x), (coordoneesElementMaxB.y - coordoneesElementMinA.y));
-			ac = new Vector2f((c.x - coordoneesElementMinA.x), (c.y - coordoneesElementMinA.y));
-			float ti = (u.x * ac.x + u.y * ac.y)/(u.x * u.x + u.y * u.y);
-			
-			coodoneesImpact = new Vector2f((coordoneesElementMinA.x + ti * u.x), (coordoneesElementMinA.y + ti * u.y));
-			
-			return coodoneesImpact;
-		}
-		
-		private Vector2f determinerNormalePointImpact(Vector2f coordoneesElementMinA, Vector2f coordoneesElementMaxB)
-		{
-			
-			Vector2f normale = null, u = null, ac = null, c = null;
-			c = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY());
-			u = new Vector2f((coordoneesElementMaxB.x - coordoneesElementMinA.x), (coordoneesElementMaxB.y - coordoneesElementMinA.y));
-			//calcul ac foireux
-			ac = new Vector2f((c.x - coordoneesElementMinA.x), (c.y - coordoneesElementMinA.y));
-			
-			float parentheses = u.x*ac.y-u.y*ac.x;
-			
-			float cordonneesX = (-1) * u.y * (parentheses);
-			float cordonneesY = (-1) * u.x * (parentheses);
-			
-			float norme = (float) Math.sqrt(cordonneesX * cordonneesX + cordonneesY * cordonneesY);
-			
-			normale = new Vector2f((cordonneesX/norme), (cordonneesY/norme));
-			
-			return normale;
-		}
-		
-		//Potentiellement errone a cause du sens dans lequel on se trouve (chager le calcul en fonction du sens et de l'objet rencontré
-		private Vector2f calculerTrajectoireInitiale(Vector2f pointInpact)
-		{
-			Vector2f c = new Vector2f(this.getElementGere().getCentreX(), this.getElementGere().getCentreY());
-			
-			return new Vector2f((c.x - pointInpact.x), (c.y - pointInpact.y));
-		}
-		
-		private Vector2f determinerDirectionRebond(Vector2f trajectoireInitiale, Vector2f normale)
-		{
-			
-			float produitScalaire = (trajectoireInitiale.x * normale.x + trajectoireInitiale.y * normale.y);
-			
-			return new Vector2f((trajectoireInitiale.x - 2 * produitScalaire *normale.x), (trajectoireInitiale.y - 2 * produitScalaire *normale.y));
-		}
-		
-		private Vector2f CalculerTrajectoireRebond(Vector2f coordoneesElementMinA, Vector2f coordoneesElementMaxB)
-		{
-			Vector2f pointInpact = determinerPointInpact(coordoneesElementMinA, coordoneesElementMaxB);
-			Vector2f normale = determinerNormalePointImpact(coordoneesElementMinA, coordoneesElementMaxB);
-			Vector2f trajectoireInitiale = calculerTrajectoireInitiale(pointInpact);
-			return determinerDirectionRebond(trajectoireInitiale, normale);
-		}
-		
-		private Vector2f extraireCoordonneesMin(Element element)
-		{
-			Vector2f valeurMin = null;
-			
-			if(element instanceof Raquette)
-			{
-				Raquette raquette = (Raquette)element;
-				
-				valeurMin = new Vector2f(raquette.getCoordonneeX(), raquette.getCoordonneeY());
-			}
-			else if(element instanceof Mur)
-			{
-				Mur mur = (Mur)element;
-				valeurMin = new Vector2f(mur.getCoordonneeX(), mur.getCoordonneeY());
-			}
-			
-			return valeurMin;
-		}
-		
-		private Vector2f extraireCoordonneesMax(Element element)
-		{
-			Vector2f valeurMax = null;
-			
-			if(element instanceof Raquette)
-			{
-				Raquette raquette = (Raquette)element;
-				
-				valeurMax = new Vector2f(raquette.getCoordonneeX() + raquette.getLargeur(), raquette.getCoordonneeY());
-			}
-			else if(element instanceof Mur)
-			{
-				Mur mur = (Mur)element;
-				
-				valeurMax = new Vector2f(mur.getCoordonneeX() + mur.getLargeur(), mur.getCoordonneeY());
-			}
-			
-			return valeurMax;
-		}
-		
-		double changAng(double angle0,double angle) 
-		{ 
-
-		    double A = 2 * angle0 - angle; 
-
-		    if (A < 0) { A = A + 2 * 3.14f ; } 
-
-		    return A; 
-
-		}
-		
-		public Vector2f calculCordoneeSuivante(Vector2f origine, Vector2f arrivee, float coordonneeAbscise)
-		{
-			//Détermination de l'équation de la droite de l'origine jusqu'à la destination
-			//y=ax+b => x est connu et variera selon la trajectoire, on cherche à connaitre y.
-			
-			//calcul de a
-			float a = (origine.y - arrivee.y)/(origine.x - arrivee.x);
-			//calcul de b
-			float b = origine.y - a * origine.x;
-			//Calcul y
-			float coordonneeOrdonnee = a * coordonneeAbscise + b;
-			
-			return new Vector2f(coordonneeAbscise, coordonneeOrdonnee);
-			
-		}
 }

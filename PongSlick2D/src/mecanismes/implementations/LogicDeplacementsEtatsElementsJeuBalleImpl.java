@@ -1,7 +1,5 @@
 package mecanismes.implementations;
 
-import java.util.Random;
-
 import mecanismes.interfaces.LogicDeplacementsEtatsElementsJeu;
 
 import org.newdawn.slick.Input;
@@ -14,7 +12,6 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 {
 	
 	private Balle element = null;
-	private Vector2f valeurAleatoireXY = null;
 	
 	public LogicDeplacementsEtatsElementsJeuBalleImpl(Balle balle)
 	{
@@ -24,19 +21,15 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	@Override
 	public void gererDeplacements(int delta)
 	{
-		
-		this.setValeurAleatoireXY(null);
 			
 		if(this.getElement().isEnCollision())
 		{
-			//this.setValeurAleatoireXY(this.genererMouvementAleatoire());
 			this.accelererBalle();
 		}
 		
 		if(element.isEnDeplacement())
 		{
 			
-			Vector2f origine = new Vector2f(element.getCentreX(), element.getCentreY());
 			float angle = (float) new Vector2f(element.getCentreX(), element.getCentreY()).getTheta();
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
@@ -61,89 +54,37 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
 			{
-				
-				if(this.getValeurAleatoireXY() != null)
-				{
-					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
-					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle - 180);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
-					element.setCentreX(test.x);
-					element.setCentreY(test.y);
-				}
-				else
-				{
-					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta), element.getCentreY() - (element.getVitesse() * delta));
-					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
-					element.setCentreX(test.x);
-					element.setCentreY(test.y);
-				}
+			
+				Vector2f test = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
+				element.setCentreX(test.x);
+				element.setCentreY(test.y);
 				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
 			{
 				
-				if(this.getValeurAleatoireXY() != null)
-				{
-					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() - (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
-					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
-					element.setCentreX(test.x);
-					element.setCentreY(test.y);
-				}
-				else
-				{
-					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta), element.getCentreY() - (element.getVitesse() * delta));
-					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
-					element.setCentreX(test.x);
-					element.setCentreY(test.y);
-				}
+				Vector2f test = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
+				element.setCentreX(test.x);
+				element.setCentreY(test.y);
 				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
 			{
 				
-				if(this.getValeurAleatoireXY() != null)
-				{
-					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
-					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
-					element.setCentreX(test.x);
-					element.setCentreY(test.y);
-				}
-				else
-				{
-					//arrivee.set(element.getCentreX() + (element.getVitesse() * delta), element.getCentreY() + (element.getVitesse() * delta));
-					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() + (element.getVitesse() * delta), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
-					element.setCentreX(test.x);
-					element.setCentreY(test.y);
-				}
+				Vector2f test = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
+				element.setCentreX(test.x);
+				element.setCentreY(test.y);
 				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
 			{
 				
-				if(this.getValeurAleatoireXY() != null)
-				{
-					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getCentreY() + (element.getVitesse() * delta * this.getValeurAleatoireXY().y));
-					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta * this.getValeurAleatoireXY().x), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
-					element.setCentreX(test.x);
-					element.setCentreY(test.y);
-				}
-				else
-				{
-					//arrivee.set(element.getCentreX() - (element.getVitesse() * delta), element.getCentreY() + (element.getVitesse() * delta));
-					//Vector2f test = calculCordoneeSuivante(origine, element.getCentreX() - (element.getVitesse() * delta), element.getVitesse(), angle);
-					Vector2f test = calculTrajectoire(180 - angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
-					element.setCentreX(test.x);
-					element.setCentreY(test.y);
-				}
+				Vector2f test = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
+				element.setCentreX(test.x);
+				element.setCentreY(test.y);
 				
 			}
 			
@@ -155,7 +96,6 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	{
 		
 		element.setEnDeplacement(true);
-	    //element.setDirection(ConstantesElements.ELEMENT_DIRECTION_GAUCHE);
 		
 		switch (key) 
 	    {
@@ -178,23 +118,6 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	public void reinitialisationEtat(int key, char c) 
 	{
 	}
-	
-	private Vector2f genererMouvementAleatoire()
-	{
-		Vector2f coupleVitesse = null;
-		
-		int intervale = ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MAX - ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MIN;
-		
-		Random r = new Random();
-		
-		int valeurX = ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MIN + r.nextInt(intervale);
-		int valeurY = ConstantesElements.ELEMENT_BALLE_COEF_ALEATOIRE_MIN + r.nextInt(intervale);
-		
-		coupleVitesse = new Vector2f(valeurX, valeurY);
-		
-		return coupleVitesse;
-		
-	}
 
 	public Balle getElement() 
 	{
@@ -204,16 +127,6 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	public void setElement(Balle element) 
 	{
 		this.element = element;
-	}
-
-	private Vector2f getValeurAleatoireXY() 
-	{
-		return valeurAleatoireXY;
-	}
-
-	private void setValeurAleatoireXY(Vector2f valeurAleatoireXY) 
-	{
-		this.valeurAleatoireXY = valeurAleatoireXY;
 	}
 	
 	private void accelererBalle()
@@ -227,35 +140,13 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 	}
 	
-	public Vector2f calculCordoneeSuivante(Vector2f origine, float coordonneeAbscise, float vitesseDeplacement, float direction)
-	{
-		//Détermination de l'équation de la droite de l'origine jusqu'à la destination
-		//y=ax+b => x est connu et variera selon la trajectoire, on cherche à connaitre y.
-		
-		Vector2f arrivee = calculCordoneeArrivee(origine, vitesseDeplacement, direction);
-		
-		//calcul de a
-		float a = (origine.y - arrivee.y)/(origine.x - arrivee.x);
-		//calcul de b
-		float b = origine.y - a * origine.x;
-		//Calcul y
-		float coordonneeOrdonnee = a * coordonneeAbscise + b;
-		
-		return new Vector2f(coordonneeAbscise, coordonneeOrdonnee);
-		
-	}
-	
-	private Vector2f calculCordoneeArrivee(Vector2f origine, float vitesse, float direction)
-	{
-		float xArrivee = (float)(origine.getX() + Math.cos(direction) * vitesse);
-		float yArrivee = (float)(origine.getY() + Math.cos(direction) * vitesse);
-		
-		return new Vector2f(xArrivee, yArrivee);
-	}
-	
 	public Vector2f calculTrajectoire(float angle, float vitesse, float x, float y, float delta)
 	{
-		//attenttion l'angle renvoyé par l'élément circle de slick1d est en degrée et ne tient pas compte du repère de l'écranc pour obtenir l'angle par rapport à l'écran faire 180 - angleSlick 
+		
+		/*attention l'angle renvoyé par l'élément circle de slick2d est en degrée 
+		 * et ne tient pas compte du repère de l'écran,
+		 *  pour obtenir l'angle par rapport à l'écran faire 180 - angleSlick*/
+		
 		//x2 = x1 + cos(direction) * vitesse
 		//y2 = x2 + sin(direction) * vitesse
 		
@@ -264,8 +155,8 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 		// direction (radiant) = (π / 180) * direction (degré)
 		
-		
 		return new Vector2f((float) (x + Math.cos(convertionDegreRadiant(angle)) * vitesse * delta), (float) (y + Math.sin(convertionDegreRadiant(angle)) * vitesse * delta));
+		
 	}
 	
 	private float convertionDegreRadiant(float angle)
