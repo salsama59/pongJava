@@ -21,6 +21,8 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	@Override
 	public void gererDeplacements(int delta)
 	{
+		
+		Vector2f trajectoire;
 			
 		if(this.getElement().isEnCollision())
 		{
@@ -55,36 +57,36 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
 			{
 			
-				Vector2f test = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
-				element.setCentreX(test.x);
-				element.setCentreY(test.y);
+				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
+				element.setCentreX(trajectoire.x);
+				element.setCentreY(trajectoire.y);
 				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
 			{
 				
-				Vector2f test = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
-				element.setCentreX(test.x);
-				element.setCentreY(test.y);
+				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
+				element.setCentreX(trajectoire.x);
+				element.setCentreY(trajectoire.y);
 				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
 			{
 				
-				Vector2f test = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
-				element.setCentreX(test.x);
-				element.setCentreY(test.y);
+				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
+				element.setCentreX(trajectoire.x);
+				element.setCentreY(trajectoire.y);
 				
 			}
 			
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
 			{
 				
-				Vector2f test = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
-				element.setCentreX(test.x);
-				element.setCentreY(test.y);
+				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
+				element.setCentreX(trajectoire.x);
+				element.setCentreY(trajectoire.y);
 				
 			}
 			
