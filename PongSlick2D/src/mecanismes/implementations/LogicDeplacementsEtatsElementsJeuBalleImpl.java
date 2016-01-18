@@ -57,7 +57,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
 			{
 			
-				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
+				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
 				element.setCentreX(trajectoire.x);
 				element.setCentreY(trajectoire.y);
 				
@@ -66,7 +66,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
 			{
 				
-				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
+				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
 				element.setCentreX(trajectoire.x);
 				element.setCentreY(trajectoire.y);
 				
@@ -75,7 +75,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
 			{
 				
-				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
+				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
 				element.setCentreX(trajectoire.x);
 				element.setCentreY(trajectoire.y);
 				
@@ -84,7 +84,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
 			{
 				
-				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
+				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
 				element.setCentreX(trajectoire.x);
 				element.setCentreY(trajectoire.y);
 				
@@ -142,7 +142,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 	}
 	
-	public Vector2f calculTrajectoire(float angle, float vitesse, float x, float y, float delta)
+	public Vector2f calculTrajectoire(float angle, float vitesse, float x_initiale, float y_initiale, float delta)
 	{
 		
 		/*attention l'angle renvoyé par l'élément circle de slick2d est en degrée 
@@ -156,14 +156,23 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		//donc 1 ° = π / 180 radians.
 		
 		// direction (radiant) = (π / 180) * direction (degré)
+		float x_finale = (float) (x_initiale + Math.cos(convertionDegreRadiant(angle)) * vitesse * delta);
+		float y_finale = (float) (y_initiale - Math.sin(convertionDegreRadiant(angle)) * vitesse * delta);
 		
-		return new Vector2f((float) (x + Math.cos(convertionDegreRadiant(angle)) * vitesse * delta), (float) (y + Math.sin(convertionDegreRadiant(angle)) * vitesse * delta));
+		return new Vector2f(ajusterTrajectoireNegative(x_finale), ajusterTrajectoireNegative(y_finale));
 		
 	}
 	
 	private float convertionDegreRadiant(float angle)
 	{
 		return (float) ((Math.PI/180) * angle);
+	}
+	
+	//Correction effet de scintillement dû à certains calculs de coordonnées
+	private float ajusterTrajectoireNegative(float coordonée)
+	{
+		return coordonée > 0 ? coordonée : coordonée * -1;
+		
 	}
 	
 }
