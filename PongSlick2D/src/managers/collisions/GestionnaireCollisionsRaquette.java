@@ -57,23 +57,23 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 					if(element instanceof Mur)
 					{
 						
-						if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
+						if(this.getElementGere().getSens() == ConstantesElements.ELEMENT_SENS_HAUT)
 						{
 							
 							if(((Mur)element).getNomElement() == ConstantesElements.ELEMENT_MUR1_NOM)
 							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+								this.getElementGere().setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 								this.getElementGere().setEnDeplacement(false);
 								this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() + (this.getElementGere().getVitesse() * delta));
 							}
 							
 						}
-						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
+						else if(this.getElementGere().getSens() == ConstantesElements.ELEMENT_SENS_BAS)
 						{
 							
 							if(((Mur)element).getNomElement() == ConstantesElements.ELEMENT_MUR2_NOM)
 							{
-								this.getElementGere().setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+								this.getElementGere().setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 								this.getElementGere().setEnDeplacement(false);
 								this.getElementGere().setCoordonneeY(this.getElementGere().getCoordonneeY() - (this.getElementGere().getVitesse() * delta));
 							}
@@ -84,7 +84,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 					else if(element instanceof Balle)
 					{
 						
-						if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
+						if(this.getElementGere().getSens() == ConstantesElements.ELEMENT_SENS_HAUT)
 						{
 							if(detecterCollisionSpecialeBallePlat((Balle)element))
 							{
@@ -93,7 +93,7 @@ public class GestionnaireCollisionsRaquette extends GestionnaireCollisions
 							}
 							
 						}
-						else if(this.getElementGere().getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
+						else if(this.getElementGere().getSens() == ConstantesElements.ELEMENT_SENS_BAS)
 						{
 							if(detecterCollisionSpecialeBallePlat((Balle)element))
 							{

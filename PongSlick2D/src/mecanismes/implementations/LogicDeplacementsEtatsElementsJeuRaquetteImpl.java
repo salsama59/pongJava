@@ -22,12 +22,12 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 	{
 		if(element.isEnDeplacement())
 		{
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_HAUT)
 			{
 				element.setCoordonneeY(element.getCoordonneeY() - (element.getVitesse() * delta));
 			}
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_BAS)
 			{
 				element.setCoordonneeY(element.getCoordonneeY() + (element.getVitesse() * delta));
 			}
@@ -44,7 +44,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		    {
 		        case Input.KEY_UP:
 		        element.setEnDeplacement(true);
-		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT);
+		        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
 		        break;
 		        
 		        case Input.KEY_LEFT:
@@ -53,7 +53,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		        
 		        case Input.KEY_DOWN:
 		        element.setEnDeplacement(true);
-		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS);
+		        element.setSens(ConstantesElements.ELEMENT_SENS_BAS);
 		        break;
 		        
 		        case Input.KEY_RIGHT:
@@ -67,7 +67,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		    {
 		        case Input.KEY_Z:
 		        element.setEnDeplacement(true);
-		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_HAUT);
+		        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
 		        break;
 		        
 		        case Input.KEY_Q:
@@ -76,7 +76,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		        
 		        case Input.KEY_W:
 		        element.setEnDeplacement(true);
-		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_BAS);
+		        element.setSens(ConstantesElements.ELEMENT_SENS_BAS);
 		        break;
 		        
 		        case Input.KEY_S:
@@ -97,7 +97,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		    {
 		        case Input.KEY_UP:
 		        element.setEnDeplacement(false);
-		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+		        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		        break;
 		        
 		        case Input.KEY_LEFT:
@@ -106,7 +106,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		        
 		        case Input.KEY_DOWN:
 		        element.setEnDeplacement(false);
-			    element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+			    element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		        break;
 		        
 		        case Input.KEY_RIGHT:
@@ -120,7 +120,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		    {
 		        case Input.KEY_Z:
 	        	element.setEnDeplacement(false);
-		        element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+		        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		        break;
 		        
 		        case Input.KEY_Q:
@@ -129,7 +129,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		        
 		        case Input.KEY_W:
 	        	element.setEnDeplacement(false);
-			    element.setDirection(ConstantesElements.ELEMENT_DIRECTION_NEUTRE);
+			    element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		        break;
 		        
 		        case Input.KEY_S:

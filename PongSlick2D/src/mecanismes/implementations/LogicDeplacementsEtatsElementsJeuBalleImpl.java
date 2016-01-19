@@ -32,38 +32,38 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		if(element.isEnDeplacement())
 		{
 			
-			float angle = (float) new Vector2f(element.getCentreX(), element.getCentreY()).getTheta();
+			float angle = element.getDirection();
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_HAUT)
 			{
 				element.setCentreY(element.getCentreY() - (element.getVitesse() * delta));
 			}
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_BAS)
 			{
 				element.setCentreY(element.getCentreY() + (element.getVitesse() * delta));
 			}
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_GAUCHE)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_GAUCHE)
 			{
 				element.setCentreX(element.getCentreX() - (element.getVitesse() * delta));
 			}
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_DROITE)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_DROITE)
 			{
 				element.setCentreX(element.getCentreX() + (element.getVitesse() * delta));
 			}
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_HAUT_DROITE)
 			{
-			
+				
 				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY(), delta);
 				element.setCentreX(trajectoire.x);
 				element.setCentreY(trajectoire.y);
 				
 			}
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE)
 			{
 				
 				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY(), delta);
@@ -72,7 +72,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				
 			}
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_BAS_DROITE)
 			{
 				
 				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX(), element.getCentreY() * -1, delta);
@@ -81,7 +81,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 				
 			}
 			
-			if(element.getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_BAS_GAUCHE)
 			{
 				
 				trajectoire = calculTrajectoire(angle, element.getVitesse(), element.getCentreX() * -1, element.getCentreY() * -1, delta);
@@ -137,7 +137,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		
 		if(element.getVitesse() < ConstantesElements.ELEMENT_BALLE_VITESSE_MAX)
 		{
-			element.setVitesse(element.getVitesse() + 0.01f);
+			element.setVitesse(element.getVitesse() + ConstantesElements.ELEMENT_BALLE_INCREMENT_VITESSE);
 		}
 		
 	}

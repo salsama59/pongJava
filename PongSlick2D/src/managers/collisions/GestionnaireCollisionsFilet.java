@@ -60,7 +60,7 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 						if(element instanceof Balle)
 						{
 							((Balle) element).reinitialiserPosition();
-							((Balle) element).setDirection(ConstantesElements.ELEMENT_DIRECTION_GAUCHE);
+							((Balle) element).setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
 						}
 						
 					}
@@ -72,7 +72,7 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 						if(element instanceof Balle)
 						{
 							((Balle) element).reinitialiserPosition();
-							((Balle) element).setDirection(ConstantesElements.ELEMENT_DIRECTION_DROITE);
+							((Balle) element).setSens(ConstantesElements.ELEMENT_SENS_DROITE);
 						}
 						
 					}

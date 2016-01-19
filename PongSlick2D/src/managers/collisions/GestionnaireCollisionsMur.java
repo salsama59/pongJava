@@ -61,11 +61,11 @@ public class GestionnaireCollisionsMur extends GestionnaireCollisions
 					else if(element instanceof Balle)
 					{
 						//Etant donné que le gestionnaire de collision de la balle est prioritaire on estime que la direction à changé déjà donc on inverse la perte ou le gain sur la position y de la balle
-						if(((Balle)element).getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_DROITE || ((Balle)element).getDirection() == ConstantesElements.ELEMENT_DIRECTION_BAS_GAUCHE)
+						if(((Balle)element).getSens() == ConstantesElements.ELEMENT_SENS_BAS_DROITE || ((Balle)element).getSens() == ConstantesElements.ELEMENT_SENS_BAS_GAUCHE)
 						{
 							((Balle)element).setCentreY(((Balle)element).getCentreY() + (((Balle)element).getVitesse() * delta));
 						}
-						else if(((Balle)element).getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_DROITE || ((Balle)element).getDirection() == ConstantesElements.ELEMENT_DIRECTION_HAUT_GAUCHE)
+						else if(((Balle)element).getSens() == ConstantesElements.ELEMENT_SENS_HAUT_DROITE || ((Balle)element).getSens() == ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE)
 						{
 							((Balle)element).setCentreY(((Balle)element).getCentreY() - (((Balle)element).getVitesse() * delta));
 						}

@@ -28,23 +28,24 @@ public class ConstantesElements
 	public final static float ELEMENT_RAQUETTE2_VALEUR_SMASH= 0.5f;
 	public final static float ELEMENT_RAQUETTE2_REDUCTION_SPIN= 0.3f;
 	
-	//Directions pour tout elements de jeu
-	public final static int ELEMENT_DIRECTION_NEUTRE =0;
-	public final static int ELEMENT_DIRECTION_HAUT =1;
-	public final static int ELEMENT_DIRECTION_HAUT_DROITE =2;
-	public final static int ELEMENT_DIRECTION_DROITE =3;
-	public final static int ELEMENT_DIRECTION_BAS_DROITE =4;
-	public final static int ELEMENT_DIRECTION_BAS =5;
-	public final static int ELEMENT_DIRECTION_BAS_GAUCHE =6;
-	public final static int ELEMENT_DIRECTION_GAUCHE =7;
-	public final static int ELEMENT_DIRECTION_HAUT_GAUCHE =8;
+	//Sens pour tous les elements de jeu
+	public final static int ELEMENT_SENS_NEUTRE =0;
+	public final static int ELEMENT_SENS_HAUT =1;
+	public final static int ELEMENT_SENS_HAUT_DROITE =2;
+	public final static int ELEMENT_SENS_DROITE =3;
+	public final static int ELEMENT_SENS_BAS_DROITE =4;
+	public final static int ELEMENT_SENS_BAS =5;
+	public final static int ELEMENT_SENS_BAS_GAUCHE =6;
+	public final static int ELEMENT_SENS_GAUCHE =7;
+	public final static int ELEMENT_SENS_HAUT_GAUCHE =8;
 	
 	//Parametre balle
 	public final static float ELEMENT_BALLE_RAYON = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_RAYON_BALLE;
 	public final static float ELEMENT_BALLE_CENTRE_X = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_X_BALLE;
-	public final static float ELEMENT_BALLE_CENTRE_Y= ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_Y_BALLE;
-	public final static float ELEMENT_BALLE_VITESSE= 0.1f;
-	public final static float ELEMENT_BALLE_VITESSE_MAX= 0.6f;
+	public final static float ELEMENT_BALLE_CENTRE_Y = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_Y_BALLE;
+	public final static float ELEMENT_BALLE_VITESSE = 0.1f;
+	public final static float ELEMENT_BALLE_VITESSE_MAX = 0.6f;
+	public final static float ELEMENT_BALLE_INCREMENT_VITESSE = 0.01f;
 	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MAX = 3;
 	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MIN = 2;
 	public final static String ELEMENT_BALLE_NOM = "balle";

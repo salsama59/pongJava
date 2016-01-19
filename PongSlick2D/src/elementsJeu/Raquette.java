@@ -9,7 +9,7 @@ public class Raquette extends Element
 	private Rectangle element = null;
 	private float vitesse;
 	private boolean enDeplacement = false;
-	private int direction = ConstantesElements.ELEMENT_DIRECTION_NEUTRE;
+	private int sens = ConstantesElements.ELEMENT_SENS_NEUTRE;
 	private int endurance;
 	private int energie;
 
@@ -84,12 +84,12 @@ public class Raquette extends Element
 		this.enDeplacement = enDeplacement;
 	}
 
-	public int getDirection() {
-		return direction;
+	public int getSens() {
+		return sens;
 	}
 
-	public void setDirection(int direction) {
-		this.direction = direction;
+	public void setSens(int sens) {
+		this.sens = sens;
 	}
 
 	public int getEndurance() {
