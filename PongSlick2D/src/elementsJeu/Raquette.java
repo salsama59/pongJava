@@ -9,7 +9,6 @@ public class Raquette extends Element
 	private Rectangle element = null;
 	private float vitesse;
 	private boolean enDeplacement = false;
-	private int sens = ConstantesElements.ELEMENT_SENS_NEUTRE;
 	private int endurance;
 	private int energie;
 
@@ -18,6 +17,7 @@ public class Raquette extends Element
 		super(nom, false, ConstantesElements.ELEMENT_RAQUETTE_TYPE, camp);
 		this.setElement(new Rectangle(x,y,largeur,longueur));
 		this.setVitesse(v);
+		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 	}
 
 	public float getVitesse() {
@@ -82,14 +82,6 @@ public class Raquette extends Element
 
 	public void setEnDeplacement(boolean enDeplacement) {
 		this.enDeplacement = enDeplacement;
-	}
-
-	public int getSens() {
-		return sens;
-	}
-
-	public void setSens(int sens) {
-		this.sens = sens;
 	}
 
 	public int getEndurance() {

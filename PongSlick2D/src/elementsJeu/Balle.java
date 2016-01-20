@@ -11,7 +11,6 @@ public class Balle extends Element
 	private Circle element = null;
 	private float vitesse;
 	private boolean enDeplacement = true;
-	private int sens = ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE;
 	@SuppressWarnings("unused")
 	private float direction;
 	private Vector2f coordonnee = null;
@@ -19,16 +18,17 @@ public class Balle extends Element
 	public Balle(float centreX, float centreY, float rayon, String nom) 
 	{
 		super(nom, false, ConstantesElements.ELEMENT_BALLE_TYPE);
+		this.setSens(ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE);
 		this.setElement(new Circle(centreX,centreY,rayon));
 		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
 		this.setCoordonnee(new Vector2f(centreX, centreY));
-		this.setDirection((float) this.getCoordonnee().getTheta());
 		this.setDirection((float) this.getCoordonnee().getTheta());
 	}
 	
 	public Balle(float centreX, float centreY, float rayon, String nom, String camp) 
 	{
 		super(nom, false, ConstantesElements.ELEMENT_BALLE_TYPE, camp);
+		this.setSens(ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE);
 		this.setElement(new Circle(centreX,centreY,rayon));
 		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
 		this.setCoordonnee(new Vector2f(centreX, centreY));
@@ -91,16 +91,6 @@ public class Balle extends Element
 	public void setEnDeplacement(boolean enDeplacement) 
 	{
 		this.enDeplacement = enDeplacement;
-	}
-
-	public int getSens()
-	{
-		return sens;
-	}
-
-	public void setSens(int sens) 
-	{
-		this.sens = sens;
 	}
 	
 	public float getDirection() 

@@ -7,6 +7,7 @@ public class Element
 	private String type;
 	private boolean enCollision;
 	private String camp;
+	private int sens;
 	
 	public Element(String nom, boolean enCollision, String type, String camp)
 	{
@@ -67,6 +68,14 @@ public class Element
 
 	public void setCamp(String camp) {
 		this.camp = camp;
+	}
+
+	public int getSens() {
+		return sens;
+	}
+
+	public void setSens(int sens) {
+		this.sens = sens;
 	}
 	
 }

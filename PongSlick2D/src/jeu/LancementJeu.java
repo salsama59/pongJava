@@ -26,6 +26,7 @@ public class LancementJeu
 		container.setVSync(ConstantesJeu.JEU_VSYNC);
 		container.setDisplayMode(ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, ConstantesJeu.ECRAN_AFFICHAGE_FULLSCREEN); 
 		container.setTargetFrameRate(ConstantesJeu.JEU_FRAMERATE);
+		container.setUpdateOnlyWhenVisible(ConstantesJeu.JEU_MAJ_SEULEMENT_SUR_FOCUS);
 		container.start();
 	}
 }
