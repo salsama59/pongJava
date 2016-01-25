@@ -10,7 +10,7 @@ public class Balle extends Element
 	
 	private Circle element = null;
 	private float vitesse;
-	private boolean enDeplacement = true;
+	private boolean enDeplacement = false;
 	@SuppressWarnings("unused")
 	private float direction;
 	private Vector2f coordonnee = null;
@@ -18,7 +18,7 @@ public class Balle extends Element
 	public Balle(float centreX, float centreY, float rayon, String nom) 
 	{
 		super(nom, false, ConstantesElements.ELEMENT_BALLE_TYPE);
-		this.setSens(ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE);
+		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		this.setElement(new Circle(centreX,centreY,rayon));
 		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
 		this.setCoordonnee(new Vector2f(centreX, centreY));
@@ -28,7 +28,7 @@ public class Balle extends Element
 	public Balle(float centreX, float centreY, float rayon, String nom, String camp) 
 	{
 		super(nom, false, ConstantesElements.ELEMENT_BALLE_TYPE, camp);
-		this.setSens(ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE);
+		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		this.setElement(new Circle(centreX,centreY,rayon));
 		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
 		this.setCoordonnee(new Vector2f(centreX, centreY));

@@ -11,13 +11,15 @@ public class Raquette extends Element
 	private boolean enDeplacement = false;
 	private int endurance;
 	private int energie;
+	private int idJoueurProprietaire;
 
-	public Raquette(float x, float y, float largeur, float longueur, float v, String nom, String camp)
+	public Raquette(float x, float y, float largeur, float longueur, float v, String nom, String camp, int idJoueur)
 	{
 		super(nom, false, ConstantesElements.ELEMENT_RAQUETTE_TYPE, camp);
 		this.setElement(new Rectangle(x,y,largeur,longueur));
 		this.setVitesse(v);
 		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+		this.setIdJoueurProprietaire(idJoueur);
 	}
 
 	public float getVitesse() {
@@ -108,6 +110,14 @@ public class Raquette extends Element
 	public void appliquerSpin(Balle balle, int delta)
 	{
 		balle.setVitesse((balle.getVitesse() * delta) / ConstantesElements.ELEMENT_RAQUETTE1_REDUCTION_SPIN);
+	}
+
+	public int getIdJoueurProprietaire() {
+		return idJoueurProprietaire;
+	}
+
+	public void setIdJoueurProprietaire(int idJoueurProprietaire) {
+		this.idJoueurProprietaire = idJoueurProprietaire;
 	}
 
 

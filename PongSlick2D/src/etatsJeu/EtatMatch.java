@@ -1,10 +1,12 @@
 package etatsJeu;
+import java.util.Hashtable;
+
 import managers.collisions.GestionnaireCollisionsBalle;
 import managers.collisions.GestionnaireCollisionsFilet;
 import managers.collisions.GestionnaireCollisionsMur;
 import managers.collisions.GestionnaireCollisionsRaquette;
 import managers.elements.GestionnaireElements;
-import managers.etat.match.GestionnaireMatch;
+import managers.etat.GestionnaireMatch;
 import mecanismes.implementations.LogicDeplacementsEtatsElementsJeuBalleImpl;
 import mecanismes.implementations.LogicDeplacementsEtatsElementsJeuRaquetteImpl;
 
@@ -119,8 +121,8 @@ public class EtatMatch extends BasicGameState
 	{
 		mur1 = new Mur(ConstantesElements.ELEMENT_MUR1_COORDONEE_X, ConstantesElements.ELEMENT_MUR1_COORDONEE_Y, ConstantesElements.ELEMENT_MUR1_LARGEUR, ConstantesElements.ELEMENT_MUR1_HAUTEUR, ConstantesElements.ELEMENT_MUR1_NOM);
 		mur2 = new Mur(ConstantesElements.ELEMENT_MUR2_COORDONEE_X, ConstantesElements.ELEMENT_MUR2_COORDONEE_Y, ConstantesElements.ELEMENT_MUR2_LARGEUR, ConstantesElements.ELEMENT_MUR2_HAUTEUR, ConstantesElements.ELEMENT_MUR2_NOM);
-		raquette1 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE1_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE1_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE1_VITESSE, ConstantesElements.ELEMENT_RAQUETTE1_NOM, ContantesJoueurs.JOUEUR_CAMP_GAUCHE);
-		raquette2 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE2_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE2_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE2_VITESSE, ConstantesElements.ELEMENT_RAQUETTE2_NOM, ContantesJoueurs.JOUEUR_CAMP_DROITE);
+		raquette1 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE1_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE1_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE1_VITESSE, ConstantesElements.ELEMENT_RAQUETTE1_NOM, ContantesJoueurs.JOUEUR_CAMP_GAUCHE, ContantesJoueurs.JOUEUR_ID_1);
+		raquette2 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE2_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE2_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE2_VITESSE, ConstantesElements.ELEMENT_RAQUETTE2_NOM, ContantesJoueurs.JOUEUR_CAMP_DROITE, ContantesJoueurs.JOUEUR_ID_2);
 		balle = new Balle(ConstantesElements.ELEMENT_BALLE_CENTRE_X, ConstantesElements.ELEMENT_BALLE_CENTRE_Y, ConstantesElements.ELEMENT_BALLE_RAYON, ConstantesElements.ELEMENT_BALLE_NOM);
 		filet1 = new Filet(ConstantesElements.ELEMENT_FILET1_COORDONEE_X, ConstantesElements.ELEMENT_FILET1_COORDONEE_Y, ConstantesElements.ELEMENT_FILET1_LARGEUR, ConstantesElements.ELEMENT_FILET1_HAUTEUR, ConstantesElements.ELEMENT_FILET1_NOM, ContantesJoueurs.JOUEUR_CAMP_GAUCHE);
 		filet2 = new Filet(ConstantesElements.ELEMENT_FILET2_COORDONEE_X, ConstantesElements.ELEMENT_FILET2_COORDONEE_Y, ConstantesElements.ELEMENT_FILET2_LARGEUR, ConstantesElements.ELEMENT_FILET2_HAUTEUR, ConstantesElements.ELEMENT_FILET2_NOM, ContantesJoueurs.JOUEUR_CAMP_DROITE);
@@ -131,6 +133,13 @@ public class EtatMatch extends BasicGameState
 		gestionnaireElement = new GestionnaireElements();
 		gestionnaireMatch = new GestionnaireMatch();
 		
+		Hashtable<Integer, Integer> choix = new Hashtable<Integer, Integer>();
+		
+		choix.put(1, 1);
+		choix.put(2, 2);
+		
+		gestionnaireMatch.setChoix(choix);
+		
 		gestionnaireElement.ajouterElement(mur1);
 		gestionnaireElement.ajouterElement(mur2);
 		gestionnaireElement.ajouterElement(raquette1);
@@ -139,6 +148,19 @@ public class EtatMatch extends BasicGameState
 		gestionnaireElement.ajouterElement(filet1);
 		gestionnaireElement.ajouterElement(filet2);
 		
+		gestionnaireMatch.attribuerLancementBalle();
+		
+		if(gestionnaireMatch.getIdLanceur() == ContantesJoueurs.JOUEUR_ID_1)
+		{
+			balle.setCentreX(ConstantesElements.ELEMENT_RAQUETTE1_ZONE_LANCEMENT_X);
+			balle.setCentreY(ConstantesElements.ELEMENT_RAQUETTE1_ZONE_LANCEMENT_Y);
+		}
+		else if(gestionnaireMatch.getIdLanceur() == ContantesJoueurs.JOUEUR_ID_2)
+		{
+			balle.setCentreX(ConstantesElements.ELEMENT_RAQUETTE2_ZONE_LANCEMENT_X);
+			balle.setCentreY(ConstantesElements.ELEMENT_RAQUETTE2_ZONE_LANCEMENT_Y);
+		}
+		
 		gestionnaireColisionBalle = new GestionnaireCollisionsBalle(balle, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_BALLE));
 		gestionnaireColisionRaquette1 = new GestionnaireCollisionsRaquette(raquette1, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_RAQUETTE));
 		gestionnaireColisionRaquette2 = new GestionnaireCollisionsRaquette(raquette2, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_RAQUETTE));
@@ -146,6 +168,7 @@ public class EtatMatch extends BasicGameState
 		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireMatch, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_FILET));
 		gestionnaireColisionMur1 = new GestionnaireCollisionsMur(mur1, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_MUR));
 		gestionnaireColisionMur2 = new GestionnaireCollisionsMur(mur2, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_MUR));
+		
 	}
 	
 	private void initialiserMecanisme()

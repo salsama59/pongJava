@@ -8,6 +8,17 @@ public class ConstantesElements
 	public final static String ELEMENT_FILET_TYPE = "FILET";
 	public final static String ELEMENT_MUR_TYPE = "MUR";
 	
+	//Parametre balle
+	public final static float ELEMENT_BALLE_RAYON = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_RAYON_BALLE;
+	public final static float ELEMENT_BALLE_CENTRE_X = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_X_BALLE;
+	public final static float ELEMENT_BALLE_CENTRE_Y = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_Y_BALLE;
+	public final static float ELEMENT_BALLE_VITESSE = 0.1f;
+	public final static float ELEMENT_BALLE_VITESSE_MAX = 0.6f;
+	public final static float ELEMENT_BALLE_INCREMENT_VITESSE = 0.01f;
+	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MAX = 3;
+	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MIN = 2;
+	public final static String ELEMENT_BALLE_NOM = "balle";
+	
 	//Parametres raquette 1
 	public final static float ELEMENT_RAQUETTE1_LARGEUR = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_LARGEUR_RAQUETTE;
 	public final static float ELEMENT_RAQUETTE1_HAUTEUR = ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_HAUTEUR_RAQUETTE;
@@ -17,6 +28,8 @@ public class ConstantesElements
 	public final static String ELEMENT_RAQUETTE1_NOM = "raquette1";
 	public final static float ELEMENT_RAQUETTE1_VALEUR_SMASH= 0.5f;
 	public final static float ELEMENT_RAQUETTE1_REDUCTION_SPIN= 0.3f;
+	public final static float ELEMENT_RAQUETTE1_ZONE_LANCEMENT_X = ELEMENT_RAQUETTE1_COORDONEE_X + ELEMENT_BALLE_RAYON + ELEMENT_RAQUETTE1_LARGEUR;
+	public final static float ELEMENT_RAQUETTE1_ZONE_LANCEMENT_Y = (ELEMENT_RAQUETTE1_HAUTEUR/2) + ELEMENT_RAQUETTE1_COORDONEE_Y;
 	
 	//Parametres raquette 2
 	public final static float ELEMENT_RAQUETTE2_LARGEUR = ELEMENT_RAQUETTE1_LARGEUR;
@@ -27,6 +40,8 @@ public class ConstantesElements
 	public final static String ELEMENT_RAQUETTE2_NOM = "raquette2";
 	public final static float ELEMENT_RAQUETTE2_VALEUR_SMASH= 0.5f;
 	public final static float ELEMENT_RAQUETTE2_REDUCTION_SPIN= 0.3f;
+	public final static float ELEMENT_RAQUETTE2_ZONE_LANCEMENT_X = ELEMENT_RAQUETTE2_COORDONEE_X - ELEMENT_BALLE_RAYON;
+	public final static float ELEMENT_RAQUETTE2_ZONE_LANCEMENT_Y = (ELEMENT_RAQUETTE2_HAUTEUR/2) + ELEMENT_RAQUETTE2_COORDONEE_Y;
 	
 	//Sens pour tous les elements de jeu
 	public final static int ELEMENT_SENS_NEUTRE =0;
@@ -38,17 +53,6 @@ public class ConstantesElements
 	public final static int ELEMENT_SENS_BAS_GAUCHE =6;
 	public final static int ELEMENT_SENS_GAUCHE =7;
 	public final static int ELEMENT_SENS_HAUT_GAUCHE =8;
-	
-	//Parametre balle
-	public final static float ELEMENT_BALLE_RAYON = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_RAYON_BALLE;
-	public final static float ELEMENT_BALLE_CENTRE_X = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_X_BALLE;
-	public final static float ELEMENT_BALLE_CENTRE_Y = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_Y_BALLE;
-	public final static float ELEMENT_BALLE_VITESSE = 0.1f;
-	public final static float ELEMENT_BALLE_VITESSE_MAX = 0.6f;
-	public final static float ELEMENT_BALLE_INCREMENT_VITESSE = 0.01f;
-	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MAX = 3;
-	public final static int ELEMENT_BALLE_COEF_ALEATOIRE_MIN = 2;
-	public final static String ELEMENT_BALLE_NOM = "balle";
 	
 	//Parametre filet gauche
 	public final static float ELEMENT_FILET1_LARGEUR = (ConstantesJeu.ECRAN_LARGEUR * 5)/100;

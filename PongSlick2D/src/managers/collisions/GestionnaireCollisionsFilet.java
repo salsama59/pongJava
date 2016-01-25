@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 
 import constantes.ConstantesElements;
-import managers.etat.match.GestionnaireMatch;
+import managers.etat.GestionnaireMatch;
 import elementsJeu.Balle;
 import elementsJeu.Element;
 import elementsJeu.Filet;
