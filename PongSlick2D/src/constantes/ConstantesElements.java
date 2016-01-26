@@ -2,11 +2,15 @@ package constantes;
 
 public class ConstantesElements 
 {
-	
+	//Types d'éléments
 	public final static String ELEMENT_RAQUETTE_TYPE = "RAQUETTE";
 	public final static String ELEMENT_BALLE_TYPE = "BALLE";
 	public final static String ELEMENT_FILET_TYPE = "FILET";
 	public final static String ELEMENT_MUR_TYPE = "MUR";
+	
+	//Etat éléments
+	public final static int ELEMENT_ETAT_NEUTRE = 0;
+	public final static int ELEMENT_ETAT_LANCEMENT = 1;
 	
 	//Parametre balle
 	public final static float ELEMENT_BALLE_RAYON = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_RAYON_BALLE;

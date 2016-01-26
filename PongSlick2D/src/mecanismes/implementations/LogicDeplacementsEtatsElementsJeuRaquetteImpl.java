@@ -1,10 +1,13 @@
 package mecanismes.implementations;
 
+import managers.elements.GestionnaireElements;
 import mecanismes.interfaces.LogicDeplacementsEtatsElementsJeu;
 
 import org.newdawn.slick.Input;
 
 import constantes.ConstantesElements;
+import constantes.ConstantesJoueurs;
+import elementsJeu.Balle;
 import elementsJeu.Raquette;
 
 public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDeplacementsEtatsElementsJeu
@@ -22,6 +25,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 	{
 		if(element.isEnDeplacement())
 		{
+			
 			if(element.getSens() == ConstantesElements.ELEMENT_SENS_HAUT)
 			{
 				element.setCoordonneeY(element.getCoordonneeY() - (element.getVitesse() * delta));
@@ -30,6 +34,14 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 			if(element.getSens() == ConstantesElements.ELEMENT_SENS_BAS)
 			{
 				element.setCoordonneeY(element.getCoordonneeY() + (element.getVitesse() * delta));
+			}
+			
+			if(element.getEtat() == ConstantesElements.ELEMENT_ETAT_LANCEMENT)
+			{
+				Balle balle = (Balle) GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_BALLE_NOM);
+				
+				this.ajusterPositionLancementBalle(balle);
+				
 			}
 			
 		}
@@ -146,6 +158,28 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 
 	public void setElement(Raquette element) {
 		this.element = element;
+	}
+	
+	private void ajusterPositionLancementBalle(Balle balle)
+	{
+		
+		float x = 0;
+		float y = 0;
+		
+		if(this.getElement().getCamp() == ConstantesJoueurs.JOUEUR_CAMP_GAUCHE)
+		{
+			x = this.getElement().getCoordonneeX() + balle.getRayon() + this.getElement().getLargeur();
+		}	
+		else if(this.getElement().getCamp() == ConstantesJoueurs.JOUEUR_CAMP_GAUCHE)
+		{
+			x = this.getElement().getCoordonneeX() - balle.getRayon();
+		}
+		
+		y = (this.getElement().getHauteur()/2) + this.getElement().getCoordonneeY();
+		
+		balle.setCentreX(x);
+		balle.setCentreY(y);
+		
 	}
 
 }

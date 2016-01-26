@@ -1,6 +1,6 @@
 package constantes;
 
-public class ContantesJoueurs 
+public class ConstantesJoueurs 
 {
 	//Identifiants joueurs
 	public final static int JOUEUR_ID_1 = 1;

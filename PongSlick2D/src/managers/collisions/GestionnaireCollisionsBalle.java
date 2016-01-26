@@ -5,7 +5,7 @@ import java.util.Hashtable;
 
 import constantes.ConstantePosition;
 import constantes.ConstantesElements;
-import constantes.ContantesJoueurs;
+import constantes.ConstantesJoueurs;
 import elementsJeu.Balle;
 import elementsJeu.Element;
 import elementsJeu.Filet;
@@ -254,14 +254,14 @@ public class GestionnaireCollisionsBalle extends GestionnaireCollisions
 		
 		String camp = raquette.getCamp();
 		
-		if(camp.equals(ContantesJoueurs.JOUEUR_CAMP_DROITE))
+		if(camp.equals(ConstantesJoueurs.JOUEUR_CAMP_DROITE))
 		{
 			if(coordonneesBalleX < coordonneesRaquetteX)
 			{
 				casSpecial = true;
 			}
 		}
-		else if(camp.equals(ContantesJoueurs.JOUEUR_CAMP_GAUCHE))
+		else if(camp.equals(ConstantesJoueurs.JOUEUR_CAMP_GAUCHE))
 		{
 			
 			if(coordonneesBalleX > coordonneesRaquetteX + largeurRaquette)

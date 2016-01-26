@@ -9,13 +9,15 @@ import elementsJeu.Element;
 public class GestionnaireElements 
 {
 	
-	private Hashtable<String, Element> ListElements;
+	private static Hashtable<String, Element> listElementsParNom;
+	private static Hashtable<Integer, Element> listElementsParID;
 	private int prochainID;
 	private int iDprecedent;
 	
 	public GestionnaireElements()
 	{
-		ListElements = new Hashtable<String, Element>();
+		setListElementsParNom(new Hashtable<String, Element>());
+		setListElementsParID(new Hashtable<Integer, Element>());
 		this.setProchainID(0);
 	}
 
@@ -37,16 +39,24 @@ public class GestionnaireElements
 		this.iDprecedent = iDprecedent;
 	}
 
-	public Hashtable<String, Element> getListElements() 
+	public static Hashtable<String, Element> getListElementsParNom() 
 	{
-		return ListElements;
+		return listElementsParNom;
 	}
 
-	public void setListElements(Hashtable<String, Element> listElements) 
+	public void setListElementsParNom(Hashtable<String, Element> listElements) 
 	{
-		ListElements = listElements;
+		listElementsParNom = listElements;
 	}
 	
+	public static Hashtable<Integer, Element> getListElementsParID() {
+		return listElementsParID;
+	}
+
+	private void setListElementsParID(Hashtable<Integer, Element> listElementsParID) {
+		GestionnaireElements.listElementsParID = listElementsParID;
+	}
+
 	private int attribuerIdElement()
 	{
 		//stocker l'id précédent
@@ -60,7 +70,8 @@ public class GestionnaireElements
 	public void ajouterElement(Element element)
 	{
 		element.setIdElement(this.attribuerIdElement());
-		this.getListElements().put(element.getNomElement(), element);
+		GestionnaireElements.getListElementsParNom().put(element.getNomElement(), element);
+		GestionnaireElements.getListElementsParID().put(element.getIdElement(), element);
 	}
 	
 	public Hashtable<String, Element> getListeElementsFiltrees(String filtre)
@@ -68,7 +79,7 @@ public class GestionnaireElements
 		
 		Hashtable<String, Element> listeTriee = new Hashtable<String, Element>();
 		
-		Collection<Element> valeurs = ListElements.values();
+		Collection<Element> valeurs = listElementsParNom.values();
 		Iterator<Element> iterateurElements = valeurs.iterator();
 		
 		while(iterateurElements.hasNext())
@@ -82,6 +93,18 @@ public class GestionnaireElements
 		}
 		
 		return listeTriee;
+		
+	}
+	
+	public static Element recupererElementParId(int id)
+	{
+		return getListElementsParID().get(id);
+		
+	}
+	
+	public static Element recupererElementParNom(String nom)
+	{
+		return getListElementsParNom().get(nom);
 		
 	}
 

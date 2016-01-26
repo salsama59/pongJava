@@ -1,5 +1,7 @@
 package elementsJeu;
 
+import constantes.ConstantesElements;
+
 public class Element 
 {
 	private int idElement;
@@ -8,6 +10,7 @@ public class Element
 	private boolean enCollision;
 	private String camp;
 	private int sens;
+	private int etat;
 	
 	public Element(String nom, boolean enCollision, String type, String camp)
 	{
@@ -15,6 +18,8 @@ public class Element
 		this.setNomElement(nom);
 		this.setType(type);
 		this.setEnCollision(enCollision);
+		this.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 	}
 	
 	public Element(String nom, boolean enCollision, String type)
@@ -22,6 +27,8 @@ public class Element
 		this.setNomElement(nom);
 		this.setType(type);
 		this.setEnCollision(enCollision);
+		this.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 	}
 
 	public int getIdElement() 
@@ -76,6 +83,14 @@ public class Element
 
 	public void setSens(int sens) {
 		this.sens = sens;
+	}
+
+	public int getEtat() {
+		return etat;
+	}
+
+	public void setEtat(int etat) {
+		this.etat = etat;
 	}
 	
 }
