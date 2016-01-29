@@ -54,9 +54,24 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		{
 			switch (key) 
 		    {
+			
+		    case Input.KEY_SPACE:
+		        
+	        	if(element.getEtat() == ConstantesElements.ELEMENT_ETAT_LANCEMENT)
+		        {
+		        	Balle balle = (Balle) GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_BALLE_NOM);
+		        	balle.setEnCollision(false);
+		        	balle.setSens(ConstantesElements.ELEMENT_SENS_HAUT_DROITE);
+		        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+		        }
+	        break;
+			
 		        case Input.KEY_UP:
 		        element.setEnDeplacement(true);
 		        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
+		        
+		        
+		        	
 		        break;
 		        
 		        case Input.KEY_LEFT:
