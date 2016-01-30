@@ -50,28 +50,38 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 	@Override
 	public void gererEtats(int key, char c) 
 	{
+		Input entree = new Input(key);
+		
 		if(element.getNomElement().equals(ConstantesElements.ELEMENT_RAQUETTE1_NOM))
 		{
 			switch (key) 
 		    {
 			
-		    case Input.KEY_SPACE:
-		        
+			    case Input.KEY_SPACE:
 	        	if(element.getEtat() == ConstantesElements.ELEMENT_ETAT_LANCEMENT)
 		        {
-		        	Balle balle = (Balle) GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_BALLE_NOM);
-		        	balle.setEnCollision(false);
-		        	balle.setSens(ConstantesElements.ELEMENT_SENS_HAUT_DROITE);
-		        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+	        		
+	        		if(entree.isKeyDown(Input.KEY_UP))
+	        		{
+	        			Balle balle = (Balle) GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_BALLE_NOM);
+			        	balle.setEnCollision(false);
+			        	balle.setSens(ConstantesElements.ELEMENT_SENS_HAUT_DROITE);
+			        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+	        		}
+	        		else if(entree.isKeyDown(Input.KEY_DOWN))
+	        		{
+	        			Balle balle = (Balle) GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_BALLE_NOM);
+			        	balle.setEnCollision(false);
+			        	balle.setSens(ConstantesElements.ELEMENT_SENS_BAS_DROITE);
+			        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+	        		}
+		        	
 		        }
-	        break;
+		        break;
 			
 		        case Input.KEY_UP:
 		        element.setEnDeplacement(true);
-		        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
-		        
-		        
-		        	
+		        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);	
 		        break;
 		        
 		        case Input.KEY_LEFT:
@@ -92,6 +102,29 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		{
 			switch (key) 
 		    {
+				
+		    	case Input.KEY_RETURN:
+	        	if(element.getEtat() == ConstantesElements.ELEMENT_ETAT_LANCEMENT)
+		        {
+	        		
+	        		if(entree.isKeyDown(Input.KEY_Z))
+	        		{
+	        			Balle balle = (Balle) GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_BALLE_NOM);
+			        	balle.setEnCollision(false);
+			        	balle.setSens(ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE);
+			        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+	        		}
+	        		else if(entree.isKeyDown(Input.KEY_W))
+	        		{
+	        			Balle balle = (Balle) GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_BALLE_NOM);
+			        	balle.setEnCollision(false);
+			        	balle.setSens(ConstantesElements.ELEMENT_SENS_BAS_GAUCHE);
+			        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+	        		}
+		        	
+		        }
+		        break;
+				
 		        case Input.KEY_Z:
 		        element.setEnDeplacement(true);
 		        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
@@ -185,7 +218,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 		{
 			x = this.getElement().getCoordonneeX() + balle.getRayon() + this.getElement().getLargeur();
 		}	
-		else if(this.getElement().getCamp() == ConstantesJoueurs.JOUEUR_CAMP_GAUCHE)
+		else if(this.getElement().getCamp() == ConstantesJoueurs.JOUEUR_CAMP_DROITE)
 		{
 			x = this.getElement().getCoordonneeX() - balle.getRayon();
 		}
