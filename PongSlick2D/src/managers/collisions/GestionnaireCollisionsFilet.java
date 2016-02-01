@@ -4,10 +4,13 @@ import java.util.Collection;
 import java.util.Hashtable;
 
 import constantes.ConstantesElements;
+import constantes.ConstantesJoueurs;
+import managers.elements.GestionnaireElements;
 import managers.etat.GestionnaireMatch;
 import elementsJeu.Balle;
 import elementsJeu.Element;
 import elementsJeu.Filet;
+import elementsJeu.Raquette;
 
 public class GestionnaireCollisionsFilet extends GestionnaireCollisions 
 {
@@ -59,8 +62,10 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 						
 						if(element instanceof Balle)
 						{
-							((Balle) element).reinitialiserPosition();
-							((Balle) element).setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
+							Raquette raquette = (Raquette)GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_RAQUETTE1_NOM);
+							ajusterPositionLancementBalle((Balle) element, raquette);
+							//((Balle) element).reinitialiserPosition();
+							//((Balle) element).setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
 						}
 						
 					}
@@ -71,8 +76,10 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 						
 						if(element instanceof Balle)
 						{
-							((Balle) element).reinitialiserPosition();
-							((Balle) element).setSens(ConstantesElements.ELEMENT_SENS_DROITE);
+							Raquette raquette = (Raquette)GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_RAQUETTE2_NOM);
+							ajusterPositionLancementBalle((Balle) element, raquette);
+							//((Balle) element).reinitialiserPosition();
+							//((Balle) element).setSens(ConstantesElements.ELEMENT_SENS_DROITE);
 						}
 						
 					}
@@ -104,6 +111,31 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 	private void setGestionnaireMatch(GestionnaireMatch gestionnaireMatch) 
 	{
 		this.gestionnaireMatch = gestionnaireMatch;
+	}
+	
+	private void ajusterPositionLancementBalle(Balle balle, Raquette raquette)
+	{
+		
+		float x = 0;
+		float y = 0;
+		
+		if(raquette.getCamp() == ConstantesJoueurs.JOUEUR_CAMP_GAUCHE)
+		{
+			x = raquette.getCoordonneeX() + balle.getRayon() + raquette.getLargeur();
+		}	
+		else if(raquette.getCamp() == ConstantesJoueurs.JOUEUR_CAMP_DROITE)
+		{
+			x = raquette.getCoordonneeX() - balle.getRayon();
+		}
+		
+		y = (raquette.getHauteur()/2) + raquette.getCoordonneeY();
+		
+		balle.setCentreX(x);
+		balle.setCentreY(y);
+		
+		balle.setEnDeplacement(false);
+		raquette.setEtat(ConstantesElements.ELEMENT_ETAT_LANCEMENT);
+		
 	}
 
 }

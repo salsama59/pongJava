@@ -27,7 +27,6 @@ public class Pong2015 extends StateBasedGame
 		} 
 		 
 		 match = new EtatMatch();
-		 container.setShowFPS(ConstantesJeu.ECRAN_AFFICHAGE_FRAMERATE);
 		 addState(match);
 	}
 	

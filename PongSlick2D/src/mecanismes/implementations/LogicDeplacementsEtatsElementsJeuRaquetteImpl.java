@@ -67,6 +67,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 			        	balle.setEnCollision(false);
 			        	balle.setSens(ConstantesElements.ELEMENT_SENS_HAUT_DROITE);
 			        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+			        	balle.setEnDeplacement(true);
 	        		}
 	        		else if(entree.isKeyDown(Input.KEY_DOWN))
 	        		{
@@ -74,6 +75,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 			        	balle.setEnCollision(false);
 			        	balle.setSens(ConstantesElements.ELEMENT_SENS_BAS_DROITE);
 			        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+			        	balle.setEnDeplacement(true);
 	        		}
 		        	
 		        }
@@ -113,6 +115,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 			        	balle.setEnCollision(false);
 			        	balle.setSens(ConstantesElements.ELEMENT_SENS_HAUT_GAUCHE);
 			        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+			        	balle.setEnDeplacement(true);
 	        		}
 	        		else if(entree.isKeyDown(Input.KEY_W))
 	        		{
@@ -120,6 +123,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 			        	balle.setEnCollision(false);
 			        	balle.setSens(ConstantesElements.ELEMENT_SENS_BAS_GAUCHE);
 			        	element.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
+			        	balle.setEnDeplacement(true);
 	        		}
 		        	
 		        }

@@ -58,7 +58,7 @@ public class GestionnaireMatch
 		this.choix = choix;
 	}
 	
-	//Substitut a pile ou face
+	//Substitut à pile ou face
 	public int genererChoix()
 	{
 		

@@ -97,7 +97,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	public void gererEtats(int key, char c) 
 	{
 		
-		element.setEnDeplacement(true);
+		//element.setEnDeplacement(true);
 		
 		switch (key) 
 	    {
