@@ -30,7 +30,7 @@ import elementsJeu.Raquette;
 public class EtatMatch extends BasicGameState 
 {
 	
-	private static final int ID = ConstantesEtat.ETAT_MATCH;
+	public static final int ID = ConstantesEtat.ETAT_MATCH;
 	private Mur mur1, mur2;
 	private Filet filet1, filet2;
 	private Raquette raquette1, raquette2;

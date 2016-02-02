@@ -6,11 +6,13 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import constantes.ConstantesJeu;
 import etatsJeu.EtatMatch;
+import etatsJeu.EtatMiseEnJeu;
 
 public class Pong2015 extends StateBasedGame
 {
 	
-	private  EtatMatch match = null; 
+	private EtatMatch match = null; 
+	private EtatMiseEnJeu miseEnJeu = null;
 	private AppGameContainer container = null;
 
 	public Pong2015()
@@ -21,13 +23,17 @@ public class Pong2015 extends StateBasedGame
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException 
 	{
+		
 		if(container instanceof AppGameContainer) 
 		{
 			this.container = (AppGameContainer) container;
 		} 
 		 
 		 match = new EtatMatch();
+		 miseEnJeu = new EtatMiseEnJeu();
+		 addState(miseEnJeu);
 		 addState(match);
+		 
 	}
 	
 	public EtatMatch getMatch() 
