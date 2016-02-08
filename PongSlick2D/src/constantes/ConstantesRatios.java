@@ -16,6 +16,8 @@ public class ConstantesRatios
 	public final static float RATIO_POSITION_Y_POINT_CAMP_GAUCHE = 10f/620f;
 	public final static float RATIO_POSITION_X_POINT_CAMP_DROITE = 550f/1024f;
 	public final static float RATIO_POSITION_Y_POINT_CAMP_DROITE = 10f/620f;
+	//public final static float RATIO_POSITION_X_CURSEUR = 15f/1024f;
+	//public final static float RATIO_POSITION_Y_CURSEUR = 15f/620f;
 	
 
 }

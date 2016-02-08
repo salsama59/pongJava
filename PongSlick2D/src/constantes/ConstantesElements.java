@@ -7,6 +7,7 @@ public class ConstantesElements
 	public final static String ELEMENT_BALLE_TYPE = "BALLE";
 	public final static String ELEMENT_FILET_TYPE = "FILET";
 	public final static String ELEMENT_MUR_TYPE = "MUR";
+	public final static String ELEMENT_CURSEUR_TYPE = "CURSEUR";
 	
 	//Etat éléments
 	public final static int ELEMENT_ETAT_NEUTRE = 0;
@@ -86,6 +87,14 @@ public class ConstantesElements
 	public final static float ELEMENT_MUR2_COORDONEE_X = ELEMENT_MUR1_COORDONEE_X;
 	public final static float ELEMENT_MUR2_COORDONEE_Y = ConstantesJeu.ECRAN_HAUTEUR - ELEMENT_MUR1_HAUTEUR;
 	public final static String ELEMENT_MUR2_NOM = "mur2";
+	
+	//Parametre curseur
+	public final static float ELEMENT_CURSEUR_LARGEUR = (ConstantesJeu.ECRAN_LARGEUR * 1.4648f)/100;
+	public final static float ELEMENT_CURSEUR_HAUTEUR = (ConstantesJeu.ECRAN_HAUTEUR * 2.4193f)/100;
+	//public final static float ELEMENT_CURSEUR_CENTRE_X = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_X_CURSEUR;
+	//public final static float ELEMENT_CURSEUR_CENTRE_Y = ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_POSITION_Y_CURSEUR;
+	public final static float ELEMENT_CURSEUR_VITESSE = 0.2f;
+	public final static String ELEMENT_CURSEUR_NOM = "curseur mise en jeu";
 	
 	
 }
