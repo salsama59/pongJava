@@ -66,5 +66,25 @@ public class Curseur extends Element
 		this.coordonnee = coordonnee;
 	}
 	
+	public float getCoordonneeX()
+	{
+		return this.getElement().getX();
+	}
+	
+	public float getCoordonneeY()
+	{
+		return this.getElement().getY();
+	}
+	
+	public void setCoordonneeX(float x)
+	{
+		this.getElement().setX(x);
+	}
+	
+	public void setCoordonneeY(float y)
+	{
+		this.getElement().setY(y);
+	}
+	
 	
 }
