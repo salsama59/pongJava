@@ -19,7 +19,7 @@ public class Curseur extends Element
 		super(nom, enCollision, type, null);
 		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		this.setElement(new Polygon(new float[]{0f,0f,0f,ConstantesElements.ELEMENT_CURSEUR_HAUTEUR,ConstantesElements.ELEMENT_CURSEUR_LARGEUR,ConstantesElements.ELEMENT_CURSEUR_HAUTEUR/2}));
-		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
+		this.setVitesse(ConstantesElements.ELEMENT_CURSEUR_VITESSE);
 		this.setCoordonnee(new Vector2f(x, y));
 		this.getElement().setX(x);
 		this.getElement().setY(y);

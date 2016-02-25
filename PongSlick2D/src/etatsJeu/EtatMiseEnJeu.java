@@ -1,7 +1,10 @@
 package etatsJeu;
 
+import mecanismes.implementations.LogicDeplacementsEtatsElementsJeuCurseurImpl;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -18,6 +21,7 @@ public class EtatMiseEnJeu extends BasicGameState
 	private StateBasedGame jeu;
 	private Rectangle r;
 	private Curseur curseur;
+	private LogicDeplacementsEtatsElementsJeuCurseurImpl logicDeplacementCurseur;
 
 	@Override
 	public void init(GameContainer gameContainer, StateBasedGame jeu) throws SlickException 
@@ -25,7 +29,7 @@ public class EtatMiseEnJeu extends BasicGameState
 		this.setJeu(jeu);
 		r = new Rectangle((gameContainer.getWidth()/2) - 150, (gameContainer.getHeight()/2) - 40, 300, 100);
 		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, r.getX() + 130 - 30, r.getY() + 40);
-		
+		logicDeplacementCurseur = new LogicDeplacementsEtatsElementsJeuCurseurImpl(curseur);
 	}
 
 	@Override
@@ -41,13 +45,29 @@ public class EtatMiseEnJeu extends BasicGameState
 	@Override
 	public void update(GameContainer gameContainer, StateBasedGame jeu, int delta) throws SlickException 
 	{
-		// TODO Auto-generated method stub
+		logicDeplacementCurseur.gererDeplacements(delta);
+	}
+	
+	@Override
+	public void keyPressed(int key, char c) 
+	{
+		logicDeplacementCurseur.gererEtats(key, c);
 	}
 	
 	@Override
 	public void keyReleased(int key, char c) 
 	{
-	    this.getJeu().enterState(EtatMatch.ID);
+		Input entree = new Input(key);
+		
+		switch (key) 
+	    {
+		 	case Input.KEY_RETURN:
+		 	this.getJeu().enterState(EtatMatch.ID);
+	        break;
+	    }
+		
+		logicDeplacementCurseur.reinitialisationEtat(key, c);
+	    
 	}
 
 	@Override

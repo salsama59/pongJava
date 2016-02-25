@@ -1,5 +1,7 @@
 package mecanismes.implementations;
 
+import org.newdawn.slick.Input;
+
 import mecanismes.interfaces.LogicDeplacementsEtatsElementsJeu;
 import constantes.ConstantesElements;
 import elementsJeu.Curseur;
@@ -30,19 +32,76 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 				element.setCoordonneeY(element.getCoordonneeY() + (element.getVitesse() * delta));
 			}
 			
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_DROITE)
+			{
+				element.setCoordonneeX(element.getCoordonneeX() + (element.getVitesse() * delta));
+			}
+			
+			if(element.getSens() == ConstantesElements.ELEMENT_SENS_GAUCHE)
+			{
+				element.setCoordonneeX(element.getCoordonneeX() - (element.getVitesse() * delta));
+			}
+			
 		}
 
 	}
 
 	@Override
-	public void gererEtats(int key, char c) {
-		// TODO Auto-generated method stub
+	public void gererEtats(int key, char c) 
+	{	
+		Input entree = new Input(key);
+		
+		switch (key) 
+	    {
+		 	case Input.KEY_UP:
+	        element.setEnDeplacement(true);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
+	        break;
+	        
+	        case Input.KEY_LEFT:
+        	element.setEnDeplacement(true);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
+	        break;
+	        
+	        case Input.KEY_DOWN:
+	        element.setEnDeplacement(true);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_BAS);
+	        break;
+	        
+	        case Input.KEY_RIGHT:
+        	element.setEnDeplacement(true);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_DROITE);
+	        break;
+	        
+	    }
 
 	}
 
 	@Override
-	public void reinitialisationEtat(int key, char c) {
-		// TODO Auto-generated method stub
+	public void reinitialisationEtat(int key, char c) 
+	{
+		switch (key) 
+	    {
+	        case Input.KEY_UP:
+	        element.setEnDeplacement(false);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+	        break;
+	        
+	        case Input.KEY_LEFT:
+        	element.setEnDeplacement(false);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+	        break;
+	        
+	        case Input.KEY_DOWN:
+	        element.setEnDeplacement(false);
+		    element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+	        break;
+	        
+	        case Input.KEY_RIGHT:
+        	element.setEnDeplacement(false);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+	        break;
+	    }
 
 	}
 
