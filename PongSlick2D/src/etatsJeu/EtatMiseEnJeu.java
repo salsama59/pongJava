@@ -12,6 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import constantes.ConstantesElements;
 import constantes.ConstantesEtat;
+import elementGraphique.Conteneur;
 import elementsJeu.Curseur;
 
 public class EtatMiseEnJeu extends BasicGameState 
@@ -21,6 +22,7 @@ public class EtatMiseEnJeu extends BasicGameState
 	private StateBasedGame jeu;
 	private Rectangle r;
 	private Curseur curseur;
+	private Conteneur conteneur;
 	private LogicDeplacementsEtatsElementsJeuCurseurImpl logicDeplacementCurseur;
 
 	@Override

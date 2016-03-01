@@ -3,40 +3,28 @@ package elementGraphique;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.geom.RoundedRectangle;
+
+
 import constantes.ConstantesElements;
 import elementsJeu.Element;
 
-public class Conteneur extends Element 
+public class Conteneur extends Element
 {
 	
-	private float coordoneeX;
-	private float coordoneeY;
+	private RoundedRectangle element;
 	
-	private List<Texte> elementsTextuel = new ArrayList<>();
+	private List<Texte> elementsTextuel = new ArrayList<Texte>();
 
-	public Conteneur(float x, float y)
+	public Conteneur(float x, float y, float largeur, float hauteur)
 	{
 		super("Cadre", false, ConstantesElements.ELEMENT_CADRE_TYPE, null);
 		
-		this.setCoordoneeX(x);
-		this.setCoordoneeY(y);
-	}
-
-	public float getCoordoneeX() 
-	{
-		return coordoneeX;
-	}
-
-	public void setCoordoneeX(float coordoneeX) {
-		this.coordoneeX = coordoneeX;
-	}
-
-	public float getCoordoneeY() {
-		return coordoneeY;
-	}
-
-	public void setCoordoneeY(float coordoneeY) {
-		this.coordoneeY = coordoneeY;
+		this.setCentreX(x);
+		this.setCentreY(y);
+		
+		this.setLargeur(largeur);
+		this.setHauteur(hauteur);
 	}
 
 	public List<Texte> getElementsTextuel() {
@@ -51,6 +39,54 @@ public class Conteneur extends Element
 	public void ajouterElementTextuel(Texte texte)
 	{
 		this.getElementsTextuel().add(texte);
+	}
+
+	public RoundedRectangle getElement() {
+		return element;
+	}
+
+	public void setElement(RoundedRectangle element) {
+		this.element = element;
+	}
+	
+	public float getCentreX()
+	{
+		return this.getElement().getCenterX();
+	}
+	
+	public float getCentreY()
+	{
+		return this.getElement().getCenterY();
+	}
+	
+	public void setCentreX(float x)
+	{
+		this.getElement().setCenterX(x);
+	}
+	
+	public void setCentreY(float y)
+	{
+		this.getElement().setCenterY(y);
+	}
+	
+	public float getLargeur()
+	{
+		return this.getElement().getWidth();
+	}
+	
+	public float getHauteur()
+	{
+		return this.getElement().getHeight();
+	}
+	
+	public void setLargeur(float largeur)
+	{
+		this.getElement().setWidth(largeur);
+	}
+	
+	public void setHauteur(float hauteur)
+	{
+		this.getElement().setHeight(hauteur);
 	}
 
 }
