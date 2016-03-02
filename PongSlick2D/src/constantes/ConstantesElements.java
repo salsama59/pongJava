@@ -9,7 +9,7 @@ public class ConstantesElements
 	public final static String ELEMENT_MUR_TYPE = "MUR";
 	public final static String ELEMENT_CURSEUR_TYPE = "CURSEUR";
 	public final static String ELEMENT_TEXTE_TYPE = "TEXTE";
-	public final static String ELEMENT_CADRE_TYPE = "TEXTE";
+	public final static String ELEMENT_CADRE_TYPE = "CADRE";
 	
 	//Etat éléments
 	public final static int ELEMENT_ETAT_NEUTRE = 0;

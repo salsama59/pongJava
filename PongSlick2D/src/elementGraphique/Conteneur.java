@@ -6,7 +6,9 @@ import java.util.List;
 import org.newdawn.slick.geom.RoundedRectangle;
 
 
+
 import constantes.ConstantesElements;
+import constantes.ConstantesGraphismes;
 import elementsJeu.Element;
 
 public class Conteneur extends Element
@@ -16,15 +18,14 @@ public class Conteneur extends Element
 	
 	private List<Texte> elementsTextuel = new ArrayList<Texte>();
 
-	public Conteneur(float x, float y, float largeur, float hauteur)
+	public Conteneur(float x, float y)
 	{
 		super("Cadre", false, ConstantesElements.ELEMENT_CADRE_TYPE, null);
 		
 		this.setCentreX(x);
 		this.setCentreY(y);
 		
-		this.setLargeur(largeur);
-		this.setHauteur(hauteur);
+		this.calculerTailleZone();
 	}
 
 	public List<Texte> getElementsTextuel() {
@@ -39,6 +40,15 @@ public class Conteneur extends Element
 	public void ajouterElementTextuel(Texte texte)
 	{
 		this.getElementsTextuel().add(texte);
+		
+		this.calculerTailleZone();
+	}
+	
+	public void supprimerElementTextuel(Texte texte)
+	{
+		this.getElementsTextuel().remove(texte);
+		
+		this.calculerTailleZone();
 	}
 
 	public RoundedRectangle getElement() {
@@ -87,6 +97,29 @@ public class Conteneur extends Element
 	public void setHauteur(float hauteur)
 	{
 		this.getElement().setHeight(hauteur);
+	}
+	
+	private void calculerTailleZone()
+	{
+		
+		float largeur = 0f;
+		float hauteur = 0f;
+		
+		for(Texte ligne : this.getElementsTextuel())
+		{
+			hauteur += ligne.getHauteur();
+			
+			if(ligne.getLargeur() > largeur)
+			{
+				largeur = ligne.getLargeur();
+			}
+		}
+		
+		largeur = largeur + (2 * ConstantesGraphismes.GRAPHISME_MARGE);
+		hauteur = hauteur + (2 * ConstantesGraphismes.GRAPHISME_RETRAIT);
+		
+		this.setHauteur(hauteur);
+		this.setLargeur(largeur);
 	}
 
 }

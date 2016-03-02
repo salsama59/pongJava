@@ -3,14 +3,13 @@ package elementGraphique;
 import org.newdawn.slick.gui.TextField;
 
 import constantes.ConstantesElements;
+import constantes.ConstantesGraphismes;
 import elementsJeu.Element;
 
 public class Texte extends Element
 {
 	private String message;
 	private TextField element;
-	private float coordoneeX;
-	private float coordoneeY;
 	private Conteneur conteneur;
 	
 	public Texte(String message, float x, float y, Conteneur conteneur)
@@ -18,8 +17,6 @@ public class Texte extends Element
 		super(message, false, ConstantesElements.ELEMENT_TEXTE_TYPE, null);
 		this.setMessage(message);
 		this.setConteneur(conteneur);
-		this.setCoordoneeX(x);
-		this.setCoordoneeY(y);
 	}
 
 	public String getMessage() {
@@ -30,36 +27,26 @@ public class Texte extends Element
 		this.message = message;
 	}
 
-	public float getCoordoneeX() {
-		return coordoneeX;
-	}
-
-	public void setCoordoneeX(float coordoneeX) {
-		this.coordoneeX = coordoneeX;
-	}
-
-	public float getCoordoneeY() {
-		return coordoneeY;
-	}
-
-	public void setCoordoneeY(float coordoneeY) {
-		this.coordoneeY = coordoneeY;
-	}
-
 	public Conteneur getConteneur() {
 		return conteneur;
 	}
 
-	public void setConteneur(Conteneur conteneur) {
+	public void setConteneur(Conteneur conteneur) 
+	{
 		this.conteneur = conteneur;
+		this.setCoordonneesX(this.calculerPositionX());
+		this.setCoordonneesY(this.calculerPositionY());
 	}
 
 	public TextField getElement() {
 		return element;
 	}
 
-	public void setElement(TextField element) {
+	public void setElement(TextField element) 
+	{
 		this.element = element;
+		this.setCoordonneesX(this.calculerPositionX());
+		this.setCoordonneesY(this.calculerPositionY());
 	}
 	
 	public int getCoordonneesX()
@@ -90,6 +77,46 @@ public class Texte extends Element
 	public float getHauteur()
 	{
 		return this.getElement().getHeight();
+	}
+	
+	private int calculerPositionX()
+	{
+		int positionXelement = 0;
+		
+		int positionXconteneurExcentree = 0;
+		
+		positionXconteneurExcentree = (int) (this.getConteneur().getCentreX() - this.getConteneur().getLargeur());
+		
+		if(positionXconteneurExcentree < 0)
+		{
+			positionXconteneurExcentree = positionXconteneurExcentree * -1;
+		}
+		
+		positionXelement = (int) (positionXconteneurExcentree + ConstantesGraphismes.GRAPHISME_MARGE);
+		
+		return positionXelement;
+		
+		
+	}
+	
+	private int calculerPositionY()
+	{
+		
+		int positionYelement = 0;
+		
+		int positionYconteneurExcentree = 0;
+		
+		positionYconteneurExcentree = (int) (this.getConteneur().getCentreY() - this.getConteneur().getHauteur());
+		
+		if(positionYconteneurExcentree < 0)
+		{
+			positionYconteneurExcentree = positionYconteneurExcentree * -1;
+		}
+		
+		positionYelement = (int) (positionYconteneurExcentree + ConstantesGraphismes.GRAPHISME_RETRAIT);
+		
+		return positionYelement;
+		
 	}
 
 }
