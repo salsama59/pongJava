@@ -3,7 +3,9 @@ package elementGraphique;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.RoundedRectangle;
+
 
 
 
@@ -14,13 +16,15 @@ import elementsJeu.Element;
 public class Conteneur extends Element
 {
 	
-	private RoundedRectangle element;
+	private Rectangle element;
 	
 	private List<Texte> elementsTextuel = new ArrayList<Texte>();
 
 	public Conteneur(float x, float y)
 	{
 		super("Cadre", false, ConstantesElements.ELEMENT_CADRE_TYPE, null);
+		
+		element = new Rectangle(x, y, 0, 0);
 		
 		this.setCentreX(x);
 		this.setCentreY(y);
@@ -51,11 +55,11 @@ public class Conteneur extends Element
 		this.calculerTailleZone();
 	}
 
-	public RoundedRectangle getElement() {
+	public Rectangle getElement() {
 		return element;
 	}
 
-	public void setElement(RoundedRectangle element) {
+	public void setElement(Rectangle element) {
 		this.element = element;
 	}
 	

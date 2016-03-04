@@ -1,30 +1,34 @@
 package elementGraphique;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.gui.TextField;
 
 import constantes.ConstantesElements;
 import constantes.ConstantesGraphismes;
 import elementsJeu.Element;
 
-public class Texte extends Element
+public class Texte extends Element implements Font
 {
-	private String message;
 	private TextField element;
 	private Conteneur conteneur;
 	
-	public Texte(String message, float x, float y, Conteneur conteneur)
+	public Texte(String message, float x, float y, Conteneur conteneur, GameContainer gameContainer)
 	{
 		super(message, false, ConstantesElements.ELEMENT_TEXTE_TYPE, null);
+		element = new TextField(gameContainer, null, (int)x, (int) y, 0, 0);
+		element.setText(message);
 		this.setMessage(message);
 		this.setConteneur(conteneur);
 	}
 
 	public String getMessage() {
-		return message;
+		return this.getElement().getText();
 	}
 
 	public void setMessage(String message) {
-		this.message = message;
+		this.getElement().setText(message);
 	}
 
 	public Conteneur getConteneur() {
@@ -117,6 +121,43 @@ public class Texte extends Element
 		
 		return positionYelement;
 		
+	}
+
+	@Override
+	public void drawString(float arg0, float arg1, String arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drawString(float arg0, float arg1, String arg2, Color arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drawString(float arg0, float arg1, String arg2, Color arg3,
+			int arg4, int arg5) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getHeight(String arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getLineHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getWidth(String arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
