@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -51,6 +52,7 @@ public class EtatMiseEnJeu extends BasicGameState
 	public void render(GameContainer gameContainer, StateBasedGame jeu, Graphics graphisme) throws SlickException 
 	{
 		graphisme.draw(conteneur.getElement());
+		texte1.getElement().render((GUIContext)gameContainer, graphisme);
 		/*graphisme.draw(r);
 		graphisme.draw(curseur.getElement());
 		graphisme.drawString("Veuillez choisir!", r.getX() + 80, r.getY() + 20);
