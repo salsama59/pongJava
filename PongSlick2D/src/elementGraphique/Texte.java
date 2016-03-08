@@ -13,19 +13,22 @@ public class Texte extends Element
 	private TextField element;
 	private Conteneur conteneur;
 	private TrueTypeFont font;
+	private String message;
 	
 	public Texte(String message, float x, float y, Conteneur conteneur, GameContainer gameContainer)
 	{
 		super(message, false, ConstantesElements.ELEMENT_TEXTE_TYPE, null);
-		font = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF,java.awt.Font.BOLD , 26), false);
-		element = new TextField(gameContainer, font, (int)x, (int) y, 0, 0);
+		this.message = message;
+		font = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN , 12), false);
+		element = new TextField(gameContainer, font, (int)x, (int) y, this.calculerLargeur(), this.calculerHauteur());
 		element.setText(message);
 		this.setMessage(message);
+		
 		this.setConteneur(conteneur);
 	}
 
 	public String getMessage() {
-		return this.getElement().getText();
+		return this.message;
 	}
 
 	public void setMessage(String message) {
@@ -121,6 +124,17 @@ public class Texte extends Element
 		positionYelement = (int) (positionYconteneurExcentree + ConstantesGraphismes.GRAPHISME_RETRAIT);
 		
 		return positionYelement;
+		
+	}
+	
+	private int calculerLargeur()
+	{
+		return this.getMessage().length() * 5 + 12;
+	}
+	
+	private int calculerHauteur()
+	{
+		return 12 * 2;
 		
 	}
 

@@ -39,6 +39,9 @@ public class Conteneur extends Element
 	public void setElementsTextuel(List<Texte> elementsTextuel) 
 	{
 		this.elementsTextuel = elementsTextuel;
+		
+		this.calculerTailleZone();
+		
 	}
 	
 	public void ajouterElementTextuel(Texte texte)
