@@ -3,8 +3,10 @@ package elementGraphique;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.RoundedRectangle;
+
 
 
 
@@ -127,6 +129,16 @@ public class Conteneur extends Element
 		
 		this.setHauteur(hauteur);
 		this.setLargeur(largeur);
+	}
+	
+	public void afficher(Graphics graphisme)
+	{
+		graphisme.draw(this.getElement());
+		
+		for(Texte ligne : this.getElementsTextuel())
+		{
+			ligne.afficher();
+		}
 	}
 
 }

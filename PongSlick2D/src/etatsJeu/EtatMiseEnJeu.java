@@ -51,8 +51,7 @@ public class EtatMiseEnJeu extends BasicGameState
 	@Override
 	public void render(GameContainer gameContainer, StateBasedGame jeu, Graphics graphisme) throws SlickException 
 	{
-		graphisme.draw(conteneur.getElement());
-		texte1.getElement().render((GUIContext)gameContainer, graphisme);
+		conteneur.afficher(graphisme);
 		/*graphisme.draw(r);
 		graphisme.draw(curseur.getElement());
 		graphisme.drawString("Veuillez choisir!", r.getX() + 80, r.getY() + 20);

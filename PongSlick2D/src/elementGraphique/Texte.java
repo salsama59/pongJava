@@ -2,7 +2,6 @@ package elementGraphique;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.gui.TextField;
 
 import constantes.ConstantesElements;
 import constantes.ConstantesGraphismes;
@@ -10,21 +9,21 @@ import elementsJeu.Element;
 
 public class Texte extends Element
 {
-	private TextField element;
+	
 	private Conteneur conteneur;
-	private TrueTypeFont font;
+	private TrueTypeFont element;
 	private String message;
+	private float x;
+	private float y;
 	
 	public Texte(String message, float x, float y, Conteneur conteneur, GameContainer gameContainer)
 	{
 		super(message, false, ConstantesElements.ELEMENT_TEXTE_TYPE, null);
-		this.message = message;
-		font = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN , 12), false);
-		element = new TextField(gameContainer, font, (int)x, (int) y, this.calculerLargeur(), this.calculerHauteur());
-		element.setText(message);
 		this.setMessage(message);
-		
 		this.setConteneur(conteneur);
+		this.setCoordonneesX(this.calculerPositionX());
+		this.setCoordonneesY(this.calculerPositionY());
+		element = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN , 12), false);
 	}
 
 	public String getMessage() {
@@ -32,7 +31,7 @@ public class Texte extends Element
 	}
 
 	public void setMessage(String message) {
-		this.getElement().setText(message);
+		this.message = message;
 	}
 
 	public Conteneur getConteneur() {
@@ -46,45 +45,45 @@ public class Texte extends Element
 		this.setCoordonneesY(this.calculerPositionY());
 	}
 
-	public TextField getElement() {
+	public TrueTypeFont getElement() {
 		return element;
 	}
 
-	public void setElement(TextField element) 
+	public void setElement(TrueTypeFont element) 
 	{
 		this.element = element;
 		this.setCoordonneesX(this.calculerPositionX());
 		this.setCoordonneesY(this.calculerPositionY());
 	}
 	
-	public int getCoordonneesX()
+	public float getCoordonneesX()
 	{
-		return this.getElement().getX();
+		return this.x;
 	}
 	
-	public int getCoordonneesY()
+	public float getCoordonneesY()
 	{
-		return this.getElement().getY();
+		return this.y;
 	}
 	
-	public void setCoordonneesX(int x)
+	public void setCoordonneesX(float x)
 	{
-		this.getElement().setLocation(x, this.getCoordonneesY());
+		this.x = x;
 	}
 	
-	public void setCoordonneesY(int y)
+	public void setCoordonneesY(float y)
 	{
-		this.getElement().setLocation(this.getCoordonneesX(), y);
+		this.y = y;
 	}
 	
 	public float getLargeur()
 	{
-		return this.getElement().getWidth();
+		return this.getElement().getWidth(this.getMessage());
 	}
 	
 	public float getHauteur()
 	{
-		return this.getElement().getHeight();
+		return this.getElement().getHeight(this.getMessage());
 	}
 	
 	private int calculerPositionX()
@@ -93,7 +92,7 @@ public class Texte extends Element
 		
 		int positionXconteneurExcentree = 0;
 		
-		positionXconteneurExcentree = (int) (this.getConteneur().getCentreX() - this.getConteneur().getLargeur());
+		positionXconteneurExcentree = (int) (this.getConteneur().getCentreX() - (this.getConteneur().getLargeur()/2));
 		
 		if(positionXconteneurExcentree < 0)
 		{
@@ -114,28 +113,24 @@ public class Texte extends Element
 		
 		int positionYconteneurExcentree = 0;
 		
-		positionYconteneurExcentree = (int) (this.getConteneur().getCentreY() - this.getConteneur().getHauteur());
+		int index = this.getConteneur().getElementsTextuel().indexOf(this);
+		
+		positionYconteneurExcentree = (int) (this.getConteneur().getCentreY() - (this.getConteneur().getHauteur()/2));
 		
 		if(positionYconteneurExcentree < 0)
 		{
 			positionYconteneurExcentree = positionYconteneurExcentree * -1;
 		}
 		
-		positionYelement = (int) (positionYconteneurExcentree + ConstantesGraphismes.GRAPHISME_RETRAIT);
+		positionYelement = (int) (positionYconteneurExcentree + ConstantesGraphismes.GRAPHISME_RETRAIT * (index + 1));
 		
 		return positionYelement;
 		
 	}
 	
-	private int calculerLargeur()
+	public void afficher()
 	{
-		return this.getMessage().length() * 5 + 12;
-	}
-	
-	private int calculerHauteur()
-	{
-		return 12 * 2;
-		
+		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage());
 	}
 
 }
