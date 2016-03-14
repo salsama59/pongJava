@@ -130,7 +130,8 @@ public class EtatMatch extends BasicGameState
 	
 	private void initialiserGestionnaires()
 	{
-		gestionnaireElement = new GestionnaireElements();
+		//GestionnaireElements.getInstance()
+		//gestionnaireElement = new GestionnaireElements();
 		gestionnaireMatch = new GestionnaireMatch();
 		
 		Hashtable<Integer, Integer> choix = new Hashtable<Integer, Integer>();

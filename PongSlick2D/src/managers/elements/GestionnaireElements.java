@@ -14,11 +14,23 @@ public class GestionnaireElements
 	private int prochainID;
 	private int iDprecedent;
 	
-	public GestionnaireElements()
+	private GestionnaireElements()
 	{
 		setListElementsParNom(new Hashtable<String, Element>());
 		setListElementsParID(new Hashtable<Integer, Element>());
 		this.setProchainID(0);
+	}
+	
+	private static class Detenteur
+	{		
+		/** Instance unique non préinitialisée */
+		private final static GestionnaireElements instance = new GestionnaireElements();
+	}
+	
+	/** Point d'accès pour l'instance unique du singleton */
+	public static GestionnaireElements getInstance()
+	{
+		return Detenteur.instance;
 	}
 
 	private int getProchainID() 
