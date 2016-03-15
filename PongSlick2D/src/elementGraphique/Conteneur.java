@@ -5,11 +5,6 @@ import java.util.List;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.RoundedRectangle;
-
-
-
-
 
 import constantes.ConstantesElements;
 import constantes.ConstantesGraphismes;

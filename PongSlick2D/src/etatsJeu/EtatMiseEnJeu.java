@@ -3,14 +3,13 @@ package etatsJeu;
 import java.util.ArrayList;
 import java.util.List;
 
+import managers.elements.GestionnaireElements;
 import mecanismes.implementations.LogicDeplacementsEtatsElementsJeuCurseurImpl;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -42,10 +41,16 @@ public class EtatMiseEnJeu extends BasicGameState
 		logicDeplacementCurseur = new LogicDeplacementsEtatsElementsJeuCurseurImpl(curseur);
 		texte1 = new Texte("PILE", 0, 0, conteneur, gameContainer);
 		texte2 = new Texte("FACE", 0, 0, conteneur, gameContainer);
+		GestionnaireElements.getInstance().ajouterElement(texte1);
+		GestionnaireElements.getInstance().ajouterElement(texte2);
 		List<Texte> list = new ArrayList<Texte>();
 		list.add(texte1);
 		list.add(texte2);
 		conteneur.setElementsTextuel(list);
+		texte1.setCoordonneesX(texte1.calculerPositionX());
+		texte1.setCoordonneesY(texte1.calculerPositionY());
+		texte2.setCoordonneesX(texte2.calculerPositionX());
+		texte2.setCoordonneesY(texte2.calculerPositionY());
 	}
 
 	@Override

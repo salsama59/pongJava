@@ -45,7 +45,6 @@ public class EtatMatch extends BasicGameState
 	private GestionnaireCollisionsFilet gestionnaireCollisionFilet2;
 	private GestionnaireCollisionsMur gestionnaireColisionMur1;
 	private GestionnaireCollisionsMur gestionnaireColisionMur2;
-	private GestionnaireElements gestionnaireElement;
 	private GestionnaireMatch gestionnaireMatch;
 
 	@Override
@@ -130,8 +129,7 @@ public class EtatMatch extends BasicGameState
 	
 	private void initialiserGestionnaires()
 	{
-		//GestionnaireElements.getInstance()
-		//gestionnaireElement = new GestionnaireElements();
+		
 		gestionnaireMatch = new GestionnaireMatch();
 		
 		Hashtable<Integer, Integer> choix = new Hashtable<Integer, Integer>();
@@ -141,13 +139,13 @@ public class EtatMatch extends BasicGameState
 		
 		gestionnaireMatch.setChoix(choix);
 		
-		gestionnaireElement.ajouterElement(mur1);
-		gestionnaireElement.ajouterElement(mur2);
-		gestionnaireElement.ajouterElement(raquette1);
-		gestionnaireElement.ajouterElement(raquette2);
-		gestionnaireElement.ajouterElement(balle);
-		gestionnaireElement.ajouterElement(filet1);
-		gestionnaireElement.ajouterElement(filet2);
+		GestionnaireElements.getInstance().ajouterElement(mur1);
+		GestionnaireElements.getInstance().ajouterElement(mur2);
+		GestionnaireElements.getInstance().ajouterElement(raquette1);
+		GestionnaireElements.getInstance().ajouterElement(raquette2);
+		GestionnaireElements.getInstance().ajouterElement(balle);
+		GestionnaireElements.getInstance().ajouterElement(filet1);
+		GestionnaireElements.getInstance().ajouterElement(filet2);
 		
 		gestionnaireMatch.attribuerLancementBalle();
 		
@@ -166,13 +164,13 @@ public class EtatMatch extends BasicGameState
 			r.setEtat(ConstantesElements.ELEMENT_ETAT_LANCEMENT);
 		}
 		
-		gestionnaireColisionBalle = new GestionnaireCollisionsBalle(balle, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_BALLE));
-		gestionnaireColisionRaquette1 = new GestionnaireCollisionsRaquette(raquette1, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_RAQUETTE));
-		gestionnaireColisionRaquette2 = new GestionnaireCollisionsRaquette(raquette2, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_RAQUETTE));
-		gestionnaireCollisionFilet1 = new GestionnaireCollisionsFilet(filet1, gestionnaireMatch, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_FILET));
-		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireMatch, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_FILET));
-		gestionnaireColisionMur1 = new GestionnaireCollisionsMur(mur1, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_MUR));
-		gestionnaireColisionMur2 = new GestionnaireCollisionsMur(mur2, gestionnaireElement.getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_MUR));
+		gestionnaireColisionBalle = new GestionnaireCollisionsBalle(balle, GestionnaireElements.getInstance().getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_BALLE));
+		gestionnaireColisionRaquette1 = new GestionnaireCollisionsRaquette(raquette1, GestionnaireElements.getInstance().getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_RAQUETTE));
+		gestionnaireColisionRaquette2 = new GestionnaireCollisionsRaquette(raquette2, GestionnaireElements.getInstance().getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_RAQUETTE));
+		gestionnaireCollisionFilet1 = new GestionnaireCollisionsFilet(filet1, gestionnaireMatch, GestionnaireElements.getInstance().getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_FILET));
+		gestionnaireCollisionFilet2 = new GestionnaireCollisionsFilet(filet2, gestionnaireMatch, GestionnaireElements.getInstance().getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_FILET));
+		gestionnaireColisionMur1 = new GestionnaireCollisionsMur(mur1, GestionnaireElements.getInstance().getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_MUR));
+		gestionnaireColisionMur2 = new GestionnaireCollisionsMur(mur2, GestionnaireElements.getInstance().getListeElementsFiltrees(ConstantesGestionnaires.FILTRE_GESTIONNAIRE_MUR));
 		
 	}
 	

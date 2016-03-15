@@ -1,5 +1,7 @@
 package elementGraphique;
 
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -21,8 +23,6 @@ public class Texte extends Element
 		super(message, false, ConstantesElements.ELEMENT_TEXTE_TYPE, null);
 		this.setMessage(message);
 		this.setConteneur(conteneur);
-		this.setCoordonneesX(this.calculerPositionX());
-		this.setCoordonneesY(this.calculerPositionY());
 		element = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN , 12), false);
 	}
 
@@ -86,7 +86,7 @@ public class Texte extends Element
 		return this.getElement().getHeight(this.getMessage());
 	}
 	
-	private int calculerPositionX()
+	public int calculerPositionX()
 	{
 		int positionXelement = 0;
 		
@@ -106,14 +106,14 @@ public class Texte extends Element
 		
 	}
 	
-	private int calculerPositionY()
+	public int calculerPositionY()
 	{
 		
 		int positionYelement = 0;
 		
 		int positionYconteneurExcentree = 0;
 		
-		int index = this.getConteneur().getElementsTextuel().indexOf(this);
+		int index = this.recupererRangElementTextuel();
 		
 		positionYconteneurExcentree = (int) (this.getConteneur().getCentreY() - (this.getConteneur().getHauteur()/2));
 		
@@ -131,6 +131,25 @@ public class Texte extends Element
 	public void afficher()
 	{
 		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage());
+	}
+	
+	public int recupererRangElementTextuel()
+	{
+		
+		List<Texte> groupTextuel = this.getConteneur().getElementsTextuel();
+		
+		for(int i = 0; i < groupTextuel.size(); i++)
+		{
+			Texte texte = groupTextuel.get(i);
+			
+			if(this.getIdElement() == texte.getIdElement())
+			{
+				return i;
+			}
+		}
+		
+		return 0;
+		
 	}
 
 }
