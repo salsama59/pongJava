@@ -22,25 +22,31 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 		if(element.isEnDeplacement())
 		{
 			
-			if(element.getSens() == ConstantesElements.ELEMENT_SENS_HAUT)
+			element.deplacerCuseur(element.getSens());
+			
+			
+			/*if(element.getSens() == ConstantesElements.ELEMENT_SENS_HAUT)
 			{
-				element.setCoordonneeY(element.getCoordonneeY() - (element.getVitesse() * delta));
+				element.deplacerCuseur(ConstantesElements.ELEMENT_SENS_HAUT);
+				//element.setCoordonneeY(element.getCoordonneeY() - (element.getVitesse() * delta));
 			}
 			
 			if(element.getSens() == ConstantesElements.ELEMENT_SENS_BAS)
 			{
-				element.setCoordonneeY(element.getCoordonneeY() + (element.getVitesse() * delta));
+				//element.setCoordonneeY(element.getCoordonneeY() + (element.getVitesse() * delta));
+				element.deplacerCuseur(ConstantesElements.ELEMENT_SENS_BAS);
 			}
 			
 			if(element.getSens() == ConstantesElements.ELEMENT_SENS_DROITE)
 			{
-				element.setCoordonneeX(element.getCoordonneeX() + (element.getVitesse() * delta));
+				//element.setCoordonneeX(element.getCoordonneeX() + (element.getVitesse() * delta));
 			}
 			
 			if(element.getSens() == ConstantesElements.ELEMENT_SENS_GAUCHE)
 			{
-				element.setCoordonneeX(element.getCoordonneeX() - (element.getVitesse() * delta));
+				//element.setCoordonneeX(element.getCoordonneeX() - (element.getVitesse() * delta));
 			}
+			*/
 			
 		}
 

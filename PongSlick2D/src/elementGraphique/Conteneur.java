@@ -8,6 +8,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 import constantes.ConstantesElements;
 import constantes.ConstantesGraphismes;
+import elementsJeu.Curseur;
 import elementsJeu.Element;
 
 public class Conteneur extends Element
@@ -16,6 +17,8 @@ public class Conteneur extends Element
 	private Rectangle element;
 	
 	private List<Texte> elementsTextuel = new ArrayList<Texte>();
+	
+	private Curseur curseur = null;
 
 	public Conteneur(float x, float y)
 	{
@@ -134,6 +137,20 @@ public class Conteneur extends Element
 		{
 			ligne.afficher();
 		}
+		
+		this.getCurseur().afficher(graphisme);
+	}
+
+	public Curseur getCurseur() 
+	{
+		return curseur;
+	}
+
+	public void setCurseur(Curseur curseur) 
+	{
+		this.curseur = curseur;
+		
+		this.curseur.setConteneurAffectation(this);
 	}
 
 }

@@ -1,9 +1,12 @@
 package elementsJeu;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Vector2f;
 
 import constantes.ConstantesElements;
+import elementGraphique.Conteneur;
+import elementGraphique.Texte;
 
 public class Curseur extends Element 
 {
@@ -13,6 +16,8 @@ public class Curseur extends Element
 	private boolean enDeplacement = false;
 	private float direction;
 	private Vector2f coordonnee = null;
+	private Conteneur conteneurAffectation = null;
+	private int indexCourant = 0;
 	
 	public Curseur(String nom, boolean enCollision, String type, float x, float y)
 	{
@@ -26,43 +31,53 @@ public class Curseur extends Element
 		this.setDirection((float) this.getCoordonnee().getTheta());
 	}
 
-	public Polygon getElement() {
+	public Polygon getElement() 
+	{
 		return element;
 	}
 
-	public void setElement(Polygon element) {
+	public void setElement(Polygon element) 
+	{
 		this.element = element;
 	}
 
-	public float getVitesse() {
+	public float getVitesse() 
+	{
 		return vitesse;
 	}
 
-	public void setVitesse(float vitesse) {
+	public void setVitesse(float vitesse) 
+	{
 		this.vitesse = vitesse;
 	}
 
-	public boolean isEnDeplacement() {
+	public boolean isEnDeplacement() 
+	{
 		return enDeplacement;
 	}
 
-	public void setEnDeplacement(boolean enDeplacement) {
+	public void setEnDeplacement(boolean enDeplacement) 
+	{
 		this.enDeplacement = enDeplacement;
 	}
 
-	public float getDirection() {
+	public float getDirection() 
+	{
 		return direction;
 	}
 
-	public void setDirection(float direction) {
+	public void setDirection(float direction) 
+	{
 		this.direction = direction;
 	}
 
-	public Vector2f getCoordonnee() {
+	public Vector2f getCoordonnee() 
+	{
 		return coordonnee;
 	}
 
-	public void setCoordonnee(Vector2f coordonnee) {
+	public void setCoordonnee(Vector2f coordonnee) 
+	{
 		this.coordonnee = coordonnee;
 	}
 	
@@ -85,6 +100,90 @@ public class Curseur extends Element
 	{
 		this.getElement().setY(y);
 	}
+
+	public Conteneur getConteneurAffectation() 
+	{
+		return conteneurAffectation;
+	}
+
+	public void setConteneurAffectation(Conteneur conteneurAffectation) 
+	{
+		this.conteneurAffectation = conteneurAffectation;
+		this.initialiserEnplacement();
+	}
 	
+	public int getIndexCourant() 
+	{
+		return indexCourant;
+	}
+
+	public void setIndexCourant(int indexCourant) 
+	{
+		this.indexCourant = indexCourant;
+	}
+	
+	public void deplacerCuseur(int sens)
+	{
+		
+		Texte elementTextuelSuivant = null;
+		
+		Texte elementTextuelCourant = this.getConteneurAffectation().getElementsTextuel().get(this.getIndexCourant());
+		
+		int nombreElements = this.getConteneurAffectation().getElementsTextuel().size();
+		
+		
+		switch(sens)
+		{
+		
+			case ConstantesElements.ELEMENT_SENS_HAUT :
+				
+				if(this.indexCourant == 0)
+				{
+					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nombreElements - 1);
+				}
+				else
+				{
+					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(this.getIndexCourant() - 1);
+				}
+				
+			break;
+				
+			case ConstantesElements.ELEMENT_SENS_BAS :
+				
+				if(this.indexCourant == nombreElements - 1)
+				{
+					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(0);
+				}
+				else
+				{
+					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(this.getIndexCourant() + 1);
+				}
+				
+			break;
+				
+			default :
+				
+				elementTextuelSuivant = elementTextuelCourant;
+			break;
+				
+		}
+		
+		this.setCoordonneeY(elementTextuelSuivant.getCoordonneesY());
+		
+	}
+	
+	private void initialiserEnplacement()
+	{
+		
+		Texte premierElement = this.getConteneurAffectation().getElementsTextuel().get(0);
+		this.setCoordonneeY(premierElement.getCoordonneesY());
+		this.setCoordonneeX(premierElement.getCoordonneesX() - 5);
+		
+	}
+	
+	public void afficher(Graphics graphisme)
+	{
+		graphisme.draw(this.getElement());
+	}
 	
 }

@@ -51,6 +51,7 @@ public class EtatMiseEnJeu extends BasicGameState
 		texte1.setCoordonneesY(texte1.calculerPositionY());
 		texte2.setCoordonneesX(texte2.calculerPositionX());
 		texte2.setCoordonneesY(texte2.calculerPositionY());
+		conteneur.setCurseur(curseur);
 	}
 
 	@Override
