@@ -11,6 +11,8 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 	
 	private Curseur element = null;
 	
+	private boolean bloqueDeplacement = false;
+	
 	public LogicDeplacementsEtatsElementsJeuCurseurImpl(Curseur curseur)
 	{
 		this.setElement(curseur);
@@ -22,31 +24,12 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 		if(element.isEnDeplacement())
 		{
 			
-			element.deplacerCuseur(element.getSens());
-			
-			
-			/*if(element.getSens() == ConstantesElements.ELEMENT_SENS_HAUT)
+			if(!this.isBloqueDeplacement())
 			{
-				element.deplacerCuseur(ConstantesElements.ELEMENT_SENS_HAUT);
-				//element.setCoordonneeY(element.getCoordonneeY() - (element.getVitesse() * delta));
+				element.deplacerCuseur(element.getSens());
 			}
 			
-			if(element.getSens() == ConstantesElements.ELEMENT_SENS_BAS)
-			{
-				//element.setCoordonneeY(element.getCoordonneeY() + (element.getVitesse() * delta));
-				element.deplacerCuseur(ConstantesElements.ELEMENT_SENS_BAS);
-			}
-			
-			if(element.getSens() == ConstantesElements.ELEMENT_SENS_DROITE)
-			{
-				//element.setCoordonneeX(element.getCoordonneeX() + (element.getVitesse() * delta));
-			}
-			
-			if(element.getSens() == ConstantesElements.ELEMENT_SENS_GAUCHE)
-			{
-				//element.setCoordonneeX(element.getCoordonneeX() - (element.getVitesse() * delta));
-			}
-			*/
+			this.setBloqueDeplacement(true);
 			
 		}
 
@@ -67,6 +50,7 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 	        case Input.KEY_LEFT:
         	element.setEnDeplacement(true);
 	        element.setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
+	        this.setBloqueDeplacement(true);
 	        break;
 	        
 	        case Input.KEY_DOWN:
@@ -77,6 +61,7 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 	        case Input.KEY_RIGHT:
         	element.setEnDeplacement(true);
 	        element.setSens(ConstantesElements.ELEMENT_SENS_DROITE);
+	        this.setBloqueDeplacement(true);
 	        break;
 	        
 	    }
@@ -86,6 +71,9 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 	@Override
 	public void reinitialisationEtat(int key, char c) 
 	{
+		
+		Input entree = new Input(key);
+		
 		switch (key) 
 	    {
 	        case Input.KEY_UP:
@@ -108,7 +96,9 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 	        break;
 	    }
-
+		
+		this.setBloqueDeplacement(false);
+		
 	}
 
 	public Curseur getElement() {
@@ -117,6 +107,14 @@ public class LogicDeplacementsEtatsElementsJeuCurseurImpl implements LogicDeplac
 
 	public void setElement(Curseur element) {
 		this.element = element;
+	}
+
+	public boolean isBloqueDeplacement() {
+		return bloqueDeplacement;
+	}
+
+	public void setBloqueDeplacement(boolean bloqueDeplacement) {
+		this.bloqueDeplacement = bloqueDeplacement;
 	}
 
 }

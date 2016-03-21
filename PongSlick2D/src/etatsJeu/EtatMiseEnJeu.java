@@ -96,7 +96,6 @@ public class EtatMiseEnJeu extends BasicGameState
 	@Override
 	public int getID() 
 	{
-		// TODO Auto-generated method stub
 		return ID;
 	}
 

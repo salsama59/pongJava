@@ -131,6 +131,8 @@ public class Curseur extends Element
 		
 		int nombreElements = this.getConteneurAffectation().getElementsTextuel().size();
 		
+		int nouvelIndex = 0;
+		
 		
 		switch(sens)
 		{
@@ -139,11 +141,13 @@ public class Curseur extends Element
 				
 				if(this.indexCourant == 0)
 				{
+					nouvelIndex = nombreElements - 1;
 					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nombreElements - 1);
 				}
 				else
 				{
-					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(this.getIndexCourant() - 1);
+					nouvelIndex = this.getIndexCourant() - 1;
+					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nouvelIndex);
 				}
 				
 			break;
@@ -152,11 +156,13 @@ public class Curseur extends Element
 				
 				if(this.indexCourant == nombreElements - 1)
 				{
-					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(0);
+					nouvelIndex = 0;
+					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nouvelIndex);
 				}
 				else
 				{
-					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(this.getIndexCourant() + 1);
+					nouvelIndex = this.getIndexCourant() + 1;
+					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nouvelIndex);
 				}
 				
 			break;
@@ -164,11 +170,13 @@ public class Curseur extends Element
 			default :
 				
 				elementTextuelSuivant = elementTextuelCourant;
+				nouvelIndex = this.indexCourant;
 			break;
 				
 		}
 		
 		this.setCoordonneeY(elementTextuelSuivant.getCoordonneesY());
+		this.setIndexCourant(nouvelIndex);
 		
 	}
 	
