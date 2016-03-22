@@ -7,29 +7,47 @@ import constantes.ConstantesGestionnaires;
 public class GestionnaireMatch 
 {
 	
-	private int pointCampDroit;
-	private int pointCampGauche;
-	private int idLanceur;
-	private Hashtable<Integer, Integer> choix = new Hashtable<Integer, Integer>();
+	private static int pointCampDroit;
+	private static int pointCampGauche;
+	private static int idLanceur;
+	private static Hashtable<Integer, Integer> choix;
 	
-	public int getPointCampDroit() 
+	private GestionnaireMatch ()
+	{
+		choix = new Hashtable<Integer, Integer>();
+	}
+	
+	private static class Detenteur
+	{		
+		/** Instance unique non préinitialisée */
+		private final static GestionnaireMatch instance = new GestionnaireMatch();
+	}
+	
+	/** Point d'accès pour l'instance unique du singleton */
+	public static GestionnaireMatch getInstance()
+	{
+		return Detenteur.instance;
+	}
+	
+	
+	public static int getPointCampDroit() 
 	{
 		return pointCampDroit;
 	}
 	
-	public void setPointCampDroit(int point_camp_droit) 
+	public static void setPointCampDroit(int point_camp_droit) 
 	{
-		this.pointCampDroit = point_camp_droit;
+		GestionnaireMatch.pointCampDroit = point_camp_droit;
 	}
 	
-	public int getPointCampGauche() 
+	public static int getPointCampGauche() 
 	{
 		return pointCampGauche;
 	}
 	
-	public void setPointCampGauche(int point_camp_gauche) 
+	public static void setPointCampGauche(int point_camp_gauche) 
 	{
-		this.pointCampGauche = point_camp_gauche;
+		GestionnaireMatch.pointCampGauche = point_camp_gauche;
 	}
 	
 	public void reinitialiserPointsMatch()
@@ -38,14 +56,14 @@ public class GestionnaireMatch
 		this.setPointCampGauche(0);
 	}
 
-	public int getIdLanceur() 
+	public static int getIdLanceur() 
 	{
 		return idLanceur;
 	}
 
-	public void setIdLanceur(int idLanceur) 
+	public static void setIdLanceur(int idLanceur) 
 	{
-		this.idLanceur = idLanceur;
+		GestionnaireMatch.idLanceur = idLanceur;
 	}
 
 	public Hashtable<Integer, Integer> getChoix() 
@@ -53,13 +71,13 @@ public class GestionnaireMatch
 		return choix;
 	}
 
-	public void setChoix(Hashtable<Integer, Integer> choix) 
+	public static void setChoix(Hashtable<Integer, Integer> choix) 
 	{
-		this.choix = choix;
+		GestionnaireMatch.choix = choix;
 	}
 	
 	//Substitut à pile ou face
-	public int genererChoix()
+	public static int genererChoix()
 	{
 		
 		int intervale = ConstantesGestionnaires.INTERVALE_MAXIMAL - ConstantesGestionnaires.INTERVALE_MINIMAL;
@@ -70,9 +88,9 @@ public class GestionnaireMatch
 		
 	}
 	
-	public void attribuerLancementBalle()
+	public static void attribuerLancementBalle()
 	{
-		this.setIdLanceur(choix.get(this.genererChoix()));
+		GestionnaireMatch.setIdLanceur(choix.get(GestionnaireMatch.genererChoix()));
 	}
 	
 }

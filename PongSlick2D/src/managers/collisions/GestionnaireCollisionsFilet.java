@@ -16,13 +16,11 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 {
 	
 	private Filet elementGere;
-	private GestionnaireMatch gestionnaireMatch;
 
-	public GestionnaireCollisionsFilet(Filet elementAgerer, GestionnaireMatch gestionnaire, Hashtable<String, Element> elements) 
+	public GestionnaireCollisionsFilet(Filet elementAgerer, Hashtable<String, Element> elements) 
 	{
 		super(elements);
 		this.setElementGere(elementAgerer);
-		this.setGestionnaireMatch(gestionnaire);
 	}
 
 	@Override
@@ -58,7 +56,7 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 					if(this.getElementGere().getNomElement().equals(ConstantesElements.ELEMENT_FILET1_NOM))
 					{
 						
-						this.getGestionnaireMatch().setPointCampDroit(this.getGestionnaireMatch().getPointCampDroit() + 1);
+						GestionnaireMatch.setPointCampDroit(GestionnaireMatch.getPointCampDroit() + 1);
 						
 						if(element instanceof Balle)
 						{
@@ -72,7 +70,7 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 					else if(this.getElementGere().getNomElement().equals(ConstantesElements.ELEMENT_FILET2_NOM))
 					{
 						
-						this.getGestionnaireMatch().setPointCampGauche(this.getGestionnaireMatch().getPointCampGauche() + 1);
+						GestionnaireMatch.setPointCampGauche(GestionnaireMatch.getPointCampGauche() + 1);
 						
 						if(element instanceof Balle)
 						{
@@ -101,16 +99,6 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 	public void setElementGere(Filet elementGere) 
 	{
 		this.elementGere = elementGere;
-	}
-
-	public GestionnaireMatch getGestionnaireMatch() 
-	{
-		return gestionnaireMatch;
-	}
-
-	private void setGestionnaireMatch(GestionnaireMatch gestionnaireMatch) 
-	{
-		this.gestionnaireMatch = gestionnaireMatch;
 	}
 	
 	private void ajusterPositionLancementBalle(Balle balle, Raquette raquette)
