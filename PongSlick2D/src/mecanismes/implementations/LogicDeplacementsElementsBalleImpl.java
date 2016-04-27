@@ -1,25 +1,26 @@
 package mecanismes.implementations;
 
-import mecanismes.interfaces.LogicDeplacementsEtatsElementsJeu;
+import mecanismes.interfaces.LogicDeplacementsElements;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Vector2f;
 
 import constantes.ConstantesElements;
 import elementsJeu.Balle;
 
-public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacementsEtatsElementsJeu 
+public class LogicDeplacementsElementsBalleImpl implements LogicDeplacementsElements 
 {
 	
 	private Balle element = null;
 	
-	public LogicDeplacementsEtatsElementsJeuBalleImpl(Balle balle)
+	public LogicDeplacementsElementsBalleImpl(Balle balle)
 	{
 		this.setElement(balle);
 	}
 
 	@Override
-	public void gererDeplacements(int delta)
+	public void gererDeplacements(int delta, String phase, GameContainer gameContainer)
 	{
 		
 		Vector2f trajectoire;
@@ -94,7 +95,7 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 	}
 
 	@Override
-	public void gererEtats(int key, char c) 
+	public void gererEtats(int key, char c, GameContainer gameContainer) 
 	{
 		
 		//element.setEnDeplacement(true);
@@ -168,10 +169,10 @@ public class LogicDeplacementsEtatsElementsJeuBalleImpl implements LogicDeplacem
 		return (float) ((Math.PI/180) * angle);
 	}
 	
-	//Correction effet de scintillement dû à certains calculs de coordonnées
-	private float ajusterTrajectoireNegative(float coordonée)
+	//Correction effet de scintillement de certains calculs de coordonnes
+	private float ajusterTrajectoireNegative(float coordonne)
 	{
-		return coordonée > 0 ? coordonée : coordonée * -1;
+		return coordonne > 0 ? coordonne : coordonne * -1;
 		
 	}
 	

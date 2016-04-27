@@ -1,8 +1,9 @@
 package mecanismes.implementations;
 
 import managers.elements.GestionnaireElements;
-import mecanismes.interfaces.LogicDeplacementsEtatsElementsJeu;
+import mecanismes.interfaces.LogicDeplacementsElements;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
 import constantes.ConstantesElements;
@@ -10,18 +11,18 @@ import constantes.ConstantesJoueurs;
 import elementsJeu.Balle;
 import elementsJeu.Raquette;
 
-public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDeplacementsEtatsElementsJeu
+public class LogicDeplacementsElementsRaquetteImpl implements LogicDeplacementsElements
 {
 	
 	private Raquette element = null;
 	
-	public LogicDeplacementsEtatsElementsJeuRaquetteImpl(Raquette raquette)
+	public LogicDeplacementsElementsRaquetteImpl(Raquette raquette)
 	{
 		this.setElement(raquette);
 	}
 	
 	@Override
-	public void gererDeplacements(int delta) 
+	public void gererDeplacements(int delta, String phase, GameContainer gameContainer)
 	{
 		if(element.isEnDeplacement())
 		{
@@ -48,7 +49,7 @@ public class LogicDeplacementsEtatsElementsJeuRaquetteImpl implements LogicDepla
 	}
 
 	@Override
-	public void gererEtats(int key, char c) 
+	public void gererEtats(int key, char c, GameContainer gameContainer) 
 	{
 		Input entree = new Input(key);
 		

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 
 import constantes.ConstantesElements;
+import constantes.ConstantesEtat;
 import constantes.ConstantesJoueurs;
 import managers.elements.GestionnaireElements;
 import managers.etat.GestionnaireMatch;
@@ -11,6 +12,7 @@ import elementsJeu.Balle;
 import elementsJeu.Element;
 import elementsJeu.Filet;
 import elementsJeu.Raquette;
+import etatsJeu.EtatMatch;
 
 public class GestionnaireCollisionsFilet extends GestionnaireCollisions 
 {
@@ -56,12 +58,18 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 					if(this.getElementGere().getNomElement().equals(ConstantesElements.ELEMENT_FILET1_NOM))
 					{
 						
-						GestionnaireMatch.setPointCampDroit(GestionnaireMatch.getPointCampDroit() + 1);
+						GestionnaireMatch.getInstance().setPointCampDroit(GestionnaireMatch.getInstance().getPointCampDroit() + 1);
 						
 						if(element instanceof Balle)
 						{
 							Raquette raquette = (Raquette)GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_RAQUETTE1_NOM);
 							ajusterPositionLancementBalle((Balle) element, raquette);
+							
+							if(GestionnaireMatch.getInstance().isFinMatch())
+							{
+								EtatMatch.setPhase(ConstantesEtat.ETAT_MATCH_PHASE_RESULTAT);
+								GestionnaireMatch.getInstance().setIdJoueurAvantage(ConstantesJoueurs.JOUEUR_ID_1);
+							}
 							//((Balle) element).reinitialiserPosition();
 							//((Balle) element).setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
 						}
@@ -70,12 +78,18 @@ public class GestionnaireCollisionsFilet extends GestionnaireCollisions
 					else if(this.getElementGere().getNomElement().equals(ConstantesElements.ELEMENT_FILET2_NOM))
 					{
 						
-						GestionnaireMatch.setPointCampGauche(GestionnaireMatch.getPointCampGauche() + 1);
+						GestionnaireMatch.getInstance().setPointCampGauche(GestionnaireMatch.getInstance().getPointCampGauche() + 1);
 						
 						if(element instanceof Balle)
 						{
 							Raquette raquette = (Raquette)GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_RAQUETTE2_NOM);
 							ajusterPositionLancementBalle((Balle) element, raquette);
+							
+							if(GestionnaireMatch.getInstance().isFinMatch())
+							{
+								EtatMatch.setPhase(ConstantesEtat.ETAT_MATCH_PHASE_RESULTAT);
+								GestionnaireMatch.getInstance().setIdJoueurAvantage(ConstantesJoueurs.JOUEUR_ID_2);
+							}
 							//((Balle) element).reinitialiserPosition();
 							//((Balle) element).setSens(ConstantesElements.ELEMENT_SENS_DROITE);
 						}

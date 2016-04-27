@@ -131,6 +131,7 @@ public class Conteneur extends Element
 	
 	public void afficher(Graphics graphisme)
 	{
+		
 		graphisme.draw(this.getElement());
 		
 		for(Texte ligne : this.getElementsTextuel())
@@ -138,9 +139,39 @@ public class Conteneur extends Element
 			ligne.afficher();
 		}
 		
-		this.getCurseur().afficher(graphisme);
+		if(this.getCurseur() != null)
+		{
+			this.getCurseur().afficher(graphisme);
+		}
+		
 	}
-
+	
+	public void afficher(Graphics graphisme, String nouveauMessage)
+	{
+		
+		graphisme.draw(this.getElement());
+		
+		for(Texte ligne : this.getElementsTextuel())
+		{
+			
+			if(ligne.isTexteVariable())
+			{
+				ligne.setMessage(nouveauMessage);
+			}
+			
+				ligne.afficher();
+				
+		}
+		
+		this.calculerTailleZone();
+		
+		if(this.getCurseur() != null)
+		{
+			this.getCurseur().afficher(graphisme);
+		}
+		
+	}
+	
 	public Curseur getCurseur() 
 	{
 		return curseur;

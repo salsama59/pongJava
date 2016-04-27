@@ -122,64 +122,6 @@ public class Curseur extends Element
 		this.indexCourant = indexCourant;
 	}
 	
-	public void deplacerCuseur(int sens)
-	{
-		
-		Texte elementTextuelSuivant = null;
-		
-		Texte elementTextuelCourant = this.getConteneurAffectation().getElementsTextuel().get(this.getIndexCourant());
-		
-		int nombreElements = this.getConteneurAffectation().getElementsTextuel().size();
-		
-		int nouvelIndex = 0;
-		
-		
-		switch(sens)
-		{
-		
-			case ConstantesElements.ELEMENT_SENS_HAUT :
-				
-				if(this.indexCourant == 0)
-				{
-					nouvelIndex = nombreElements - 1;
-					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nombreElements - 1);
-				}
-				else
-				{
-					nouvelIndex = this.getIndexCourant() - 1;
-					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nouvelIndex);
-				}
-				
-			break;
-				
-			case ConstantesElements.ELEMENT_SENS_BAS :
-				
-				if(this.indexCourant == nombreElements - 1)
-				{
-					nouvelIndex = 0;
-					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nouvelIndex);
-				}
-				else
-				{
-					nouvelIndex = this.getIndexCourant() + 1;
-					elementTextuelSuivant = this.getConteneurAffectation().getElementsTextuel().get(nouvelIndex);
-				}
-				
-			break;
-				
-			default :
-				
-				elementTextuelSuivant = elementTextuelCourant;
-				nouvelIndex = this.indexCourant;
-			break;
-				
-		}
-		
-		this.setCoordonneeY(elementTextuelSuivant.getCoordonneesY());
-		this.setIndexCourant(nouvelIndex);
-		
-	}
-	
 	private void initialiserEnplacement()
 	{
 		

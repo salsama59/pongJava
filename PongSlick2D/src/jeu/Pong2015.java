@@ -5,14 +5,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import constantes.ConstantesJeu;
+import etatsJeu.EtatChoixModeJeu;
 import etatsJeu.EtatMatch;
-import etatsJeu.EtatMiseEnJeu;
+//import etatsJeu.EtatMiseEnJeu;
 
 public class Pong2015 extends StateBasedGame
 {
 	
 	private EtatMatch match = null; 
-	private EtatMiseEnJeu miseEnJeu = null;
+	private EtatChoixModeJeu choixModeJeu = null;
 	private AppGameContainer container = null;
 
 	public Pong2015()
@@ -30,8 +31,8 @@ public class Pong2015 extends StateBasedGame
 		} 
 		 
 		 match = new EtatMatch();
-		 miseEnJeu = new EtatMiseEnJeu();
-		 addState(miseEnJeu);
+		 choixModeJeu = new EtatChoixModeJeu();
+		 addState(choixModeJeu);
 		 addState(match);
 		 
 	}

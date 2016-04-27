@@ -10,6 +10,7 @@ public class ConstantesElements
 	public final static String ELEMENT_CURSEUR_TYPE = "CURSEUR";
 	public final static String ELEMENT_TEXTE_TYPE = "TEXTE";
 	public final static String ELEMENT_CADRE_TYPE = "CADRE";
+	public final static String ELEMENT_AVATAR_TYPE = "AVATAR";
 	
 	//Etat éléments
 	public final static int ELEMENT_ETAT_NEUTRE = 0;

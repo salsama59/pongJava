@@ -1,8 +1,12 @@
 package managers.etat;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 
+import constantes.ConstantesAffichageInfos;
 import constantes.ConstantesGestionnaires;
+import constantes.ConstantesJoueurs;
 
 public class GestionnaireMatch 
 {
@@ -11,10 +15,19 @@ public class GestionnaireMatch
 	private static int pointCampGauche;
 	private static int idLanceur;
 	private static Hashtable<Integer, Integer> choix;
+	private List<Integer> listIdJoueurs = new ArrayList<Integer>();
+	private int idJoueurAvantage;
+	private int limitePointsVictoire = ConstantesJoueurs.JOUEUR_LIMITE_POINT_VICTOIRE;
 	
 	private GestionnaireMatch ()
 	{
 		choix = new Hashtable<Integer, Integer>();
+		listIdJoueurs.add(ConstantesJoueurs.JOUEUR_ID_1);
+		listIdJoueurs.add(ConstantesJoueurs.JOUEUR_ID_2);
+		listIdJoueurs.add(ConstantesJoueurs.JOUEUR_ID_3);
+		listIdJoueurs.add(ConstantesJoueurs.JOUEUR_ID_4);
+		
+		this.setIdJoueurAvantage(ConstantesJoueurs.JOUEUR_ID_1);
 	}
 	
 	private static class Detenteur
@@ -29,23 +42,22 @@ public class GestionnaireMatch
 		return Detenteur.instance;
 	}
 	
-	
-	public static int getPointCampDroit() 
+	public int getPointCampDroit() 
 	{
 		return pointCampDroit;
 	}
 	
-	public static void setPointCampDroit(int point_camp_droit) 
+	public void setPointCampDroit(int point_camp_droit) 
 	{
 		GestionnaireMatch.pointCampDroit = point_camp_droit;
 	}
 	
-	public static int getPointCampGauche() 
+	public int getPointCampGauche() 
 	{
 		return pointCampGauche;
 	}
 	
-	public static void setPointCampGauche(int point_camp_gauche) 
+	public void setPointCampGauche(int point_camp_gauche) 
 	{
 		GestionnaireMatch.pointCampGauche = point_camp_gauche;
 	}
@@ -56,12 +68,12 @@ public class GestionnaireMatch
 		this.setPointCampGauche(0);
 	}
 
-	public static int getIdLanceur() 
+	public int getIdLanceur() 
 	{
 		return idLanceur;
 	}
 
-	public static void setIdLanceur(int idLanceur) 
+	public void setIdLanceur(int idLanceur) 
 	{
 		GestionnaireMatch.idLanceur = idLanceur;
 	}
@@ -71,13 +83,13 @@ public class GestionnaireMatch
 		return choix;
 	}
 
-	public static void setChoix(Hashtable<Integer, Integer> choix) 
+	public void setChoix(Hashtable<Integer, Integer> choix) 
 	{
 		GestionnaireMatch.choix = choix;
 	}
 	
 	//Substitut à pile ou face
-	public static int genererChoix()
+	public int genererDecision()
 	{
 		
 		int intervale = ConstantesGestionnaires.INTERVALE_MAXIMAL - ConstantesGestionnaires.INTERVALE_MINIMAL;
@@ -88,9 +100,118 @@ public class GestionnaireMatch
 		
 	}
 	
-	public static void attribuerLancementBalle()
+	public void attribuerLancementBalle()
 	{
-		GestionnaireMatch.setIdLanceur(choix.get(GestionnaireMatch.genererChoix()));
+		
+		int decisionAleatoire = GestionnaireMatch.getInstance().genererDecision();
+		
+		for(Integer idJoueur : this.getListIdJoueurs())
+		{
+			
+			Integer choixJoueur = choix.get(idJoueur);
+			
+			if(choixJoueur != null)
+			{
+				if(decisionAleatoire == choixJoueur.intValue())
+				{
+					GestionnaireMatch.getInstance().setIdLanceur(idJoueur.intValue());
+					break;
+				}
+			}
+			
+		}
+		
+	}
+
+
+	public List<Integer> getListIdJoueurs() 
+	{
+		return listIdJoueurs;
+	}
+
+
+	public void setListIdJoueurs(List<Integer> listIdJoueurs) 
+	{
+		this.listIdJoueurs = listIdJoueurs;
+	}
+	
+	public void miseAjourChoixMiseEnJeuJoueur(Integer choix)
+	{
+		
+		this.getChoix().put(this.getIdJoueurAvantage(), choix);
+		
+		for(Integer idjoueur : this.getListIdJoueurs())
+		{
+			
+			if(idjoueur.intValue() != this.getIdJoueurAvantage())
+			{
+				
+				if(choix == ConstantesAffichageInfos.CHOIX_LANCEMENT_FACE)
+				{
+					this.getChoix().put(idjoueur.intValue(), ConstantesAffichageInfos.CHOIX_LANCEMENT_PILE);
+				}
+				else if(choix == ConstantesAffichageInfos.CHOIX_LANCEMENT_PILE)
+				{
+					this.getChoix().put(idjoueur.intValue(), ConstantesAffichageInfos.CHOIX_LANCEMENT_FACE);
+				}
+				
+			}
+		}
+		
+	}
+
+
+	public int getIdJoueurAvantage() 
+	{
+		return idJoueurAvantage;
+	}
+
+
+	public void setIdJoueurAvantage(int idJoueurAvantage) 
+	{
+		this.idJoueurAvantage = idJoueurAvantage;
+	}
+
+	public int getLimitePointsVictoire() 
+	{
+		return limitePointsVictoire;
+	}
+
+	public void setLimitePointsVictoire(int limitePointsVictoire) 
+	{
+		this.limitePointsVictoire = limitePointsVictoire;
+	}
+	
+	public boolean isFinMatch()
+	{
+		
+		boolean fin = false;
+		
+		if(this.getPointCampDroit() == ConstantesJoueurs.JOUEUR_LIMITE_POINT_VICTOIRE || this.getPointCampGauche() == ConstantesJoueurs.JOUEUR_LIMITE_POINT_VICTOIRE)
+		{
+			fin = true;
+		}
+		
+		return fin;
+		
+	}
+	
+	public String getCampVainqueur()
+	{
+		String camp = ConstantesJoueurs.JOUEUR_CAMP_NEUTRE;
+		
+		if(this.getPointCampDroit() == ConstantesJoueurs.JOUEUR_LIMITE_POINT_VICTOIRE)
+		{
+			camp = ConstantesJoueurs.JOUEUR_CAMP_DROITE;
+		}
+		
+		if(this.getPointCampGauche() == ConstantesJoueurs.JOUEUR_LIMITE_POINT_VICTOIRE)
+		{
+			camp = ConstantesJoueurs.JOUEUR_CAMP_GAUCHE;
+		}
+		
+		return camp;
+		
 	}
 	
 }
