@@ -5,23 +5,27 @@ import org.newdawn.slick.Color;
 public class Options 
 {
 	
-	private Color couleurFond;
+	private Color couleurFond = null;
+	private Color CouleurLigne = null;
 	
-	private Color CouleurLigne;
 
-	public Color getCouleurFond() {
+	public Color getCouleurFond() 
+	{
 		return couleurFond;
 	}
 
-	public void setCouleurFond(Color couleurFond) {
+	public void setCouleurFond(Color couleurFond) 
+	{
 		this.couleurFond = couleurFond;
 	}
 
-	public Color getCouleurLigne() {
+	public Color getCouleurLigne() 
+	{
 		return CouleurLigne;
 	}
 
-	public void setCouleurLigne(Color couleurLigne) {
+	public void setCouleurLigne(Color couleurLigne) 
+	{
 		CouleurLigne = couleurLigne;
 	}
 	

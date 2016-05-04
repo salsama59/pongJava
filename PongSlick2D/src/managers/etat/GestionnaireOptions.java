@@ -8,7 +8,7 @@ import donnees.Options;
 
 public class GestionnaireOptions 
 {
-	private static Hashtable<Integer, String> Options;
+	private static Hashtable<Integer, String> options;
 	private static String selection;
 	
 	private Graphics graphisme;
@@ -30,7 +30,7 @@ public class GestionnaireOptions
 	private GestionnaireOptions()
 	{
 		setSelection(OPTION1);
-		Options = new Hashtable<Integer, String>();
+		options = new Hashtable<Integer, String>();
 		
 		this.setDonneesOption(new Options());
 		
@@ -53,13 +53,13 @@ public class GestionnaireOptions
 	
 	private void initialiserListOptions()
 	{
-		Options.put(0, OPTION1);
-		Options.put(1, OPTION2);
-		Options.put(2, OPTION3);
-		Options.put(3, OPTION4);
-		Options.put(4, OPTION5);
-		Options.put(5, OPTION6);
-		Options.put(6, OPTION7);
+		options.put(0, OPTION1);
+		options.put(1, OPTION2);
+		options.put(2, OPTION3);
+		options.put(3, OPTION4);
+		options.put(4, OPTION5);
+		options.put(5, OPTION6);
+		options.put(6, OPTION7);
 	}
 	
 	public void selectionnerOption(Integer choix)
@@ -82,13 +82,13 @@ public class GestionnaireOptions
 
 	public static Hashtable<Integer, String> getOptions() 
 	{
-		return Options;
+		return options;
 	}
 
 
-	public static void setOptions(Hashtable<Integer, String> options) 
+	public static void setOptions(Hashtable<Integer, String> listOptions) 
 	{
-		Options = options;
+		options = listOptions;
 	}
 
 

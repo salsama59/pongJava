@@ -67,10 +67,22 @@ public class EtatOptions extends BasicGameState
 	@Override
 	public void render(GameContainer gameContainer, StateBasedGame jeu, Graphics graphisme) throws SlickException 
 	{
-		graphisme.setBackground(new Color(255, 255, 255, 255));
-			//graphisme.clear();
-			graphisme.setColor(new Color(0, 0, 0, 0));
+		//remplisage de la forme géométrique sp
+		//g.fill(sp);
+		Color couleurFond = GestionnaireOptions.getInstance().getDonneesOption().getCouleurFond();
+		Color couleurLigne = GestionnaireOptions.getInstance().getDonneesOption().getCouleurLigne();
+		
+		if(couleurFond != null && couleurLigne != null)
+		{
+			graphisme.clear();
+			
+			graphisme.setBackground(couleurFond);
+			
+			graphisme.setColor(couleurLigne);
+		}
+		
 		conteneur.afficher(graphisme);
+		
 	}
 
 	@Override
