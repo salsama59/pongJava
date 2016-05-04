@@ -170,7 +170,6 @@ public class Conteneur extends Element
 		}
 		
 	}
-<<<<<<< .mine
 	
 	public void afficher(Graphics graphisme, String nouveauMessage)
 	{
@@ -204,35 +203,6 @@ public class Conteneur extends Element
 		
 	}
 	
-=======
-	
-	public void afficher(Graphics graphisme, String nouveauMessage)
-	{
-		
-		graphisme.draw(this.getElement());
-		
-		for(Texte ligne : this.getElementsTextuel())
-		{
-			
-			if(ligne.isTexteVariable())
-			{
-				ligne.setMessage(nouveauMessage);
-			}
-			
-				ligne.afficher();
-				
-		}
-		
-		this.calculerTailleZone();
-		
-		if(this.getCurseur() != null)
-		{
-			this.getCurseur().afficher(graphisme);
-		}
-		
-	}
-	
->>>>>>> .r59
 	public Curseur getCurseur() 
 	{
 		return curseur;

@@ -43,7 +43,6 @@ public class EtatMatch extends BasicGameState
 	private Filet filet1, filet2;
 	private Raquette raquette1, raquette2;
 	private Balle balle;
-<<<<<<< .mine
 	private Curseur curseur;
 	private Conteneur menuMiseEnJeu;
 	private Conteneur menuResultat;
@@ -55,18 +54,6 @@ public class EtatMatch extends BasicGameState
 	private LogicDeplacementsElementsRaquetteImpl mecanismeRaquette1;
 	private LogicDeplacementsElementsRaquetteImpl mecanismeRaquette2;
 	private LogicDeplacementsElementsBalleImpl mecanismeBalle;
-=======
-	private Curseur curseur;
-	private Conteneur menuMiseEnJeu;
-	private Conteneur menuResultat;
-	private Texte texte1;
-	private Texte texte2;
-	private Texte texte3;
-	private LogicDeplacementsElementsCurseurImpl logicDeplacementCurseur;
-	private LogicDeplacementsElementsRaquetteImpl mecanismeRaquette1;
-	private LogicDeplacementsElementsRaquetteImpl mecanismeRaquette2;
-	private LogicDeplacementsElementsBalleImpl mecanismeBalle;
->>>>>>> .r59
 	private GestionnaireCollisionsBalle gestionnaireColisionBalle;
 	private GestionnaireCollisionsRaquette gestionnaireColisionRaquette1;
 	private GestionnaireCollisionsRaquette gestionnaireColisionRaquette2;
@@ -107,7 +94,6 @@ public class EtatMatch extends BasicGameState
 			graphisme.drawString("" + GestionnaireMatch.getInstance().getPointCampGauche(), ConstantesAffichageInfos.INFOS_POSITION_X_SCORE_CAMP_GAUCHE, ConstantesAffichageInfos.INFOS_POSITION_Y_SCORE_CAMP_GAUCHE);
 		}
 		
-<<<<<<< .mine
 		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_MISE_EN_JEU))
 		{
 			menuMiseEnJeu.afficher(graphisme);
@@ -118,18 +104,6 @@ public class EtatMatch extends BasicGameState
 			menuResultat.afficher(graphisme, "Le vainqueur est le camp " + GestionnaireMatch.getInstance().getCampVainqueur());
 		}
 		
-=======
-		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_MISE_EN_JEU))
-		{
-			menuMiseEnJeu.afficher(graphisme);
-		}
-		
-		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_RESULTAT))
-		{
-			menuResultat.afficher(graphisme, "Le vainqueur est : " + GestionnaireMatch.getInstance().getCampVainqueur());
-		}
-		
->>>>>>> .r59
 	}
 
 	@Override
@@ -300,7 +274,6 @@ public class EtatMatch extends BasicGameState
 		balle = new Balle(ConstantesElements.ELEMENT_BALLE_CENTRE_X, ConstantesElements.ELEMENT_BALLE_CENTRE_Y, ConstantesElements.ELEMENT_BALLE_RAYON, ConstantesElements.ELEMENT_BALLE_NOM);
 		filet1 = new Filet(ConstantesElements.ELEMENT_FILET1_COORDONEE_X, ConstantesElements.ELEMENT_FILET1_COORDONEE_Y, ConstantesElements.ELEMENT_FILET1_LARGEUR, ConstantesElements.ELEMENT_FILET1_HAUTEUR, ConstantesElements.ELEMENT_FILET1_NOM, ConstantesJoueurs.JOUEUR_CAMP_GAUCHE);
 		filet2 = new Filet(ConstantesElements.ELEMENT_FILET2_COORDONEE_X, ConstantesElements.ELEMENT_FILET2_COORDONEE_Y, ConstantesElements.ELEMENT_FILET2_LARGEUR, ConstantesElements.ELEMENT_FILET2_HAUTEUR, ConstantesElements.ELEMENT_FILET2_NOM, ConstantesJoueurs.JOUEUR_CAMP_DROITE);
-<<<<<<< .mine
 		
 		
 		//Elements nécéssaire à la mise en jeu
@@ -337,39 +310,6 @@ public class EtatMatch extends BasicGameState
 		listResultat.add(texte3);
 		menuResultat.setElementsTextuel(listResultat);
 		
-=======
-		
-		
-		//Elements nécéssaire à la mise en jeu
-		menuMiseEnJeu = new Conteneur((gameContainer.getWidth()/2) - 150, (gameContainer.getHeight()/2) - 40);
-		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, menuMiseEnJeu.getCentreX() + 130 - 30, menuMiseEnJeu.getCentreY() + 40);
-		logicDeplacementCurseur = new LogicDeplacementsElementsCurseurImpl(curseur);
-		texte1 = new Texte("PILE", 0, 0, menuMiseEnJeu, gameContainer, false);
-		texte2 = new Texte("FACE", 0, 0, menuMiseEnJeu, gameContainer, false);
-		GestionnaireElements.getInstance().ajouterElement(texte1);
-		GestionnaireElements.getInstance().ajouterElement(texte2);
-		List<Texte> list = new ArrayList<Texte>();
-		list.add(texte1);
-		list.add(texte2);
-		menuMiseEnJeu.setElementsTextuel(list);
-		texte1.setCoordonneesX(texte1.calculerPositionX());
-		texte1.setCoordonneesY(texte1.calculerPositionY());
-		texte2.setCoordonneesX(texte2.calculerPositionX());
-		texte2.setCoordonneesY(texte2.calculerPositionY());
-		menuMiseEnJeu.setCurseur(curseur);
-		
-		GestionnaireMatch.getInstance().miseAjourChoixMiseEnJeuJoueur(curseur.getIndexCourant());
-		
-		
-		//Elements nécessaire aux résultats
-		
-		menuResultat = new Conteneur((gameContainer.getWidth()/2) - 150, (gameContainer.getHeight()/2) - 40);
-		texte3 = new Texte("Le vainqueur est : ", 0, 0, menuResultat, gameContainer, true);
-		List<Texte> listResultat = new ArrayList<Texte>();
-		listResultat.add(texte3);
-		menuResultat.setElementsTextuel(listResultat);
-		
->>>>>>> .r59
 	}
 	
 	private void initialiserGestionnaires()

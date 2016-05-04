@@ -18,7 +18,7 @@ public class GestionnaireChoixModeJeu
 	
 	private GestionnaireChoixModeJeu()
 	{
-		setSelection("Mode Exibition");
+		setSelection(EXIBITION);
 		ModeDeJeu = new Hashtable<Integer, String>();
 		
 		this.initialiserListModeJeu();

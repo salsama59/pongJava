@@ -8,6 +8,7 @@ import managers.etat.GestionnaireChoixModeJeu;
 import managers.etat.GestionnaireOptions;
 import mecanismes.implementations.LogicDeplacementsElementsCurseurImpl;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -31,19 +32,19 @@ public class EtatOptions extends BasicGameState
 	private Texte texte1;
 	private Texte texte2;
 	private LogicDeplacementsElementsCurseurImpl logicDeplacementCurseur;
-	private static String phase;
+	private static String phase = ConstantesEtat.ETAT_OPTIONS_PHASE_AFFICHAGE_GENERAL;
 
 	@Override
 	public void init(GameContainer gameContainer, StateBasedGame jeu) throws SlickException 
 	{
-		
+		GestionnaireOptions.getInstance().setGraphisme(gameContainer.getGraphics());
 		this.setJeu(jeu);
 		conteneur = new Conteneur((gameContainer.getWidth()/2) - 150, (gameContainer.getHeight()/2) - 40);
 		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM_MISE_EN_JEU, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, conteneur.getCentreX() + 130 - 30, conteneur.getCentreY() + 40);
 		logicDeplacementCurseur = new LogicDeplacementsElementsCurseurImpl(curseur);
 		
-		texte1 = new Texte("PILE", 0, 0, conteneur, gameContainer, false);
-		texte2 = new Texte("FACE", 0, 0, conteneur, gameContainer, false);
+		texte1 = new Texte(GestionnaireOptions.OPTION1, 0, 0, conteneur, gameContainer, false);
+		texte2 = new Texte(GestionnaireOptions.OPTION2, 0, 0, conteneur, gameContainer, false);
 		
 		GestionnaireElements.getInstance().ajouterElement(texte1);
 		GestionnaireElements.getInstance().ajouterElement(texte2);
@@ -66,6 +67,9 @@ public class EtatOptions extends BasicGameState
 	@Override
 	public void render(GameContainer gameContainer, StateBasedGame jeu, Graphics graphisme) throws SlickException 
 	{
+		graphisme.setBackground(new Color(255, 255, 255, 255));
+			//graphisme.clear();
+			graphisme.setColor(new Color(0, 0, 0, 0));
 		conteneur.afficher(graphisme);
 	}
 
@@ -90,20 +94,21 @@ public class EtatOptions extends BasicGameState
 			
 		 	case Input.KEY_RETURN:
 		 	
-	 		if(EtatOptions.getPhase().equals(ConstantesEtat.ETAT_CHOIX_MODE_PHASE_SELECTION))
+	 		if(EtatOptions.getPhase().equals(ConstantesEtat.ETAT_OPTIONS_PHASE_AFFICHAGE_GENERAL))
 			{
 	 			
 	 			if(GestionnaireOptions.getInstance().getSelection().equals(GestionnaireOptions.OPTION1))
 	 			{
-	 				EtatOptions.setPhase(ConstantesEtat.ETAT_CHOIX_MODE_PHASE_EXIBITION_LOBBY);
+	 				Graphics graphisme = GestionnaireOptions.getInstance().getGraphisme();
+	 				
+	 				GestionnaireOptions.getInstance().getDonneesOption().setCouleurFond(new Color(255, 255, 255, 255));
+	 				GestionnaireOptions.getInstance().getDonneesOption().setCouleurLigne(new Color(0, 0, 0, 0));
+	 				graphisme.setBackground(new Color(255, 255, 255, 255));
+	 				graphisme.setColor(new Color(0, 0, 0, 0));
 	 			}
 	 			else if(GestionnaireOptions.getInstance().getSelection().equals(GestionnaireOptions.OPTION2))
 	 			{
-	 				this.getJeu().enterState(EtatOptions.ID);
-	 			}
-	 			else if(GestionnaireChoixModeJeu.getInstance().getSelection().equals(GestionnaireChoixModeJeu.QUITTER_JEU))
-	 			{
-	 				this.getJeu().getContainer().exit();
+	 				this.getJeu().enterState(GestionnaireOptions.getInstance().getIdEtatPrecedent());
 	 			}
 	 			
 			}

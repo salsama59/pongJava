@@ -5,6 +5,7 @@ import java.util.List;
 
 import managers.elements.GestionnaireElements;
 import managers.etat.GestionnaireChoixModeJeu;
+import managers.etat.GestionnaireOptions;
 import managers.joueur.GestionnaireJoueurs;
 import mecanismes.implementations.LogicDeplacementsElementsAvatarImpl;
 import mecanismes.implementations.LogicDeplacementsElementsCurseurImpl;
@@ -192,6 +193,7 @@ public class EtatChoixModeJeu extends BasicGameState
 	 			}
 	 			else if(GestionnaireChoixModeJeu.getInstance().getSelection().equals(GestionnaireChoixModeJeu.OPTIONS))
 	 			{
+	 				GestionnaireOptions.getInstance().setIdEtatPrecedent(EtatChoixModeJeu.ID);
 	 				this.getJeu().enterState(EtatOptions.ID);
 	 			}
 	 			else if(GestionnaireChoixModeJeu.getInstance().getSelection().equals(GestionnaireChoixModeJeu.QUITTER_JEU))

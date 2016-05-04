@@ -2,15 +2,19 @@ package managers.etat;
 
 import java.util.Hashtable;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
+import donnees.Options;
 
 public class GestionnaireOptions 
 {
 	private static Hashtable<Integer, String> Options;
 	private static String selection;
 	
-	public static final String OPTION1 = "Option 1";
-	public static final String OPTION2 = "Option 2";
+	private Graphics graphisme;
+	
+	public static final String OPTION1 = "Couleur affichage";
+	public static final String OPTION2 = "Retour";
 	public static final String OPTION3 = "Option 3";
 	public static final String OPTION4 = "Option 4";
 	public static final String OPTION5 = "Option 5";
@@ -19,10 +23,16 @@ public class GestionnaireOptions
 	
 	private StateBasedGame jeu;
 	
+	private Integer idEtatPrecedent;
+	
+	private Options donneesOption;
+	
 	private GestionnaireOptions()
 	{
-		setSelection("Option 1");
+		setSelection(OPTION1);
 		Options = new Hashtable<Integer, String>();
+		
+		this.setDonneesOption(new Options());
 		
 		this.initialiserListOptions();
 		
@@ -52,9 +62,9 @@ public class GestionnaireOptions
 		Options.put(6, OPTION7);
 	}
 	
-	public void selectionnerMode(Integer choix)
+	public void selectionnerOption(Integer choix)
 	{
-		setSelection(getModeDeJeu().get(choix));
+		setSelection(getOptions().get(choix));
 	}
 
 
@@ -70,15 +80,15 @@ public class GestionnaireOptions
 	}
 
 
-	public static Hashtable<Integer, String> getModeDeJeu() 
+	public static Hashtable<Integer, String> getOptions() 
 	{
 		return Options;
 	}
 
 
-	public static void setModeDeJeu(Hashtable<Integer, String> modeDeJeu) 
+	public static void setOptions(Hashtable<Integer, String> options) 
 	{
-		Options = modeDeJeu;
+		Options = options;
 	}
 
 
@@ -89,5 +99,35 @@ public class GestionnaireOptions
 
 	public void setJeu(StateBasedGame jeu) {
 		this.jeu = jeu;
+	}
+
+
+	public Integer getIdEtatPrecedent() {
+		return idEtatPrecedent;
+	}
+
+
+	public void setIdEtatPrecedent(Integer idEtatPrecedent) {
+		this.idEtatPrecedent = idEtatPrecedent;
+	}
+
+
+	public Graphics getGraphisme() {
+		return graphisme;
+	}
+
+
+	public void setGraphisme(Graphics graphisme) {
+		this.graphisme = graphisme;
+	}
+
+
+	public Options getDonneesOption() {
+		return donneesOption;
+	}
+
+
+	public void setDonneesOption(Options donneesOption) {
+		this.donneesOption = donneesOption;
 	}
 }

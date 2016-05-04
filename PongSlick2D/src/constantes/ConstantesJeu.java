@@ -3,7 +3,7 @@ package constantes;
 public class ConstantesJeu 
 {
 	
-	public final static String JEU_TITRE = "Pong 2016";
+	public final static String JEU_TITRE = "Pong 2015";
 	public final static int ECRAN_LARGEUR = 1024;
 	public final static int ECRAN_HAUTEUR = 620;
 	public final static int JEU_FRAMERATE = 60;
@@ -13,7 +13,6 @@ public class ConstantesJeu
 	public final static boolean JEU_VSYNC = false;
 	//pratique pour le debug
 	public final static boolean JEU_MAJ_SEULEMENT_SUR_FOCUS = false;
-
 
 
 

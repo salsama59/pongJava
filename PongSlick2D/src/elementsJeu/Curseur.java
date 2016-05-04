@@ -121,15 +121,9 @@ public class Curseur extends Element
 		this.indexCourant = indexCourant;
 	}
 	
-<<<<<<< .mine
 	public void initialiserEnplacement()
 	{
 		
-=======
-	private void initialiserEnplacement()
-	{
-		
->>>>>>> .r59
 		Texte premierElement = this.getConteneurAffectation().getElementsTextuel().get(0);
 		this.setCoordonneeY(premierElement.getCoordonneesY());
 		this.setCoordonneeX(premierElement.getCoordonneesX() - this.getElement().getWidth());

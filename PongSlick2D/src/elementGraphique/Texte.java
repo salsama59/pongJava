@@ -196,7 +196,6 @@ public class Texte extends Element
 		
 	}
 
-<<<<<<< .mine
 	public boolean isTexteVariable() {
 		return texteVariable;
 	}
@@ -210,14 +209,4 @@ public class Texte extends Element
 		return this.getConteneur().getCurseur();
 	}
 
-=======
-	public boolean isTexteVariable() {
-		return texteVariable;
-	}
-
-	public void setTexteVariable(boolean texteVariable) {
-		this.texteVariable = texteVariable;
-	}
-
->>>>>>> .r59
 }

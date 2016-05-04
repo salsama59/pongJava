@@ -5,6 +5,7 @@ import org.newdawn.slick.Input;
 
 import managers.etat.GestionnaireChoixModeJeu;
 import managers.etat.GestionnaireMatch;
+import managers.etat.GestionnaireOptions;
 import mecanismes.interfaces.LogicDeplacementsElements;
 import constantes.ConstantesElements;
 import constantes.ConstantesEtat;
@@ -256,6 +257,10 @@ public class LogicDeplacementsElementsCurseurImpl implements LogicDeplacementsEl
 		else if(phase.equals(ConstantesEtat.ETAT_CHOIX_MODE_PHASE_SELECTION))
 		{
 			GestionnaireChoixModeJeu.getInstance().selectionnerMode(element.getIndexCourant());
+		}
+		else if(phase.equals(ConstantesEtat.ETAT_OPTIONS_PHASE_AFFICHAGE_GENERAL))
+		{
+			GestionnaireOptions.getInstance().selectionnerOption(element.getIndexCourant());
 		}
 		
 	}
