@@ -5,6 +5,7 @@ import java.util.List;
 
 import managers.elements.GestionnaireElements;
 import managers.etat.GestionnaireChoixModeJeu;
+import managers.etat.GestionnaireOptions;
 import mecanismes.implementations.LogicDeplacementsElementsCurseurImpl;
 
 import org.newdawn.slick.GameContainer;
@@ -20,10 +21,10 @@ import elementGraphique.Conteneur;
 import elementGraphique.Texte;
 import elementsJeu.Curseur;
 
-public class EtatMiseEnJeu extends BasicGameState 
+public class EtatOptions extends BasicGameState 
 {
 	
-	public static final int ID = ConstantesEtat.ETAT_MATCH;
+	public static final int ID = ConstantesEtat.ETAT_OPTION;
 	private StateBasedGame jeu;
 	private Curseur curseur;
 	private Conteneur conteneur;
@@ -35,23 +36,31 @@ public class EtatMiseEnJeu extends BasicGameState
 	@Override
 	public void init(GameContainer gameContainer, StateBasedGame jeu) throws SlickException 
 	{
+		
 		this.setJeu(jeu);
 		conteneur = new Conteneur((gameContainer.getWidth()/2) - 150, (gameContainer.getHeight()/2) - 40);
-		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, conteneur.getCentreX() + 130 - 30, conteneur.getCentreY() + 40);
+		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM_MISE_EN_JEU, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, conteneur.getCentreX() + 130 - 30, conteneur.getCentreY() + 40);
 		logicDeplacementCurseur = new LogicDeplacementsElementsCurseurImpl(curseur);
+		
 		texte1 = new Texte("PILE", 0, 0, conteneur, gameContainer, false);
 		texte2 = new Texte("FACE", 0, 0, conteneur, gameContainer, false);
+		
 		GestionnaireElements.getInstance().ajouterElement(texte1);
 		GestionnaireElements.getInstance().ajouterElement(texte2);
+		
 		List<Texte> list = new ArrayList<Texte>();
 		list.add(texte1);
 		list.add(texte2);
+		
 		conteneur.setElementsTextuel(list);
+		
 		texte1.setCoordonneesX(texte1.calculerPositionX());
 		texte1.setCoordonneesY(texte1.calculerPositionY());
 		texte2.setCoordonneesX(texte2.calculerPositionX());
 		texte2.setCoordonneesY(texte2.calculerPositionY());
+		
 		conteneur.setCurseur(curseur);
+		
 	}
 
 	@Override
@@ -63,7 +72,7 @@ public class EtatMiseEnJeu extends BasicGameState
 	@Override
 	public void update(GameContainer gameContainer, StateBasedGame jeu, int delta) throws SlickException 
 	{
-		logicDeplacementCurseur.gererDeplacements(delta, EtatMiseEnJeu.getPhase(), gameContainer);
+		logicDeplacementCurseur.gererDeplacements(delta, EtatOptions.getPhase(), gameContainer);
 	}
 	
 	@Override
@@ -75,13 +84,32 @@ public class EtatMiseEnJeu extends BasicGameState
 	@Override
 	public void keyReleased(int key, char c) 
 	{
-		Input entree = new Input(key);
 		
 		switch (key) 
 	    {
+			
 		 	case Input.KEY_RETURN:
-		 	this.getJeu().enterState(EtatMatch.ID);
+		 	
+	 		if(EtatOptions.getPhase().equals(ConstantesEtat.ETAT_CHOIX_MODE_PHASE_SELECTION))
+			{
+	 			
+	 			if(GestionnaireOptions.getInstance().getSelection().equals(GestionnaireOptions.OPTION1))
+	 			{
+	 				EtatOptions.setPhase(ConstantesEtat.ETAT_CHOIX_MODE_PHASE_EXIBITION_LOBBY);
+	 			}
+	 			else if(GestionnaireOptions.getInstance().getSelection().equals(GestionnaireOptions.OPTION2))
+	 			{
+	 				this.getJeu().enterState(EtatOptions.ID);
+	 			}
+	 			else if(GestionnaireChoixModeJeu.getInstance().getSelection().equals(GestionnaireChoixModeJeu.QUITTER_JEU))
+	 			{
+	 				this.getJeu().getContainer().exit();
+	 			}
+	 			
+			}
+	 		
 	        break;
+	        
 	    }
 		
 		logicDeplacementCurseur.reinitialisationEtat(key, c);
@@ -107,7 +135,7 @@ public class EtatMiseEnJeu extends BasicGameState
 	}
 
 	public static void setPhase(String phase) {
-		EtatMiseEnJeu.phase = phase;
+		EtatOptions.phase = phase;
 	}
 
 }

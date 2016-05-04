@@ -19,6 +19,8 @@ public class Conteneur extends Element
 	private List<Texte> elementsTextuel = new ArrayList<Texte>();
 	
 	private Curseur curseur = null;
+	
+	private Texte titreMenu;
 
 	public Conteneur(float x, float y)
 	{
@@ -122,7 +124,24 @@ public class Conteneur extends Element
 			}
 		}
 		
-		largeur = largeur + (2 * ConstantesGraphismes.GRAPHISME_MARGE);
+		if(this.getTitreMenu() != null)
+		{
+			hauteur += this.getTitreMenu().getHauteur();
+			
+			if(this.getTitreMenu().getLargeur() > largeur)
+			{
+				largeur = this.getTitreMenu().getLargeur();
+			}
+		}
+		
+		float largeurCurseur = 0.f;
+		
+		if(this.getCurseur() != null)
+		{
+			largeurCurseur = this.getCurseur().getElement().getWidth();
+		}
+		
+		largeur = largeur + (2 * ConstantesGraphismes.GRAPHISME_MARGE) + (largeurCurseur * 2);
 		hauteur = hauteur + (2 * ConstantesGraphismes.GRAPHISME_RETRAIT);
 		
 		this.setHauteur(hauteur);
@@ -133,6 +152,12 @@ public class Conteneur extends Element
 	{
 		
 		graphisme.draw(this.getElement());
+		
+		if(this.getTitreMenu() != null)
+		{
+			this.getTitreMenu().afficher();
+			this.tracerLigneTitre(graphisme);
+		}
 		
 		for(Texte ligne : this.getElementsTextuel())
 		{
@@ -145,6 +170,41 @@ public class Conteneur extends Element
 		}
 		
 	}
+<<<<<<< .mine
+	
+	public void afficher(Graphics graphisme, String nouveauMessage)
+	{
+		
+		graphisme.draw(this.getElement());
+		
+		if(this.getTitreMenu() != null)
+		{
+			this.getTitreMenu().afficher();
+			this.tracerLigneTitre(graphisme);
+		}
+		
+		for(Texte ligne : this.getElementsTextuel())
+		{
+			
+			if(ligne.isTexteVariable())
+			{
+				ligne.setMessage(nouveauMessage);
+			}
+			
+				ligne.afficher();
+				
+		}
+		
+		this.calculerTailleZone();
+		
+		if(this.getCurseur() != null)
+		{
+			this.getCurseur().afficher(graphisme);
+		}
+		
+	}
+	
+=======
 	
 	public void afficher(Graphics graphisme, String nouveauMessage)
 	{
@@ -172,6 +232,7 @@ public class Conteneur extends Element
 		
 	}
 	
+>>>>>>> .r59
 	public Curseur getCurseur() 
 	{
 		return curseur;
@@ -179,9 +240,50 @@ public class Conteneur extends Element
 
 	public void setCurseur(Curseur curseur) 
 	{
+		
 		this.curseur = curseur;
 		
 		this.curseur.setConteneurAffectation(this);
+		
+		this.ajusterPositionTextes();
+		
+		this.curseur.initialiserEnplacement();
+		
+		this.calculerTailleZone();
+		
+	}
+
+	public Texte getTitreMenu() {
+		return titreMenu;
+	}
+
+	public void setTitreMenu(Texte titreMenu) 
+	{
+		this.titreMenu = titreMenu;
+		this.calculerTailleZone();
+	}
+	
+	private void tracerLigneTitre(Graphics graphisme)
+	{
+		graphisme.drawLine(this.getElement().getX(), this.getElement().getY() + this.getTitreMenu().getHauteur(), this.getElement().getX() + this.getLargeur() - 1, this.getElement().getY() + this.getTitreMenu().getHauteur());
+	}
+	
+	private void ajusterPositionTextes()
+	{
+		
+		for(Texte texte : this.getElementsTextuel())
+		{
+			texte.setCoordonneesX(texte.calculerPositionX());
+			texte.setCoordonneesY(texte.calculerPositionY());
+		}
+		
+		if(this.getTitreMenu() != null)
+		{
+			
+			this.getTitreMenu().setCoordonneesX(this.getTitreMenu().calculerPositionX());
+			this.getTitreMenu().setCoordonneesY(this.getTitreMenu().calculerPositionY());
+			
+		}
 	}
 
 }

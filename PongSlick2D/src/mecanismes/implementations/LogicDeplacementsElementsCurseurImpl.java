@@ -8,6 +8,7 @@ import managers.etat.GestionnaireMatch;
 import mecanismes.interfaces.LogicDeplacementsElements;
 import constantes.ConstantesElements;
 import constantes.ConstantesEtat;
+import constantes.ConstantesJoueurs;
 import elementGraphique.Texte;
 import elementsJeu.Curseur;
 
@@ -43,31 +44,89 @@ public class LogicDeplacementsElementsCurseurImpl implements LogicDeplacementsEl
 
 	@Override
 	public void gererEtats(int key, char c, GameContainer gameContainer) 
-	{	
-		Input entree = new Input(key);
+	{
 		
 		switch (key) 
 	    {
+			
 		 	case Input.KEY_UP:
-	        element.setEnDeplacement(true);
-	        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
+		 	
+		 	if(GestionnaireMatch.getInstance().getIdJoueurAvantage() == ConstantesJoueurs.JOUEUR_ID_1)
+		 	{
+		 		element.setEnDeplacement(true);
+		        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
+		 	}
+		 	
 	        break;
 	        
 	        case Input.KEY_LEFT:
-        	element.setEnDeplacement(true);
-	        element.setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
-	        this.setBloqueDeplacement(true);
+	        
+        	if(GestionnaireMatch.getInstance().getIdJoueurAvantage() == ConstantesJoueurs.JOUEUR_ID_1)
+		 	{
+        		element.setEnDeplacement(true);
+    	        element.setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
+		 	}
+        	
 	        break;
 	        
 	        case Input.KEY_DOWN:
-	        element.setEnDeplacement(true);
-	        element.setSens(ConstantesElements.ELEMENT_SENS_BAS);
+	        	
+        	if(GestionnaireMatch.getInstance().getIdJoueurAvantage() == ConstantesJoueurs.JOUEUR_ID_1)
+		 	{
+        		element.setEnDeplacement(true);
+    	        element.setSens(ConstantesElements.ELEMENT_SENS_BAS);
+		 	}
+        	
 	        break;
 	        
 	        case Input.KEY_RIGHT:
-        	element.setEnDeplacement(true);
-	        element.setSens(ConstantesElements.ELEMENT_SENS_DROITE);
-	        this.setBloqueDeplacement(true);
+	        
+        	if(GestionnaireMatch.getInstance().getIdJoueurAvantage() == ConstantesJoueurs.JOUEUR_ID_1)
+		 	{
+        		element.setEnDeplacement(true);
+    	        element.setSens(ConstantesElements.ELEMENT_SENS_DROITE);
+		 	}
+        	
+	        break;
+	        
+	        case Input.KEY_Z:
+	        
+        	if(GestionnaireMatch.getInstance().getIdJoueurAvantage() == ConstantesJoueurs.JOUEUR_ID_2)
+		 	{
+        		element.setEnDeplacement(true);
+    	        element.setSens(ConstantesElements.ELEMENT_SENS_HAUT);
+		 	}
+	        
+	        break;
+	        
+	        case Input.KEY_Q:
+	        
+        	if(GestionnaireMatch.getInstance().getIdJoueurAvantage() == ConstantesJoueurs.JOUEUR_ID_2)
+		 	{
+        		element.setEnDeplacement(true);
+    	        element.setSens(ConstantesElements.ELEMENT_SENS_GAUCHE);
+		 	}
+        	
+	        break;
+	        
+	        case Input.KEY_W:
+        	
+        	if(GestionnaireMatch.getInstance().getIdJoueurAvantage() == ConstantesJoueurs.JOUEUR_ID_2)
+		 	{
+        		element.setEnDeplacement(true);
+    	        element.setSens(ConstantesElements.ELEMENT_SENS_BAS);
+		 	}
+	        
+	        break;
+	        
+	        case Input.KEY_S:
+        	
+        	if(GestionnaireMatch.getInstance().getIdJoueurAvantage() == ConstantesJoueurs.JOUEUR_ID_2)
+		 	{
+        		element.setEnDeplacement(true);
+    	        element.setSens(ConstantesElements.ELEMENT_SENS_DROITE);
+		 	}
+        	
 	        break;
 	        
 	    }
@@ -78,10 +137,9 @@ public class LogicDeplacementsElementsCurseurImpl implements LogicDeplacementsEl
 	public void reinitialisationEtat(int key, char c) 
 	{
 		
-		Input entree = new Input(key);
-		
 		switch (key) 
 	    {
+			
 	        case Input.KEY_UP:
 	        element.setEnDeplacement(false);
 	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
@@ -101,6 +159,27 @@ public class LogicDeplacementsElementsCurseurImpl implements LogicDeplacementsEl
         	element.setEnDeplacement(false);
 	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 	        break;
+	        
+	        case Input.KEY_Z:
+        	element.setEnDeplacement(false);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+	        break;
+	        
+	        case Input.KEY_Q:
+        	element.setEnDeplacement(false);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+	        break;
+	        
+	        case Input.KEY_W:
+        	element.setEnDeplacement(false);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+	        break;
+	        
+	        case Input.KEY_S:
+        	element.setEnDeplacement(false);
+	        element.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+	        break;
+	        
 	    }
 		
 		this.setBloqueDeplacement(false);

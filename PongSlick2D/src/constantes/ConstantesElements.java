@@ -97,7 +97,9 @@ public class ConstantesElements
 	//public final static float ELEMENT_CURSEUR_CENTRE_X = ConstantesJeu.ECRAN_LARGEUR * ConstantesRatios.RATIO_POSITION_X_CURSEUR;
 	//public final static float ELEMENT_CURSEUR_CENTRE_Y = ConstantesJeu.ECRAN_HAUTEUR * ConstantesRatios.RATIO_POSITION_Y_CURSEUR;
 	public final static float ELEMENT_CURSEUR_VITESSE = 0.2f;
-	public final static String ELEMENT_CURSEUR_NOM = "curseur mise en jeu";
+	public final static String ELEMENT_CURSEUR_NOM_MISE_EN_JEU = "curseur mise en jeu";
+	public final static String ELEMENT_CURSEUR_NOM_CHOIX_MODE = "curseur choix mode";
+	public final static String ELEMENT_CURSEUR_NOM_OPTIONS = "curseur options";
 	
 	
 }

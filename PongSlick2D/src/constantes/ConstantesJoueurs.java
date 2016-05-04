@@ -9,11 +9,20 @@ public class ConstantesJoueurs
 	public final static int JOUEUR_ID_4 = 4;
 	
 	//Camps
+<<<<<<< .mine
+	public final static String JOUEUR_CAMP_GAUCHE = "GAUCHE";
+	public final static String JOUEUR_CAMP_DROITE = "DROITE";
+	public final static String JOUEUR_CAMP_NEUTRE = "NEUTRE";
+	
+	//Limite de point pour remporter un match
+	public final static int JOUEUR_LIMITE_POINT_VICTOIRE = 1;
+=======
 	public final static String JOUEUR_CAMP_GAUCHE = "gauche";
 	public final static String JOUEUR_CAMP_DROITE = "droite";
 	public final static String JOUEUR_CAMP_NEUTRE = "neutre";
 	
 	//Limite de point pour remporter un match
 	public final static int JOUEUR_LIMITE_POINT_VICTOIRE = 1;
+>>>>>>> .r59
 
 }

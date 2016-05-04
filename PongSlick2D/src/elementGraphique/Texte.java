@@ -7,6 +7,7 @@ import org.newdawn.slick.TrueTypeFont;
 
 import constantes.ConstantesElements;
 import constantes.ConstantesGraphismes;
+import elementsJeu.Curseur;
 import elementsJeu.Element;
 
 public class Texte extends Element
@@ -111,6 +112,7 @@ public class Texte extends Element
 	
 	public int calculerPositionX()
 	{
+		
 		int positionXelement = 0;
 		
 		int positionXconteneurExcentree = 0;
@@ -122,7 +124,16 @@ public class Texte extends Element
 			positionXconteneurExcentree = positionXconteneurExcentree * -1;
 		}
 		
-		positionXelement = (int) (positionXconteneurExcentree + ConstantesGraphismes.GRAPHISME_MARGE);
+		Curseur curseur = this.recupererCurseur();
+		
+		float largeurCurseur = 0.f;
+		
+		if(curseur != null)
+		{
+			largeurCurseur = curseur.getElement().getWidth();
+		}
+		
+		positionXelement = (int) (positionXconteneurExcentree + ConstantesGraphismes.GRAPHISME_MARGE + largeurCurseur);
 		
 		return positionXelement;
 		
@@ -185,6 +196,21 @@ public class Texte extends Element
 		
 	}
 
+<<<<<<< .mine
+	public boolean isTexteVariable() {
+		return texteVariable;
+	}
+
+	public void setTexteVariable(boolean texteVariable) {
+		this.texteVariable = texteVariable;
+	}
+	
+	private Curseur recupererCurseur()
+	{
+		return this.getConteneur().getCurseur();
+	}
+
+=======
 	public boolean isTexteVariable() {
 		return texteVariable;
 	}
@@ -193,4 +219,5 @@ public class Texte extends Element
 		this.texteVariable = texteVariable;
 	}
 
+>>>>>>> .r59
 }

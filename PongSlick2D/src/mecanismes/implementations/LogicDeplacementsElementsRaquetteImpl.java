@@ -24,6 +24,7 @@ public class LogicDeplacementsElementsRaquetteImpl implements LogicDeplacementsE
 	@Override
 	public void gererDeplacements(int delta, String phase, GameContainer gameContainer)
 	{
+		
 		if(element.isEnDeplacement())
 		{
 			
@@ -39,6 +40,7 @@ public class LogicDeplacementsElementsRaquetteImpl implements LogicDeplacementsE
 			
 			if(element.getEtat() == ConstantesElements.ELEMENT_ETAT_LANCEMENT)
 			{
+				
 				Balle balle = (Balle) GestionnaireElements.recupererElementParNom(ConstantesElements.ELEMENT_BALLE_NOM);
 				
 				this.ajusterPositionLancementBalle(balle);

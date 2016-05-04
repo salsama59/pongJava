@@ -52,8 +52,8 @@ public class EtatChoixModeJeu extends BasicGameState
 		
 		this.setJeu(jeu);
 		GestionnaireChoixModeJeu.getInstance().setJeu(jeu);
-		conteneur = new Conteneur((gameContainer.getWidth()/2) - 150, (gameContainer.getHeight()/2) - 40);
-		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, conteneur.getCentreX() + 130 - 30, conteneur.getCentreY() + 40);
+		conteneur = new Conteneur((gameContainer.getWidth()/2), (gameContainer.getHeight()/2));
+		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM_CHOIX_MODE, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, conteneur.getCentreX() + 130 - 30, conteneur.getCentreY() + 40);
 		logicDeplacementCurseur = new LogicDeplacementsElementsCurseurImpl(curseur);
 		texte1 = new Texte("Mode Exibition", 0, 0, conteneur, gameContainer, false);
 		texte2 = new Texte("Options", 0, 0, conteneur, gameContainer, false);
@@ -66,12 +66,6 @@ public class EtatChoixModeJeu extends BasicGameState
 		list.add(texte2);
 		list.add(texte3);
 		conteneur.setElementsTextuel(list);
-		texte1.setCoordonneesX(texte1.calculerPositionX());
-		texte1.setCoordonneesY(texte1.calculerPositionY());
-		texte2.setCoordonneesX(texte2.calculerPositionX());
-		texte2.setCoordonneesY(texte2.calculerPositionY());
-		texte3.setCoordonneesX(texte3.calculerPositionX());
-		texte3.setCoordonneesY(texte3.calculerPositionY());
 		conteneur.setCurseur(curseur);
 		
 		joueur1 = new Joueur(ConstantesJoueurs.JOUEUR_ID_1, ConstantesJoueurs.JOUEUR_CAMP_NEUTRE, "");
@@ -198,7 +192,7 @@ public class EtatChoixModeJeu extends BasicGameState
 	 			}
 	 			else if(GestionnaireChoixModeJeu.getInstance().getSelection().equals(GestionnaireChoixModeJeu.OPTIONS))
 	 			{
-	 				EtatChoixModeJeu.setPhase(ConstantesEtat.ETAT_CHOIX_MODE_PHASE_OPTIONS);
+	 				this.getJeu().enterState(EtatOptions.ID);
 	 			}
 	 			else if(GestionnaireChoixModeJeu.getInstance().getSelection().equals(GestionnaireChoixModeJeu.QUITTER_JEU))
 	 			{

@@ -109,7 +109,6 @@ public class Curseur extends Element
 	public void setConteneurAffectation(Conteneur conteneurAffectation) 
 	{
 		this.conteneurAffectation = conteneurAffectation;
-		this.initialiserEnplacement();
 	}
 	
 	public int getIndexCourant() 
@@ -122,12 +121,18 @@ public class Curseur extends Element
 		this.indexCourant = indexCourant;
 	}
 	
+<<<<<<< .mine
+	public void initialiserEnplacement()
+	{
+		
+=======
 	private void initialiserEnplacement()
 	{
 		
+>>>>>>> .r59
 		Texte premierElement = this.getConteneurAffectation().getElementsTextuel().get(0);
 		this.setCoordonneeY(premierElement.getCoordonneesY());
-		this.setCoordonneeX(premierElement.getCoordonneesX() - 5);
+		this.setCoordonneeX(premierElement.getCoordonneesX() - this.getElement().getWidth());
 		
 	}
 	
