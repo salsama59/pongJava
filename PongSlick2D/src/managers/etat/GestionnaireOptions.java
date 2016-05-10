@@ -4,7 +4,8 @@ import java.util.Hashtable;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
-import donnees.Options;
+
+import donnees.generale.Options;
 
 public class GestionnaireOptions 
 {
@@ -13,13 +14,13 @@ public class GestionnaireOptions
 	
 	private Graphics graphisme;
 	
-	public static final String OPTION1 = "Couleur affichage";
-	public static final String OPTION2 = "Retour";
-	public static final String OPTION3 = "Option 3";
-	public static final String OPTION4 = "Option 4";
-	public static final String OPTION5 = "Option 5";
+	public static final String OPTION1 = "Pleine écran";
+	public static final String OPTION2 = "Activer le son";
+	public static final String OPTION3 = "Augmenter le volume de la musique";
+	public static final String OPTION4 = "Augmenter le volume des bruitages";
+	public static final String OPTION5 = "Retour";
 	public static final String OPTION6 = "Option 6";
-	public static final String OPTION7 = "Option 7";
+	public static final String OPTION7 = "Retour";
 	
 	private StateBasedGame jeu;
 	

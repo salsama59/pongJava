@@ -2,6 +2,7 @@ package elementGraphique;
 
 import java.util.List;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -19,6 +20,7 @@ public class Texte extends Element
 	private float x;
 	private float y;
 	private boolean texteVariable = false;
+	private Color couleurTexte;
 	
 	public Texte(String message, float x, float y, Conteneur conteneur, GameContainer gameContainer, boolean texteVariable)
 	{
@@ -29,6 +31,7 @@ public class Texte extends Element
 		this.setMessage(message);
 		this.setConteneur(conteneur);
 		element = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN , 12), false);
+		couleurTexte = new Color(255, 255, 255, 255);
 	}
 
 	public String getMessage() {
@@ -164,12 +167,12 @@ public class Texte extends Element
 	
 	public void afficher()
 	{
-		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage());
+		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage(), this.getCouleurTexte());
 	}
 	
 	public void afficher(String complementMessage)
 	{
-		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage() + " " + complementMessage);
+		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage() + " " + complementMessage , this.getCouleurTexte());
 	}
 	
 	public int recupererRangElementTextuel()
@@ -207,6 +210,14 @@ public class Texte extends Element
 	private Curseur recupererCurseur()
 	{
 		return this.getConteneur().getCurseur();
+	}
+
+	public Color getCouleurTexte() {
+		return couleurTexte;
+	}
+
+	public void setCouleurTexte(Color couleurTexte) {
+		this.couleurTexte = couleurTexte;
 	}
 
 }

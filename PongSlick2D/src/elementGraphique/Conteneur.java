@@ -3,6 +3,7 @@ package elementGraphique;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -253,6 +254,14 @@ public class Conteneur extends Element
 			this.getTitreMenu().setCoordonneesX(this.getTitreMenu().calculerPositionX());
 			this.getTitreMenu().setCoordonneesY(this.getTitreMenu().calculerPositionY());
 			
+		}
+	}
+	
+	public void miseAjourCouleurTextes(Color couleurTexte)
+	{
+		for(Texte texte : this.getElementsTextuel())
+		{
+			texte.setCouleurTexte(couleurTexte);
 		}
 	}
 

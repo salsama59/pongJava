@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import managers.elements.GestionnaireElements;
-import managers.etat.GestionnaireChoixModeJeu;
 import managers.etat.GestionnaireOptions;
 import mecanismes.implementations.LogicDeplacementsElementsCurseurImpl;
 
-import org.newdawn.slick.Color;
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import constantes.ConstantesElements;
 import constantes.ConstantesEtat;
+import donnees.generale.Options;
 import elementGraphique.Conteneur;
 import elementGraphique.Texte;
 import elementsJeu.Curseur;
@@ -31,6 +32,9 @@ public class EtatOptions extends BasicGameState
 	private Conteneur conteneur;
 	private Texte texte1;
 	private Texte texte2;
+	private Texte texte3;
+	private Texte texte4;
+	private Texte texte5;
 	private LogicDeplacementsElementsCurseurImpl logicDeplacementCurseur;
 	private static String phase = ConstantesEtat.ETAT_OPTIONS_PHASE_AFFICHAGE_GENERAL;
 
@@ -45,13 +49,22 @@ public class EtatOptions extends BasicGameState
 		
 		texte1 = new Texte(GestionnaireOptions.OPTION1, 0, 0, conteneur, gameContainer, false);
 		texte2 = new Texte(GestionnaireOptions.OPTION2, 0, 0, conteneur, gameContainer, false);
+		texte3 = new Texte(GestionnaireOptions.OPTION3, 0, 0, conteneur, gameContainer, false);
+		texte4 = new Texte(GestionnaireOptions.OPTION4, 0, 0, conteneur, gameContainer, false);
+		texte5 = new Texte(GestionnaireOptions.OPTION5, 0, 0, conteneur, gameContainer, false);
 		
 		GestionnaireElements.getInstance().ajouterElement(texte1);
 		GestionnaireElements.getInstance().ajouterElement(texte2);
+		GestionnaireElements.getInstance().ajouterElement(texte3);
+		GestionnaireElements.getInstance().ajouterElement(texte4);
+		GestionnaireElements.getInstance().ajouterElement(texte5);
 		
 		List<Texte> list = new ArrayList<Texte>();
 		list.add(texte1);
 		list.add(texte2);
+		list.add(texte3);
+		list.add(texte4);
+		list.add(texte5);
 		
 		conteneur.setElementsTextuel(list);
 		
@@ -59,6 +72,12 @@ public class EtatOptions extends BasicGameState
 		texte1.setCoordonneesY(texte1.calculerPositionY());
 		texte2.setCoordonneesX(texte2.calculerPositionX());
 		texte2.setCoordonneesY(texte2.calculerPositionY());
+		texte3.setCoordonneesX(texte3.calculerPositionX());
+		texte3.setCoordonneesY(texte3.calculerPositionY());
+		texte4.setCoordonneesX(texte4.calculerPositionX());
+		texte4.setCoordonneesY(texte4.calculerPositionY());
+		texte5.setCoordonneesX(texte5.calculerPositionX());
+		texte5.setCoordonneesY(texte5.calculerPositionY());
 		
 		conteneur.setCurseur(curseur);
 		
@@ -67,19 +86,6 @@ public class EtatOptions extends BasicGameState
 	@Override
 	public void render(GameContainer gameContainer, StateBasedGame jeu, Graphics graphisme) throws SlickException 
 	{
-		//remplisage de la forme géométrique sp
-		//g.fill(sp);
-		Color couleurFond = GestionnaireOptions.getInstance().getDonneesOption().getCouleurFond();
-		Color couleurLigne = GestionnaireOptions.getInstance().getDonneesOption().getCouleurLigne();
-		
-		if(couleurFond != null && couleurLigne != null)
-		{
-			graphisme.clear();
-			
-			graphisme.setBackground(couleurFond);
-			
-			graphisme.setColor(couleurLigne);
-		}
 		
 		conteneur.afficher(graphisme);
 		
@@ -109,16 +115,53 @@ public class EtatOptions extends BasicGameState
 	 		if(EtatOptions.getPhase().equals(ConstantesEtat.ETAT_OPTIONS_PHASE_AFFICHAGE_GENERAL))
 			{
 	 			
-	 			if(GestionnaireOptions.getInstance().getSelection().equals(GestionnaireOptions.OPTION1))
+	 			String selection = GestionnaireOptions.getInstance().getSelection();
+	 			AppGameContainer container = ((AppGameContainer)this.getJeu().getContainer());
+	 			
+	 			if(selection.equals(GestionnaireOptions.OPTION1))
 	 			{
-	 				Graphics graphisme = GestionnaireOptions.getInstance().getGraphisme();
 	 				
-	 				GestionnaireOptions.getInstance().getDonneesOption().setCouleurFond(new Color(255, 255, 255, 255));
-	 				GestionnaireOptions.getInstance().getDonneesOption().setCouleurLigne(new Color(0, 0, 0, 0));
-	 				graphisme.setBackground(new Color(255, 255, 255, 255));
-	 				graphisme.setColor(new Color(0, 0, 0, 0));
+	 				try 
+	 				{
+	 					container.setDisplayMode(1366, 768, true);
+					}
+	 				catch (SlickException e) 
+	 				{
+						e.printStackTrace();
+					}
+	 				
 	 			}
-	 			else if(GestionnaireOptions.getInstance().getSelection().equals(GestionnaireOptions.OPTION2))
+	 			else if(selection.equals(GestionnaireOptions.OPTION2))
+				{
+	 				
+	 				container.setMusicOn(true);
+	 				
+	 				try 
+	 				{
+						Music music = new Music("C:/Users/Rosemonde/Downloads/awildcreatureappears.ogg");
+						music.loop();
+					}
+	 				catch (SlickException e) 
+	 				{
+						e.printStackTrace();
+					}
+	 				
+				}
+	 			else if(selection.equals(GestionnaireOptions.OPTION3))
+				{
+	 				
+	 				Options option = GestionnaireOptions.getInstance().getDonneesOption();
+	 				option.setVolumeMusiques(option.getVolumeMusiques() + 1f);
+	 				
+				}
+	 			else if(selection.equals(GestionnaireOptions.OPTION4))
+				{
+	 				
+	 				Options option = GestionnaireOptions.getInstance().getDonneesOption();
+	 				option.setVolumeBruitages(option.getVolumeBruitages() + 1f);
+	 				
+				}
+	 			else if(selection.equals(GestionnaireOptions.OPTION7))
 	 			{
 	 				this.getJeu().enterState(GestionnaireOptions.getInstance().getIdEtatPrecedent());
 	 			}
