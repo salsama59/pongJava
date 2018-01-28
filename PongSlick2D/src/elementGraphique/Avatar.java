@@ -1,6 +1,7 @@
 package elementGraphique;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 
 import constantes.ConstantesElements;
@@ -16,9 +17,9 @@ public class Avatar extends Element
 	private boolean valide;
 	private Texte elementAvatar;
 	
-	public Avatar(int idjoueurRepresente, GameContainer gameContainer, float x, float y, float largeur, float hauteur)
+	public Avatar(int idjoueurRepresente, GameContainer gameContainer, float x, float y, float largeur, float hauteur, Image sprite)
 	{
-		super("", false, ConstantesElements.ELEMENT_AVATAR_TYPE, ConstantesJoueurs.JOUEUR_CAMP_NEUTRE);
+		super("", false, ConstantesElements.ELEMENT_AVATAR_TYPE, ConstantesJoueurs.JOUEUR_CAMP_NEUTRE, sprite);
 		this.setIdjoueurRepresente(idjoueurRepresente);
 		this.setElement(new Rectangle(x, y, largeur, hauteur));
 		this.setValide(false);

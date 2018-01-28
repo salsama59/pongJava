@@ -243,11 +243,11 @@ public class LogicDeplacementsElementsCurseurImpl implements LogicDeplacementsEl
 		element.setCoordonneeY(elementTextuelSuivant.getCoordonneesY());
 		element.setIndexCourant(nouvelIndex);
 		
-		this.miseAjourChoixJoueur(phase);
+		this.miseAjourChoixJoueur(phase, sens);
 		
 	}
 	
-	private void miseAjourChoixJoueur(String phase)
+	private void miseAjourChoixJoueur(String phase, int sens)
 	{
 		
 		if(phase.equals(ConstantesEtat.ETAT_MATCH_PHASE_MISE_EN_JEU))
@@ -260,7 +260,20 @@ public class LogicDeplacementsElementsCurseurImpl implements LogicDeplacementsEl
 		}
 		else if(phase.equals(ConstantesEtat.ETAT_OPTIONS_PHASE_AFFICHAGE_GENERAL))
 		{
-			GestionnaireOptions.getInstance().selectionnerOption(element.getIndexCourant());
+			
+			if((sens == ConstantesElements.ELEMENT_SENS_HAUT) || (sens == ConstantesElements.ELEMENT_SENS_BAS))
+			{
+				GestionnaireOptions.getInstance().selectionnerOption(element.getIndexCourant());
+			}
+			else if((sens == ConstantesElements.ELEMENT_SENS_GAUCHE) || (sens == ConstantesElements.ELEMENT_SENS_DROITE))
+			{
+				GestionnaireOptions.getInstance().selectionnerOption(element.getIndexCourant());
+			}
+			
+		}
+		else if(phase.equals(ConstantesEtat.ETAT_OPTIONS_PHASE_OPTION_AFICHAGE))
+		{
+			
 		}
 		
 	}

@@ -1,5 +1,6 @@
 package elementsJeu;
 
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -15,7 +16,7 @@ public class Balle extends Element
 	private float direction;
 	private Vector2f coordonnee = null;
 
-	public Balle(float centreX, float centreY, float rayon, String nom) 
+	/*public Balle(float centreX, float centreY, float rayon, String nom) 
 	{
 		super(nom, false, ConstantesElements.ELEMENT_BALLE_TYPE);
 		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
@@ -23,11 +24,11 @@ public class Balle extends Element
 		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);
 		this.setCoordonnee(new Vector2f(centreX, centreY));
 		this.setDirection((float) this.getCoordonnee().getTheta());
-	}
+	}*/
 	
-	public Balle(float centreX, float centreY, float rayon, String nom, String camp) 
+	public Balle(float centreX, float centreY, float rayon, String nom, String camp, Image sprite) 
 	{
-		super(nom, false, ConstantesElements.ELEMENT_BALLE_TYPE, camp);
+		super(nom, false, ConstantesElements.ELEMENT_BALLE_TYPE, camp, sprite);
 		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		this.setElement(new Circle(centreX,centreY,rayon));
 		this.setVitesse(ConstantesElements.ELEMENT_BALLE_VITESSE);

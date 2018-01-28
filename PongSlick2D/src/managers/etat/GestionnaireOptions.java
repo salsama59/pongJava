@@ -1,6 +1,7 @@
 package managers.etat;
 
-import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
@@ -9,18 +10,21 @@ import donnees.generale.Options;
 
 public class GestionnaireOptions 
 {
-	private static Hashtable<Integer, String> options;
-	private static String selection;
+	private static LinkedHashMap<Integer, String> options;
+	private static LinkedHashMap<Integer, String> sousOptions1;
+	private static String selectionMenu;
+	private static int indexSelectionMenu;
+	
+	private static String selectionSousMenu;
+	private static int indexSelectionSousMenu;
 	
 	private Graphics graphisme;
 	
-	public static final String OPTION1 = "Pleine écran";
-	public static final String OPTION2 = "Activer le son";
-	public static final String OPTION3 = "Augmenter le volume de la musique";
-	public static final String OPTION4 = "Augmenter le volume des bruitages";
-	public static final String OPTION5 = "Retour";
-	public static final String OPTION6 = "Option 6";
-	public static final String OPTION7 = "Retour";
+	public static final String OPTION1 = "Affichage/Resolution";
+	public static final String OPTION2 = "Volume musique";
+	public static final String OPTION3 = "Volume bruitage";
+	public static final String OPTION4 = "Retour";
+	//public static final String OPTION5 = "Retour";
 	
 	private StateBasedGame jeu;
 	
@@ -30,12 +34,13 @@ public class GestionnaireOptions
 	
 	private GestionnaireOptions()
 	{
-		setSelection(OPTION1);
-		options = new Hashtable<Integer, String>();
+		
+		setSelectionMenu(OPTION1);
+		setSelectionSousMenu(null);
+		options = new LinkedHashMap<Integer, String>();
+		sousOptions1 = new LinkedHashMap<Integer, String>();
 		
 		this.setDonneesOption(new Options());
-		
-		this.initialiserListOptions();
 		
 	}
 	
@@ -52,42 +57,82 @@ public class GestionnaireOptions
 	}
 	
 	
-	private void initialiserListOptions()
+	public void initialiserListOptions(List<String> libelles)
 	{
-		options.put(0, OPTION1);
-		options.put(1, OPTION2);
-		options.put(2, OPTION3);
-		options.put(3, OPTION4);
-		options.put(4, OPTION5);
-		options.put(5, OPTION6);
-		options.put(6, OPTION7);
+		for(int i = 0; i < libelles.size(); i++)
+		{
+			options.put(i, libelles.get(i));
+		}
+	}
+	
+	public void initialiserListSousOptions1(List<String> libelles)
+	{
+		for(int i = 0; i < libelles.size(); i++)
+		{
+			sousOptions1.put(i, libelles.get(i));
+		}
 	}
 	
 	public void selectionnerOption(Integer choix)
 	{
-		setSelection(getOptions().get(choix));
+		setSelectionMenu(getOptions().get(choix));
+		setIndexSelectionMenu(choix);
 	}
-
-
-	public String getSelection() 
+	
+	public void selectionnerSousOption(Integer choix)
 	{
-		return selection;
+		setSelectionSousMenu(getSousOptions1().get(choix));
 	}
 
-
-	public static void setSelection(String selection) 
+	public String getSelectionMenu() 
 	{
-		GestionnaireOptions.selection = selection;
+		return selectionMenu;
 	}
 
 
-	public static Hashtable<Integer, String> getOptions() 
+	public static void setSelectionMenu(String selection) 
+	{
+		GestionnaireOptions.selectionMenu = selection;
+	}
+
+
+	public static String getSelectionSousMenu() {
+		return selectionSousMenu;
+	}
+
+
+	public static void setSelectionSousMenu(String selectionSousMenu) {
+		GestionnaireOptions.selectionSousMenu = selectionSousMenu;
+	}
+
+
+	public static int getIndexSelectionMenu() {
+		return indexSelectionMenu;
+	}
+
+
+	public static void setIndexSelectionMenu(int indexSelectionMenu) {
+		GestionnaireOptions.indexSelectionMenu = indexSelectionMenu;
+	}
+
+
+	public static int getIndexSelectionSousMenu() {
+		return indexSelectionSousMenu;
+	}
+
+
+	public static void setIndexSelectionSousMenu(int indexSelectionSousMenu) {
+		GestionnaireOptions.indexSelectionSousMenu = indexSelectionSousMenu;
+	}
+
+
+	public static LinkedHashMap<Integer,String> getOptions() 
 	{
 		return options;
 	}
 
 
-	public static void setOptions(Hashtable<Integer, String> listOptions) 
+	public static void setOptions(LinkedHashMap<Integer, String> listOptions) 
 	{
 		options = listOptions;
 	}
@@ -130,5 +175,15 @@ public class GestionnaireOptions
 
 	public void setDonneesOption(Options donneesOption) {
 		this.donneesOption = donneesOption;
+	}
+
+
+	public static LinkedHashMap<Integer, String> getSousOptions1() {
+		return sousOptions1;
+	}
+
+
+	public static void setSousOptions1(LinkedHashMap<Integer, String> sousOptions1) {
+		GestionnaireOptions.sousOptions1 = sousOptions1;
 	}
 }

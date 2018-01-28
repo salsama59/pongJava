@@ -3,8 +3,8 @@ package elementGraphique;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 
 import constantes.ConstantesElements;
@@ -23,9 +23,9 @@ public class Conteneur extends Element
 	
 	private Texte titreMenu;
 
-	public Conteneur(float x, float y)
+	public Conteneur(float x, float y, Image sprite)
 	{
-		super("Cadre", false, ConstantesElements.ELEMENT_CADRE_TYPE, null);
+		super("Cadre", false, ConstantesElements.ELEMENT_CADRE_TYPE, null, sprite);
 		
 		element = new Rectangle(x, y, 0, 0);
 		
@@ -109,7 +109,7 @@ public class Conteneur extends Element
 		this.getElement().setHeight(hauteur);
 	}
 	
-	private void calculerTailleZone()
+	public void calculerTailleZone()
 	{
 		
 		float largeur = 0f;
@@ -122,6 +122,14 @@ public class Conteneur extends Element
 			if(ligne.getLargeur() > largeur)
 			{
 				largeur = ligne.getLargeur();
+			}
+			
+			if(ligne.getFils() != null)
+			{
+				if((ligne.getFils().getLargeur() + ligne.getLargeur() + ConstantesGraphismes.GRAPHISME_MARGE) > largeur)
+				{
+					largeur = ligne.getFils().getLargeur() + ligne.getLargeur() + ConstantesGraphismes.GRAPHISME_MARGE;
+				}
 			}
 		}
 		
@@ -191,7 +199,7 @@ public class Conteneur extends Element
 				ligne.setMessage(nouveauMessage);
 			}
 			
-				ligne.afficher();
+			ligne.afficher();
 				
 		}
 		
@@ -239,7 +247,7 @@ public class Conteneur extends Element
 		graphisme.drawLine(this.getElement().getX(), this.getElement().getY() + this.getTitreMenu().getHauteur(), this.getElement().getX() + this.getLargeur() - 1, this.getElement().getY() + this.getTitreMenu().getHauteur());
 	}
 	
-	private void ajusterPositionTextes()
+	public void ajusterPositionTextes()
 	{
 		
 		for(Texte texte : this.getElementsTextuel())
@@ -254,14 +262,6 @@ public class Conteneur extends Element
 			this.getTitreMenu().setCoordonneesX(this.getTitreMenu().calculerPositionX());
 			this.getTitreMenu().setCoordonneesY(this.getTitreMenu().calculerPositionY());
 			
-		}
-	}
-	
-	public void miseAjourCouleurTextes(Color couleurTexte)
-	{
-		for(Texte texte : this.getElementsTextuel())
-		{
-			texte.setCouleurTexte(couleurTexte);
 		}
 	}
 

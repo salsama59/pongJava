@@ -1,7 +1,4 @@
-package etatsJeu;
-import java.util.ArrayList;
-import java.util.List;
-
+package etatsJeu.implementations;
 import managers.collisions.GestionnaireCollisionsBalle;
 import managers.collisions.GestionnaireCollisionsFilet;
 import managers.collisions.GestionnaireCollisionsMur;
@@ -11,9 +8,11 @@ import managers.etat.GestionnaireMatch;
 import mecanismes.implementations.LogicDeplacementsElementsBalleImpl;
 import mecanismes.implementations.LogicDeplacementsElementsCurseurImpl;
 import mecanismes.implementations.LogicDeplacementsElementsRaquetteImpl;
+import menu.MenuJeu;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -23,19 +22,19 @@ import constantes.ConstantesAffichageInfos;
 import constantes.ConstantesElements;
 import constantes.ConstantesEtat;
 import constantes.ConstantesGestionnaires;
+import constantes.ConstantesJeu;
 import constantes.ConstantesJoueurs;
 import elementGraphique.Conteneur;
-import elementGraphique.Texte;
 import elementsJeu.Balle;
-import elementsJeu.Curseur;
 import elementsJeu.Filet;
 import elementsJeu.Mur;
 import elementsJeu.Raquette;
+import etatsJeu.interfaces.EtatJeu;
 
 
-public class EtatMatch extends BasicGameState 
+public class EtatMatch extends BasicGameState implements EtatJeu
 {
-	
+	private Image imageArene;
 	public static final int ID = ConstantesEtat.ETAT_MATCH;
 	private static String phase = ConstantesEtat.ETAT_MATCH_PHASE_MISE_EN_JEU;
 	private StateBasedGame jeu;
@@ -43,13 +42,10 @@ public class EtatMatch extends BasicGameState
 	private Filet filet1, filet2;
 	private Raquette raquette1, raquette2;
 	private Balle balle;
-	private Curseur curseur;
-	private Conteneur menuMiseEnJeu;
-	private Conteneur menuResultat;
-	private Texte texte1;
-	private Texte texte2;
-	private Texte texte3;
-	private Texte texte4;
+	private MenuJeu menuMiseEnJeu;
+	private MenuJeu menuResultat;
+	private Conteneur conteneurMenuMiseEnJeu;
+	private Conteneur conteneurMenuResultat;
 	private LogicDeplacementsElementsCurseurImpl logicDeplacementCurseur;
 	private LogicDeplacementsElementsRaquetteImpl mecanismeRaquette1;
 	private LogicDeplacementsElementsRaquetteImpl mecanismeRaquette2;
@@ -68,10 +64,10 @@ public class EtatMatch extends BasicGameState
 	{
 		this.setJeu(jeu);
 		this.setTransitionFinPartie(false);
-		
-		initialiserElements(container);
-		initialiserGestionnaires();
-		initialiserMecanisme();
+		this.creerMenu(container);
+		this.initialiserElements(container);
+		this.initialiserGestionnaires();
+		this.initialiserMecanisme();
 		
 	}
 
@@ -81,10 +77,16 @@ public class EtatMatch extends BasicGameState
 		
 		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_PARTIE))
 		{
+			
+			graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);
+			
+			float imsx = balle.getElement().getCenterX() - balle.getElement().getRadius();
+			float imsy = balle.getElement().getCenterY() - balle.getElement().getRadius();
+			graphisme.drawImage(balle.getSprite(), imsx, imsy, imsx + balle.getElement().getRadius() * 2, imsy + balle.getElement().getRadius() * 2, 0, 0, 600, 600);
+			
 			graphisme.draw(raquette1.getElement());
 			graphisme.draw(raquette2.getElement());
-			//graphisme.setColor(Color.blue);
-			graphisme.draw(balle.getElement());
+			//graphisme.draw(balle.getElement());
 			graphisme.draw(mur1.getElement());
 			graphisme.draw(mur2.getElement());
 			graphisme.draw(filet1.getElement());
@@ -96,12 +98,14 @@ public class EtatMatch extends BasicGameState
 		
 		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_MISE_EN_JEU))
 		{
-			menuMiseEnJeu.afficher(graphisme);
+			graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);
+			conteneurMenuMiseEnJeu.afficher(graphisme);
 		}
 		
 		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_RESULTAT))
 		{
-			menuResultat.afficher(graphisme, "Le vainqueur est le camp " + GestionnaireMatch.getInstance().getCampVainqueur());
+			graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);
+			conteneurMenuResultat.afficher(graphisme, this.menuResultat.recupererLibelle("ligne.resultat.0") + GestionnaireMatch.getInstance().getCampVainqueur());
 		}
 		
 	}
@@ -256,7 +260,7 @@ public class EtatMatch extends BasicGameState
 	
 	public void reinitialisationEtatMatch(GameContainer container, StateBasedGame game) throws SlickException
 	{
-		
+		this.creerMenu(container);
 		this.initialiserElements(container);
 		initialiserGestionnaires();
 		initialiserMecanisme();
@@ -264,55 +268,35 @@ public class EtatMatch extends BasicGameState
 		
 	}
 	
-	private void initialiserElements(GameContainer gameContainer)
+	@Override
+	public void initialiserElements(GameContainer gameContainer) throws SlickException
 	{
+		
+		Image imageBalle = new Image("C:\\Users\\Rosemonde\\Pictures\\Asset_pong\\sprite\\Balle.png");
+		
+		imageBalle.setFilter(Image.FILTER_NEAREST);
+		
+//		imageArene = new Image("C:\\Users\\Rosemonde\\Pictures\\Asset_pong\\sprite\\Concept arène futuriste.jpeg");
+		
+		imageArene = new Image("C:\\Users\\Rosemonde\\Pictures\\Asset_pong\\sprite\\arene_test.jpg");
+		
+		imageArene.setFilter(Image.FILTER_NEAREST);
+		
 		//Elements nécéssaire à la partie
 		mur1 = new Mur(ConstantesElements.ELEMENT_MUR1_COORDONEE_X, ConstantesElements.ELEMENT_MUR1_COORDONEE_Y, ConstantesElements.ELEMENT_MUR1_LARGEUR, ConstantesElements.ELEMENT_MUR1_HAUTEUR, ConstantesElements.ELEMENT_MUR1_NOM);
 		mur2 = new Mur(ConstantesElements.ELEMENT_MUR2_COORDONEE_X, ConstantesElements.ELEMENT_MUR2_COORDONEE_Y, ConstantesElements.ELEMENT_MUR2_LARGEUR, ConstantesElements.ELEMENT_MUR2_HAUTEUR, ConstantesElements.ELEMENT_MUR2_NOM);
-		raquette1 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE1_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE1_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE1_VITESSE, ConstantesElements.ELEMENT_RAQUETTE1_NOM, ConstantesJoueurs.JOUEUR_CAMP_GAUCHE, ConstantesJoueurs.JOUEUR_ID_1);
-		raquette2 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE2_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE2_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE2_VITESSE, ConstantesElements.ELEMENT_RAQUETTE2_NOM, ConstantesJoueurs.JOUEUR_CAMP_DROITE, ConstantesJoueurs.JOUEUR_ID_2);
-		balle = new Balle(ConstantesElements.ELEMENT_BALLE_CENTRE_X, ConstantesElements.ELEMENT_BALLE_CENTRE_Y, ConstantesElements.ELEMENT_BALLE_RAYON, ConstantesElements.ELEMENT_BALLE_NOM);
+		raquette1 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE1_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE1_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE1_VITESSE, ConstantesElements.ELEMENT_RAQUETTE1_NOM, ConstantesJoueurs.JOUEUR_CAMP_GAUCHE, ConstantesJoueurs.JOUEUR_ID_1, null);
+		raquette2 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE2_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE2_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE2_VITESSE, ConstantesElements.ELEMENT_RAQUETTE2_NOM, ConstantesJoueurs.JOUEUR_CAMP_DROITE, ConstantesJoueurs.JOUEUR_ID_2, null);
+		balle = new Balle(ConstantesElements.ELEMENT_BALLE_CENTRE_X, ConstantesElements.ELEMENT_BALLE_CENTRE_Y, ConstantesElements.ELEMENT_BALLE_RAYON, ConstantesElements.ELEMENT_BALLE_NOM, null, imageBalle);
 		filet1 = new Filet(ConstantesElements.ELEMENT_FILET1_COORDONEE_X, ConstantesElements.ELEMENT_FILET1_COORDONEE_Y, ConstantesElements.ELEMENT_FILET1_LARGEUR, ConstantesElements.ELEMENT_FILET1_HAUTEUR, ConstantesElements.ELEMENT_FILET1_NOM, ConstantesJoueurs.JOUEUR_CAMP_GAUCHE);
 		filet2 = new Filet(ConstantesElements.ELEMENT_FILET2_COORDONEE_X, ConstantesElements.ELEMENT_FILET2_COORDONEE_Y, ConstantesElements.ELEMENT_FILET2_LARGEUR, ConstantesElements.ELEMENT_FILET2_HAUTEUR, ConstantesElements.ELEMENT_FILET2_NOM, ConstantesJoueurs.JOUEUR_CAMP_DROITE);
 		
-		
-		//Elements nécéssaire à la mise en jeu
-		menuMiseEnJeu = new Conteneur((gameContainer.getWidth()/2) - 150, (gameContainer.getHeight()/2) - 40);
-		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM_MISE_EN_JEU, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, menuMiseEnJeu.getCentreX() + 130 - 30, menuMiseEnJeu.getCentreY() + 40);
-		logicDeplacementCurseur = new LogicDeplacementsElementsCurseurImpl(curseur);
-		
-		
-		String messageJoueur = "Joueur " + GestionnaireMatch.getInstance().getIdJoueurAvantage() + " veuillez faire votre choix";
-		texte1 = new Texte("PILE", 0, 0, menuMiseEnJeu, gameContainer, false);
-		texte2 = new Texte("FACE", 0, 0, menuMiseEnJeu, gameContainer, false);
-		texte4 = new Texte(messageJoueur, 0, 0, menuMiseEnJeu, gameContainer, false);
-		menuMiseEnJeu.setTitreMenu(texte4);
-		
-		GestionnaireElements.getInstance().ajouterElement(texte1);
-		GestionnaireElements.getInstance().ajouterElement(texte2);
-		GestionnaireElements.getInstance().ajouterElement(texte4);
-		
-		List<Texte> list = new ArrayList<Texte>();
-		list.add(texte1);
-		list.add(texte2);
-		
-		menuMiseEnJeu.setElementsTextuel(list);
-		menuMiseEnJeu.setCurseur(curseur);
-		
-		GestionnaireMatch.getInstance().miseAjourChoixMiseEnJeuJoueur(curseur.getIndexCourant());
-		
-		
-		//Elements nécessaire aux résultats
-		
-		menuResultat = new Conteneur((gameContainer.getWidth()/2) - 150, (gameContainer.getHeight()/2) - 40);
-		texte3 = new Texte("Le vainqueur est : ", 0, 0, menuResultat, gameContainer, true);
-		List<Texte> listResultat = new ArrayList<Texte>();
-		listResultat.add(texte3);
-		menuResultat.setElementsTextuel(listResultat);
+		GestionnaireMatch.getInstance().miseAjourChoixMiseEnJeuJoueur(0);
 		
 	}
 	
-	private void initialiserGestionnaires()
+	@Override
+	public void initialiserGestionnaires()
 	{
 		
 		GestionnaireElements.getInstance().ajouterElement(mur1);
@@ -333,7 +317,8 @@ public class EtatMatch extends BasicGameState
 		
 	}
 	
-	private void initialiserMecanisme()
+	@Override
+	public void initialiserMecanisme()
 	{
 		mecanismeRaquette1 = new LogicDeplacementsElementsRaquetteImpl(raquette1);
 		mecanismeRaquette2 = new LogicDeplacementsElementsRaquetteImpl(raquette2);
@@ -367,5 +352,21 @@ public class EtatMatch extends BasicGameState
 
 	public void setTransitionFinPartie(boolean transitionFinPartie) {
 		this.transitionFinPartie = transitionFinPartie;
+	}
+
+	@Override
+	public void creerMenu(GameContainer gameContainer) 
+	{
+		String titreMenuMiseEnJeu = "Joueur " + GestionnaireMatch.getInstance().getIdJoueurAvantage() + " veuillez faire votre choix";
+		menuMiseEnJeu = new MenuJeu(null, "menuMiseEnJeu_fr_FR", ConstantesElements.ELEMENT_MENU_TYPE);
+		menuMiseEnJeu.initialiserMenu(gameContainer, false, titreMenuMiseEnJeu, false);
+		this.conteneurMenuMiseEnJeu = menuMiseEnJeu.getConteneur();
+		
+		menuResultat = new MenuJeu(null, "menuResultat_fr_FR", ConstantesElements.ELEMENT_MENU_TYPE);
+		menuResultat.initialiserMenu(gameContainer, true, null, true);
+		this.conteneurMenuResultat = menuResultat.getConteneur();
+		
+		logicDeplacementCurseur = new LogicDeplacementsElementsCurseurImpl(menuMiseEnJeu.getConteneur().getCurseur());
+		
 	}
 }

@@ -2,7 +2,6 @@ package elementGraphique;
 
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -20,18 +19,17 @@ public class Texte extends Element
 	private float x;
 	private float y;
 	private boolean texteVariable = false;
-	private Color couleurTexte;
+	private Texte fils = null;
 	
 	public Texte(String message, float x, float y, Conteneur conteneur, GameContainer gameContainer, boolean texteVariable)
 	{
-		super(message, false, ConstantesElements.ELEMENT_TEXTE_TYPE, null);
+		super(message, false, ConstantesElements.ELEMENT_TEXTE_TYPE, null, null);
 		this.setCoordonneesX(x);
 		this.setCoordonneesY(y);
 		this.setTexteVariable(texteVariable);
 		this.setMessage(message);
 		this.setConteneur(conteneur);
 		element = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN , 12), false);
-		couleurTexte = new Color(255, 255, 255, 255);
 	}
 
 	public String getMessage() {
@@ -167,12 +165,18 @@ public class Texte extends Element
 	
 	public void afficher()
 	{
-		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage(), this.getCouleurTexte());
+		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage());
+		
+		if(this.getFils() != null)
+		{
+			this.getFils().getElement().drawString(this.getCoordonneesX() + this.getLargeur() + ConstantesGraphismes.GRAPHISME_MARGE, this.getCoordonneesY(), this.getFils().getMessage());
+		}
+		
 	}
 	
 	public void afficher(String complementMessage)
 	{
-		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage() + " " + complementMessage , this.getCouleurTexte());
+		this.getElement().drawString(this.getCoordonneesX(), this.getCoordonneesY(), this.getMessage() + " " + complementMessage);
 	}
 	
 	public int recupererRangElementTextuel()
@@ -212,12 +216,12 @@ public class Texte extends Element
 		return this.getConteneur().getCurseur();
 	}
 
-	public Color getCouleurTexte() {
-		return couleurTexte;
+	public Texte getFils() {
+		return fils;
 	}
 
-	public void setCouleurTexte(Color couleurTexte) {
-		this.couleurTexte = couleurTexte;
+	public void setFils(Texte fils) {
+		this.fils = fils;
 	}
 
 }

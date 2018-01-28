@@ -5,10 +5,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import constantes.ConstantesJeu;
-import etatsJeu.EtatChoixModeJeu;
-import etatsJeu.EtatMatch;
-import etatsJeu.EtatOptions;
-//import etatsJeu.EtatMiseEnJeu;
+import etatsJeu.implementations.EtatChoixModeJeu;
+import etatsJeu.implementations.EtatMatch;
+import etatsJeu.implementations.EtatOptions;
 
 public class Pong2015 extends StateBasedGame
 {

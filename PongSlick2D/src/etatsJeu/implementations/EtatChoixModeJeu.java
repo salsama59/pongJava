@@ -1,14 +1,11 @@
-package etatsJeu;
+package etatsJeu.implementations;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import managers.elements.GestionnaireElements;
 import managers.etat.GestionnaireChoixModeJeu;
 import managers.etat.GestionnaireOptions;
 import managers.joueur.GestionnaireJoueurs;
 import mecanismes.implementations.LogicDeplacementsElementsAvatarImpl;
 import mecanismes.implementations.LogicDeplacementsElementsCurseurImpl;
+import menu.MenuJeu;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -24,18 +21,15 @@ import constantes.ConstantesJoueurs;
 import elementGraphique.Avatar;
 import elementGraphique.Conteneur;
 import elementGraphique.Texte;
-import elementsJeu.Curseur;
+import etatsJeu.interfaces.EtatJeu;
 
-public class EtatChoixModeJeu extends BasicGameState 
+public class EtatChoixModeJeu extends BasicGameState implements EtatJeu
 {
 	
 	public static final int ID = ConstantesEtat.ETAT_CHOIX_MODE;
 	private StateBasedGame jeu;
-	private Curseur curseur;
-	private Conteneur conteneur;
-	private Texte texte1;
-	private Texte texte2;
-	private Texte texte3;
+	private Conteneur conteneurMenuPrincipal;
+	private MenuJeu menuPrincipal;
 	private LogicDeplacementsElementsCurseurImpl logicDeplacementCurseur;
 	private static String phase = ConstantesEtat.ETAT_CHOIX_MODE_PHASE_SELECTION;
 	private Joueur joueur1;
@@ -53,56 +47,11 @@ public class EtatChoixModeJeu extends BasicGameState
 		
 		this.setJeu(jeu);
 		GestionnaireChoixModeJeu.getInstance().setJeu(jeu);
-		conteneur = new Conteneur((gameContainer.getWidth()/2), (gameContainer.getHeight()/2));
-		curseur = new Curseur(ConstantesElements.ELEMENT_CURSEUR_NOM_CHOIX_MODE, false, ConstantesElements.ELEMENT_CURSEUR_TYPE, conteneur.getCentreX() + 130 - 30, conteneur.getCentreY() + 40);
-		logicDeplacementCurseur = new LogicDeplacementsElementsCurseurImpl(curseur);
-		texte1 = new Texte("Mode Exibition", 0, 0, conteneur, gameContainer, false);
-		texte2 = new Texte("Options", 0, 0, conteneur, gameContainer, false);
-		texte3 = new Texte("Quitter le jeu", 0, 0, conteneur, gameContainer, false);
-		GestionnaireElements.getInstance().ajouterElement(texte1);
-		GestionnaireElements.getInstance().ajouterElement(texte2);
-		GestionnaireElements.getInstance().ajouterElement(texte3);
-		List<Texte> list = new ArrayList<Texte>();
-		list.add(texte1);
-		list.add(texte2);
-		list.add(texte3);
-		conteneur.setElementsTextuel(list);
-		conteneur.setCurseur(curseur);
 		
-		joueur1 = new Joueur(ConstantesJoueurs.JOUEUR_ID_1, ConstantesJoueurs.JOUEUR_CAMP_NEUTRE, "");
-		joueur2 = new Joueur(ConstantesJoueurs.JOUEUR_ID_2, ConstantesJoueurs.JOUEUR_CAMP_NEUTRE, "");
-		
-		joueur1.setConnecte(true);
-		joueur2.setConnecte(true);
-		
-		float xAvatar1 = gameContainer.getWidth()/3 + gameContainer.getWidth()/3/2;
-		float yAvatar1 = gameContainer.getHeight()/3/2;
-		
-		float xAvatar2 = xAvatar1;
-		float yAvatar2 = gameContainer.getHeight()/3;
-		
-		avatar1 = new Avatar(joueur1.getId(), gameContainer, xAvatar1, yAvatar1, 40, 40);
-		avatar2 = new Avatar(joueur2.getId(), gameContainer, xAvatar2, yAvatar2, 40, 40);
-		
-		elementAvatar1 = new Texte("V", avatar1.getCoordonneeX() + (avatar1.getElement().getWidth()/2), avatar1.getCoordonneeY() + (avatar1.getElement().getHeight()/2), null, gameContainer, false);
-		elementAvatar2 = new Texte("V", avatar2.getCoordonneeX() + (avatar2.getElement().getWidth()/2), avatar2.getCoordonneeY() + (avatar2.getElement().getHeight()/2), null, gameContainer, false);
-		
-		elementAvatar1.setCoordonneesX(elementAvatar1.getCoordonneesX() - elementAvatar1.getLargeur()/2);
-		elementAvatar1.setCoordonneesY(elementAvatar1.getCoordonneesY() - elementAvatar1.getHauteur()/2);
-		
-		elementAvatar2.setCoordonneesX(elementAvatar2.getCoordonneesX() - elementAvatar2.getLargeur()/2);
-		elementAvatar2.setCoordonneesY(elementAvatar2.getCoordonneesY() - elementAvatar2.getHauteur()/2);
-		
-		avatar1.setElementAvatar(elementAvatar1);
-		avatar2.setElementAvatar(elementAvatar2);
-		
-		logicDeplacementsAvatar1 = new LogicDeplacementsElementsAvatarImpl(avatar1);
-		logicDeplacementsAvatar2 = new LogicDeplacementsElementsAvatarImpl(avatar2);
-		
-		GestionnaireJoueurs.getInstance().ajouterJoueur(joueur1);
-		GestionnaireJoueurs.getInstance().ajouterJoueur(joueur2);
-		GestionnaireJoueurs.getInstance().ajouterAvatar(avatar1);
-		GestionnaireJoueurs.getInstance().ajouterAvatar(avatar2);
+		this.creerMenu(gameContainer);
+		this.initialiserElements(gameContainer);
+		this.initialiserGestionnaires();
+		this.initialiserMecanisme();
 		
 	}
 
@@ -112,7 +61,7 @@ public class EtatChoixModeJeu extends BasicGameState
 		
 		if(EtatChoixModeJeu.getPhase().equals(ConstantesEtat.ETAT_CHOIX_MODE_PHASE_SELECTION))
 		{
-			conteneur.afficher(graphisme);
+			conteneurMenuPrincipal.afficher(graphisme);
 		}
 		
 		if(EtatChoixModeJeu.getPhase().equals(ConstantesEtat.ETAT_CHOIX_MODE_PHASE_EXIBITION_LOBBY))
@@ -177,7 +126,7 @@ public class EtatChoixModeJeu extends BasicGameState
 	public void keyReleased(int key, char c) 
 	{
 		
-		Input entree = new Input(key);
+		new Input(key);
 		
 		switch (key) 
 	    {
@@ -222,6 +171,19 @@ public class EtatChoixModeJeu extends BasicGameState
 	{
 		return ID;
 	}
+	
+	@Override
+	public void creerMenu(GameContainer gameContainer)
+	{
+		
+		menuPrincipal = new MenuJeu(null, "menuPrincipal_fr_FR", ConstantesElements.ELEMENT_MENU_TYPE);
+		
+		menuPrincipal.initialiserMenu(gameContainer, false, null, false);
+		logicDeplacementCurseur = new LogicDeplacementsElementsCurseurImpl(menuPrincipal.getConteneur().getCurseur());
+		
+		this.conteneurMenuPrincipal = menuPrincipal.getConteneur();
+		
+	}
 
 	public StateBasedGame getJeu() {
 		return jeu;
@@ -237,6 +199,59 @@ public class EtatChoixModeJeu extends BasicGameState
 
 	public static void setPhase(String phase) {
 		EtatChoixModeJeu.phase = phase;
+	}
+
+	@Override
+	public void initialiserElements(GameContainer gameContainer) 
+	{
+		
+		joueur1 = new Joueur(ConstantesJoueurs.JOUEUR_ID_1, ConstantesJoueurs.JOUEUR_CAMP_NEUTRE, "");
+		joueur2 = new Joueur(ConstantesJoueurs.JOUEUR_ID_2, ConstantesJoueurs.JOUEUR_CAMP_NEUTRE, "");
+		
+		joueur1.setConnecte(true);
+		joueur2.setConnecte(true);
+		
+		float xAvatar1 = gameContainer.getWidth()/3 + gameContainer.getWidth()/3/2;
+		float yAvatar1 = gameContainer.getHeight()/3/2;
+		
+		float xAvatar2 = xAvatar1;
+		float yAvatar2 = gameContainer.getHeight()/3;
+		
+		avatar1 = new Avatar(joueur1.getId(), gameContainer, xAvatar1, yAvatar1, 40, 40, null);
+		avatar2 = new Avatar(joueur2.getId(), gameContainer, xAvatar2, yAvatar2, 40, 40, null);
+		
+		elementAvatar1 = new Texte("V", avatar1.getCoordonneeX() + (avatar1.getElement().getWidth()/2), avatar1.getCoordonneeY() + (avatar1.getElement().getHeight()/2), null, gameContainer, false);
+		elementAvatar2 = new Texte("V", avatar2.getCoordonneeX() + (avatar2.getElement().getWidth()/2), avatar2.getCoordonneeY() + (avatar2.getElement().getHeight()/2), null, gameContainer, false);
+		
+		elementAvatar1.setCoordonneesX(elementAvatar1.getCoordonneesX() - elementAvatar1.getLargeur()/2);
+		elementAvatar1.setCoordonneesY(elementAvatar1.getCoordonneesY() - elementAvatar1.getHauteur()/2);
+		
+		elementAvatar2.setCoordonneesX(elementAvatar2.getCoordonneesX() - elementAvatar2.getLargeur()/2);
+		elementAvatar2.setCoordonneesY(elementAvatar2.getCoordonneesY() - elementAvatar2.getHauteur()/2);
+		
+		avatar1.setElementAvatar(elementAvatar1);
+		avatar2.setElementAvatar(elementAvatar2);
+		
+	}
+
+	@Override
+	public void initialiserGestionnaires() 
+	{
+		
+		GestionnaireJoueurs.getInstance().ajouterJoueur(joueur1);
+		GestionnaireJoueurs.getInstance().ajouterJoueur(joueur2);
+		GestionnaireJoueurs.getInstance().ajouterAvatar(avatar1);
+		GestionnaireJoueurs.getInstance().ajouterAvatar(avatar2);
+		
+	}
+
+	@Override
+	public void initialiserMecanisme() 
+	{
+		
+		logicDeplacementsAvatar1 = new LogicDeplacementsElementsAvatarImpl(avatar1);
+		logicDeplacementsAvatar2 = new LogicDeplacementsElementsAvatarImpl(avatar2);
+		
 	}
 
 }

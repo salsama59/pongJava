@@ -11,6 +11,8 @@ public class ConstantesElements
 	public final static String ELEMENT_TEXTE_TYPE = "TEXTE";
 	public final static String ELEMENT_CADRE_TYPE = "CADRE";
 	public final static String ELEMENT_AVATAR_TYPE = "AVATAR";
+	public final static String ELEMENT_MENU_TYPE = "MENU";
+	public final static String ELEMENT_SOUS_MENU_TYPE = "SOUS_MENU";
 	
 	//Etat éléments
 	public final static int ELEMENT_ETAT_NEUTRE = 0;

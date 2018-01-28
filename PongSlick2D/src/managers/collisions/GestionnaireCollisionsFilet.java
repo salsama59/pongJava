@@ -12,7 +12,7 @@ import elementsJeu.Balle;
 import elementsJeu.Element;
 import elementsJeu.Filet;
 import elementsJeu.Raquette;
-import etatsJeu.EtatMatch;
+import etatsJeu.implementations.EtatMatch;
 
 public class GestionnaireCollisionsFilet extends GestionnaireCollisions 
 {

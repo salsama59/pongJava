@@ -1,4 +1,4 @@
-package donnees;
+package menu;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +11,9 @@ import managers.elements.GestionnaireElements;
 import org.newdawn.slick.GameContainer;
 
 import constantes.ConstantesElements;
+import constantes.ConstantesJeu;
+import donnees.affichage.AffichageResolution;
+import donnees.affichage.InformationsEcran;
 import elementGraphique.Conteneur;
 import elementGraphique.Texte;
 import elementsJeu.Curseur;
@@ -22,21 +25,52 @@ public class MenuJeu
 	private String id;
 	private ResourceBundle contenu;
 	private Conteneur conteneur;
-	private static String preffixe = "traduction.";
+	private String type;
+	private static String preffixeMenu = "traductions.";
+	private static String preffixeSousMenu = "menu.";
 	
-	public MenuJeu(Locale locale, String idMenu)
+	public MenuJeu(Locale locale, String idMenu, String typeMenu)
 	{
 		
 		this.setId(idMenu);
 		this.setLocaleMenu(locale);
+		this.setType(typeMenu);
 		
 		if(this.getLocaleMenu() == null)
 		{
-			this.setContenu(ResourceBundle.getBundle(preffixe + this.getId()));
+			
+			if(this.isSousMenu())
+			{
+				
+				if(this.getId() != null)
+				{
+					this.setContenu(ResourceBundle.getBundle(preffixeSousMenu + this.getId()));
+				}
+				
+			}
+			else
+			{
+				this.setContenu(ResourceBundle.getBundle(preffixeMenu + this.getId()));
+			}
+			
 		}
 		else
 		{
-			this.setContenu(ResourceBundle.getBundle(preffixe + this.getId(), this.getLocaleMenu()));
+			
+			if(this.isSousMenu())
+			{
+				
+				if(this.getId() != null)
+				{
+					this.setContenu(ResourceBundle.getBundle(preffixeSousMenu + this.getId(), this.getLocaleMenu()));
+				}
+				
+			}
+			else
+			{
+				this.setContenu(ResourceBundle.getBundle(preffixeMenu + this.getId(), this.getLocaleMenu()));
+			}
+			
 		}
 		
 	}
@@ -58,6 +92,11 @@ public class MenuJeu
 		
 	}
 	
+	public String recupererLibelle(String cle)
+	{
+		return this.getContenu().getString(cle);
+	}
+	
 	public void initialiserMenu(GameContainer gameContainer, boolean sansCurseur, String titreMenu, boolean texteVariable)
 	{
 		
@@ -70,11 +109,11 @@ public class MenuJeu
 			
 			if(this.getLocaleMenu() == null)
 			{
-				bundle = ResourceBundle.getBundle(preffixe + "nomCurseurs");
+				bundle = ResourceBundle.getBundle(preffixeMenu + "nomCurseurs");
 			}
 			else
 			{
-				bundle = ResourceBundle.getBundle(preffixe + "nomCurseurs", this.getLocaleMenu());
+				bundle = ResourceBundle.getBundle(preffixeMenu + "nomCurseurs", this.getLocaleMenu());
 			}
 			
 			if(this.getId().equals("menuPrincipal_fr_FR"))
@@ -93,6 +132,9 @@ public class MenuJeu
 		{
 			
 			Texte texte = new Texte(libelle, 0, 0, conteneur, gameContainer, texteVariable);
+			
+			texte = miseAjourFils(texte, gameContainer, texteVariable);
+			
 			GestionnaireElements.getInstance().ajouterElement(texte);
 			conteneur.ajouterElementTextuel(texte);
 			
@@ -111,6 +153,53 @@ public class MenuJeu
 			conteneur.setCurseur(curseur);
 		}
 		
+	}
+	
+	Texte miseAjourFils(Texte pere, GameContainer gameContainer, boolean texteVariable)
+	{
+		
+		if(this.getId().equals("menuOptions_fr_FR"))
+		{
+			
+			if(pere.getMessage().equals("Affichage/Resolution"))
+			{
+				
+				InformationsEcran infoEcran = new InformationsEcran();
+				List<AffichageResolution> listResolution = infoEcran.getListResolutionsDisponible();
+				
+				for(int i = 0; i < listResolution.size(); i++)
+				{
+					
+					AffichageResolution resolution = listResolution.get(i);
+					
+					int hauteur = resolution.getHauteurResolution();
+					int largeur = resolution.getLargeurResolution();
+					
+					if((hauteur >= ConstantesJeu.ECRAN_HAUTEUR_MIN) && (largeur >= ConstantesJeu.ECRAN_LARGEUR_MIN))
+					{
+						
+						String valeurAffichee =  "" + resolution.getLargeurResolution() + "x" + resolution.getHauteurResolution();
+						Texte texteFils = new Texte(valeurAffichee, 0, 0, conteneur, gameContainer, texteVariable);
+						pere.setFils(texteFils);
+						GestionnaireElements.getInstance().ajouterElement(texteFils);
+						
+						break;
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		return pere;
+		
+	}
+	
+	public boolean isSousMenu()
+	{
+		return this.getType().equals(ConstantesElements.ELEMENT_SOUS_MENU_TYPE);
 	}
 
 	public Locale getLocaleMenu() {
@@ -143,5 +232,13 @@ public class MenuJeu
 
 	public void setConteneur(Conteneur conteneur) {
 		this.conteneur = conteneur;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

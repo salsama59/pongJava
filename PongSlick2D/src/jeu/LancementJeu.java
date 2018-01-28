@@ -23,11 +23,13 @@ public class LancementJeu
 	
 	private static void initialisationJeu(AppGameContainer container) throws SlickException
 	{
+		container.setMaximumLogicUpdateInterval(ConstantesJeu.JEU_FRAMERATE);
 		container.setShowFPS(ConstantesJeu.ECRAN_AFFICHAGE_FRAMERATE);
 		container.setVSync(ConstantesJeu.JEU_VSYNC);
 		container.setDisplayMode(ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, ConstantesJeu.ECRAN_AFFICHAGE_FULLSCREEN); 
 		container.setTargetFrameRate(ConstantesJeu.JEU_FRAMERATE);
 		container.setUpdateOnlyWhenVisible(ConstantesJeu.JEU_MAJ_SEULEMENT_SUR_FOCUS);
+		//System.setProperty("org.newdawn.slick.pngloader", "false");
 		container.start();
 	}
 }

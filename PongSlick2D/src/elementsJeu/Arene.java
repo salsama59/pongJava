@@ -9,7 +9,7 @@ public class Arene extends Element
 	
 	public Arene(String nom, String type)
 	{
-		super(nom, false, type);
+		super(nom, false, type, null, null);
 	}
 
 	public Rectangle getElement() {

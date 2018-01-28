@@ -14,7 +14,7 @@ import Joueur.Joueur;
 import constantes.ConstantesElements;
 import constantes.ConstantesJoueurs;
 import elementGraphique.Avatar;
-import etatsJeu.EtatMatch;
+import etatsJeu.implementations.EtatMatch;
 
 public class LogicDeplacementsElementsAvatarImpl implements LogicDeplacementsElements 
 {

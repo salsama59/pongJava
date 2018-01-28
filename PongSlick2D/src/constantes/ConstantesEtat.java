@@ -18,4 +18,5 @@ public class ConstantesEtat
 	//Options du jeu
 	public final static int ETAT_OPTION = 3;
 	public final static String ETAT_OPTIONS_PHASE_AFFICHAGE_GENERAL = "AFFICHAGE_GENERAL";
+	public final static String ETAT_OPTIONS_PHASE_OPTION_AFICHAGE = "OPTION_AFICHAGE";
 }

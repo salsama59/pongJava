@@ -1,5 +1,6 @@
 package elementsJeu;
 
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 
 import constantes.ConstantesElements;
@@ -13,9 +14,9 @@ public class Raquette extends Element
 	private int energie;
 	private int idJoueurProprietaire;
 
-	public Raquette(float x, float y, float largeur, float longueur, float v, String nom, String camp, int idJoueur)
+	public Raquette(float x, float y, float largeur, float longueur, float v, String nom, String camp, int idJoueur, Image sprite)
 	{
-		super(nom, false, ConstantesElements.ELEMENT_RAQUETTE_TYPE, camp);
+		super(nom, false, ConstantesElements.ELEMENT_RAQUETTE_TYPE, camp, sprite);
 		this.setElement(new Rectangle(x,y,largeur,longueur));
 		this.setVitesse(v);
 		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);

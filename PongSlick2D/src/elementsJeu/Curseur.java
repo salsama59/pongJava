@@ -1,6 +1,7 @@
 package elementsJeu;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -19,9 +20,9 @@ public class Curseur extends Element
 	private Conteneur conteneurAffectation = null;
 	private int indexCourant = 0;
 	
-	public Curseur(String nom, boolean enCollision, String type, float x, float y)
+	public Curseur(String nom, boolean enCollision, String type, float x, float y, Image sprite)
 	{
-		super(nom, enCollision, type, null);
+		super(nom, enCollision, type, null, sprite);
 		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
 		this.setElement(new Polygon(new float[]{0f,0f,0f,ConstantesElements.ELEMENT_CURSEUR_HAUTEUR,ConstantesElements.ELEMENT_CURSEUR_LARGEUR,ConstantesElements.ELEMENT_CURSEUR_HAUTEUR/2}));
 		this.setVitesse(ConstantesElements.ELEMENT_CURSEUR_VITESSE);

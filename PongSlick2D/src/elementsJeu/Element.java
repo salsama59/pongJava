@@ -1,5 +1,7 @@
 package elementsJeu;
 
+import org.newdawn.slick.Image;
+
 import constantes.ConstantesElements;
 
 public class Element 
@@ -11,8 +13,9 @@ public class Element
 	private String camp;
 	private int sens;
 	private int etat;
+	private Image sprite;
 	
-	public Element(String nom, boolean enCollision, String type, String camp)
+	public Element(String nom, boolean enCollision, String type, String camp, Image sprite)
 	{
 		this.setCamp(camp);
 		this.setNomElement(nom);
@@ -20,16 +23,18 @@ public class Element
 		this.setEnCollision(enCollision);
 		this.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
 		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
+		this.setSprite(sprite);
 	}
 	
-	public Element(String nom, boolean enCollision, String type)
+	/*public Element(String nom, boolean enCollision, String type, String camp, Image sprite)
 	{
 		this.setNomElement(nom);
 		this.setType(type);
 		this.setEnCollision(enCollision);
 		this.setEtat(ConstantesElements.ELEMENT_ETAT_NEUTRE);
 		this.setSens(ConstantesElements.ELEMENT_SENS_NEUTRE);
-	}
+		this.setSprite(sprite);
+	}*/
 
 	public int getIdElement() 
 	{
@@ -91,6 +96,14 @@ public class Element
 
 	public void setEtat(int etat) {
 		this.etat = etat;
+	}
+
+	public Image getSprite() {
+		return sprite;
+	}
+
+	public void setSprite(Image sprite) {
+		this.sprite = sprite;
 	}
 	
 }
