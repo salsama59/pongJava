@@ -14,6 +14,6 @@ public class ConstantesJoueurs
 	public final static String JOUEUR_CAMP_NEUTRE = "NEUTRE";
 	
 	//Limite de point pour remporter un match
-	public final static int JOUEUR_LIMITE_POINT_VICTOIRE = 1;
+	public final static int JOUEUR_LIMITE_POINT_VICTOIRE = 5;
 
 }
