@@ -8,10 +8,10 @@ public class AffichageResolution
 	private int nombreBitsPixel;
 	private int frequenceAffichage;
 	
-	public AffichageResolution(int largeur, int hauteur, int nombreBitsParPixel, int fréquence)
+	public AffichageResolution(int largeur, int hauteur, int nombreBitsParPixel, int frequence)
 	{
 		
-		this.setFrequenceAffichage(fréquence);
+		this.setFrequenceAffichage(frequence);
 		this.setHauteurResolution(hauteur);
 		this.setLargeurResolution(largeur);
 		this.setNombreBitsPixel(nombreBitsParPixel);

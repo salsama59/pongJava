@@ -1,4 +1,22 @@
 package etatsJeu.implementations;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+
+import constantes.ConstantesAffichageInfos;
+import constantes.ConstantesElements;
+import constantes.ConstantesEtat;
+import constantes.ConstantesGestionnaires;
+import constantes.ConstantesJoueurs;
+import elementGraphique.Conteneur;
+import elementsJeu.Balle;
+import elementsJeu.Filet;
+import elementsJeu.Mur;
+import elementsJeu.Raquette;
+import etatsJeu.interfaces.EtatJeu;
 import managers.collisions.GestionnaireCollisionsBalle;
 import managers.collisions.GestionnaireCollisionsFilet;
 import managers.collisions.GestionnaireCollisionsMur;
@@ -10,31 +28,10 @@ import mecanismes.implementations.LogicDeplacementsElementsCurseurImpl;
 import mecanismes.implementations.LogicDeplacementsElementsRaquetteImpl;
 import menu.MenuJeu;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
-
-import constantes.ConstantesAffichageInfos;
-import constantes.ConstantesElements;
-import constantes.ConstantesEtat;
-import constantes.ConstantesGestionnaires;
-import constantes.ConstantesJeu;
-import constantes.ConstantesJoueurs;
-import elementGraphique.Conteneur;
-import elementsJeu.Balle;
-import elementsJeu.Filet;
-import elementsJeu.Mur;
-import elementsJeu.Raquette;
-import etatsJeu.interfaces.EtatJeu;
-
 
 public class EtatMatch extends BasicGameState implements EtatJeu
 {
-	private Image imageArene;
+	//private Image imageArene;
 	public static final int ID = ConstantesEtat.ETAT_MATCH;
 	private static String phase = ConstantesEtat.ETAT_MATCH_PHASE_MISE_EN_JEU;
 	private StateBasedGame jeu;
@@ -78,15 +75,10 @@ public class EtatMatch extends BasicGameState implements EtatJeu
 		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_PARTIE))
 		{
 			
-			graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);
-			
-			float imsx = balle.getElement().getCenterX() - balle.getElement().getRadius();
-			float imsy = balle.getElement().getCenterY() - balle.getElement().getRadius();
-			graphisme.drawImage(balle.getSprite(), imsx, imsy, imsx + balle.getElement().getRadius() * 2, imsy + balle.getElement().getRadius() * 2, 0, 0, 600, 600);
-			
+			//graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);	
 			graphisme.draw(raquette1.getElement());
 			graphisme.draw(raquette2.getElement());
-			//graphisme.draw(balle.getElement());
+			graphisme.draw(balle.getElement());
 			graphisme.draw(mur1.getElement());
 			graphisme.draw(mur2.getElement());
 			graphisme.draw(filet1.getElement());
@@ -98,13 +90,13 @@ public class EtatMatch extends BasicGameState implements EtatJeu
 		
 		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_MISE_EN_JEU))
 		{
-			graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);
+			//graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);
 			conteneurMenuMiseEnJeu.afficher(graphisme);
 		}
 		
 		if(EtatMatch.getPhase().equals(ConstantesEtat.ETAT_MATCH_PHASE_RESULTAT))
 		{
-			graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);
+			//graphisme.drawImage(imageArene, 0, 0, ConstantesJeu.ECRAN_LARGEUR, ConstantesJeu.ECRAN_HAUTEUR, 0, 0, 1280, 720);
 			conteneurMenuResultat.afficher(graphisme, this.menuResultat.recupererLibelle("ligne.resultat.0") + GestionnaireMatch.getInstance().getCampVainqueur());
 		}
 		
@@ -270,24 +262,13 @@ public class EtatMatch extends BasicGameState implements EtatJeu
 	
 	@Override
 	public void initialiserElements(GameContainer gameContainer) throws SlickException
-	{
-		
-		Image imageBalle = new Image("C:\\Users\\Rosemonde\\Pictures\\Asset_pong\\sprite\\Balle.png");
-		
-		imageBalle.setFilter(Image.FILTER_NEAREST);
-		
-//		imageArene = new Image("C:\\Users\\Rosemonde\\Pictures\\Asset_pong\\sprite\\Concept arène futuriste.jpeg");
-		
-		imageArene = new Image("C:\\Users\\Rosemonde\\Pictures\\Asset_pong\\sprite\\arene_test.jpg");
-		
-		imageArene.setFilter(Image.FILTER_NEAREST);
-		
-		//Elements nécéssaire à la partie
+	{	
+		//Elements nï¿½cï¿½ssaire ï¿½ la partie
 		mur1 = new Mur(ConstantesElements.ELEMENT_MUR1_COORDONEE_X, ConstantesElements.ELEMENT_MUR1_COORDONEE_Y, ConstantesElements.ELEMENT_MUR1_LARGEUR, ConstantesElements.ELEMENT_MUR1_HAUTEUR, ConstantesElements.ELEMENT_MUR1_NOM);
 		mur2 = new Mur(ConstantesElements.ELEMENT_MUR2_COORDONEE_X, ConstantesElements.ELEMENT_MUR2_COORDONEE_Y, ConstantesElements.ELEMENT_MUR2_LARGEUR, ConstantesElements.ELEMENT_MUR2_HAUTEUR, ConstantesElements.ELEMENT_MUR2_NOM);
 		raquette1 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE1_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE1_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE1_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE1_VITESSE, ConstantesElements.ELEMENT_RAQUETTE1_NOM, ConstantesJoueurs.JOUEUR_CAMP_GAUCHE, ConstantesJoueurs.JOUEUR_ID_1, null);
 		raquette2 = new Raquette(ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_X, ConstantesElements.ELEMENT_RAQUETTE2_COORDONEE_Y, ConstantesElements.ELEMENT_RAQUETTE2_LARGEUR, ConstantesElements.ELEMENT_RAQUETTE2_HAUTEUR, ConstantesElements.ELEMENT_RAQUETTE2_VITESSE, ConstantesElements.ELEMENT_RAQUETTE2_NOM, ConstantesJoueurs.JOUEUR_CAMP_DROITE, ConstantesJoueurs.JOUEUR_ID_2, null);
-		balle = new Balle(ConstantesElements.ELEMENT_BALLE_CENTRE_X, ConstantesElements.ELEMENT_BALLE_CENTRE_Y, ConstantesElements.ELEMENT_BALLE_RAYON, ConstantesElements.ELEMENT_BALLE_NOM, null, imageBalle);
+		balle = new Balle(ConstantesElements.ELEMENT_BALLE_CENTRE_X, ConstantesElements.ELEMENT_BALLE_CENTRE_Y, ConstantesElements.ELEMENT_BALLE_RAYON, ConstantesElements.ELEMENT_BALLE_NOM, null, null);
 		filet1 = new Filet(ConstantesElements.ELEMENT_FILET1_COORDONEE_X, ConstantesElements.ELEMENT_FILET1_COORDONEE_Y, ConstantesElements.ELEMENT_FILET1_LARGEUR, ConstantesElements.ELEMENT_FILET1_HAUTEUR, ConstantesElements.ELEMENT_FILET1_NOM, ConstantesJoueurs.JOUEUR_CAMP_GAUCHE);
 		filet2 = new Filet(ConstantesElements.ELEMENT_FILET2_COORDONEE_X, ConstantesElements.ELEMENT_FILET2_COORDONEE_Y, ConstantesElements.ELEMENT_FILET2_LARGEUR, ConstantesElements.ELEMENT_FILET2_HAUTEUR, ConstantesElements.ELEMENT_FILET2_NOM, ConstantesJoueurs.JOUEUR_CAMP_DROITE);
 		
